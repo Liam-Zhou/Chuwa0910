@@ -1,7 +1,43 @@
 1. Learn **MarkDown** and show all of basic usage.
 
-    
+    # First Level Heading
+    ## Second Level Heading
+    ### Third Level Heading
 
+    **Bold Text**
+    
+    *Italic Text*
+    
+    _Italic Text 2_
+    
+    ~~StrikeThrough~~
+    
+    **Bold and _Nested_ Italic Text**
+    
+    ***All Bold and Italic Text***
+    
+    <sub> Sub </sub> Text
+    
+    <sup> Sup </sup> Text
+    
+    > Quote Text
+    
+    ```
+    Code
+    ```
+    
+    This site was built using [GitHub Pages](https://pages.github.com/).
+    
+    ![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
+    
+    - George Washington
+    * John Adams
+    + Thomas Jefferson
+    
+    1. First list item
+       - First nested list item
+         - Second nested list item
+    
 2. Practice Git using the platform. List the git commands you learned.
 
    1. git commit
