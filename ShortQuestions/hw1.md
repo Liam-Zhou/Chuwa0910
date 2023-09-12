@@ -170,11 +170,43 @@
 
 9. What is  **maven** role? What it be used to do?
 
+    Maven is a project management and build automation tool primarily used in the Java ecosystem. Its main roles include:
 
+    1. Dependency Management: Automatically handles project dependencies, fetching them from online repositories.
+    2. Build Automation: Compiles, tests, and packages code.
+    3. Project Standardization: Provides a consistent directory layout and build lifecycle.
+    4. Plugin Architecture: Extends functionality using plugins, such as for compiling or testing.
+    5. Multi-module Support: Manages large projects split into sub-modules.
 
 10. What is the **lifecycle** of maven? Could you tell me the details?
 
+    Maven's lifecycle represents a sequence of phases that determine the order in which goals are executed. Maven has three primary built-in lifecycles:
 
+    1. Default Lifecycle (handles project deployment):
+
+       1. validate: Validate project is correct.
+       2. initialize: Set up build state, e.g., properties or directories.
+       3. compile: Compile the project's source code.
+       4. test: Test the compiled code using a testing framework.
+       5. package: Convert the compiled code into a distributable format (e.g., JAR, WAR).
+       6. verify: Ensure the package meets quality criteria.
+       7. install: Store the package in the local repository.
+       8. deploy: Copy the package to a remote repository.
+
+    2. Clean Lifecycle (handles project cleaning):
+
+       1. pre-clean: Pre-clean actions.
+       2. clean: Remove all previously built files.
+       3. post-clean: Post-clean actions.
+     
+    3. Site Lifecycle (creates project documentation):
+
+       1. pre-site: Pre-site generation actions.
+       2. site: Generate project's site documentation.
+       3. post-site: Post-site generation actions.
+       4. site-deploy: Deploy the site to a server.
+       
+    In everyday Maven use, the default lifecycle is most frequently engaged, and developers often run commands like mvn compile, mvn test, or mvn deploy targeting specific phases of this lifecycle.
 
 11. What is the difference between **package** and **install** in maven lifecycle?
 
