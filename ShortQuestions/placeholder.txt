@@ -3,3 +3,27 @@ git init: initialize new repository.
 git clone: clone a repository.
 git commit -m "commit message": commit with a message.
 git branch name: create a new branch.
+
+problem 3: terminal commands to init a repo in local.
+cd directory
+git init
+
+problem 4: clone repository
+git clone repo_url
+
+problem 5: create and check out new branch
+git branch newbranch
+git checkout newbranch
+
+problem 6: merge branch_test to master
+git checkout master
+git merge branch_test
+
+problem 7: stash the changes
+use 'git stash' before making any changes.
+use 'git stash pop' to apply the changes.
+
+problem 8:
+pull request is used when individual members wants to make changes to the main codebase. So they need to make the PR in their own branch first, let other member review their PR, and then finally commit the change to the code base.
+
+problem 9:
