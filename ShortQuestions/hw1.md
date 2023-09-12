@@ -1,7 +1,6 @@
 # HW1 - Ke Chen
 
 ## 1. 
-    ### Styling text
 	This is **Ke Chen**
 	This is _Ke Chen_
 	This is ~~Ke Chen~~
@@ -10,10 +9,8 @@
 	This is <sub>Ke Chen<sub>
 	This is <sup>Ke Chen</sup>
 
-    ### Quoting text
 	>This is Ke Chen
 
-	### Quoting code
 	This is a command : 'Ke Chen'
 	There are three commands:
 	'''
@@ -22,20 +19,15 @@
 	Ke Chen3
 	'''
 
-	### Supported color models
 	The background color is '#ffffff' for light mode.
 
-	### Links
 	This is a github link from [Ke Chen](https://github.com/kechen11257)
 
-	### Section links + Relative links
 	section links: can link directly to a section in a rendered file by hovering over the section heading to expose
 	relative links: is a link that is relative to the current file/
 
-	### Images
 	![tomcat](https://myoctocat.com/assets/images/base-octocat.svg)
 
-	### Lists
 	-Ke Chen
 	*Ke Chen2
 	+Ke Chen3
@@ -44,37 +36,28 @@
 	1.Ke Chen2
 	1.Ke Chen3
 
-	### Nested Lists
 	1.Ke Chen
 	  - Ke Chen2
 		- Ke Chen3
 
-	### Task Lists
 	- [x] #Ke Chen
 	- [ ] https://github.com/octo-org/octo-repo/issues/740
 	- [ ] Add delight to the experience when all tasks are complete :tada:
 
-	### Mentioning people and teams
 	@Ke Chen what do you think about this hw?
 
-	### Referencing issues and pull requests
 	if you have any questions, please find: #26
 
-	### Uploading assets
 	You can upload assets like images by dragging and dropping, selecting from a file browser, or pasting. You can upload assets to issues, pull requests, comments, and .md files in your repository.
 
-	### Using emoji
 	:+1:    :shipit:
 
-	### Paragraphs
 	This is Ke Chen
 
 	This is Ke Chen2
 
-	### Footnotes
 	This is Ke Chen[^1]
 
-	### Alerts
 	> [!IMPORTANT]
 	> This is important
 	> [!NOTE]
@@ -82,17 +65,13 @@
 	> [!WARNING]
 	> This is warning
 
-	### Hiding content with comments
 	<!-- This is Ke Chen -->
 
-	### Ignoring Markdown formatting
 	This is \*Ke Chen\*
 
-	### Disabling Markdown rendering
 	When viewing a Markdown file, you can click <> at the top of the file to disable Markdown rendering and view the file's source instead.
 
 ## 2. 
-    ### Introduction Sequence
 		git commit : 
 			make a new commit 相当于提交copy
 			A commit in a git repository records a snapshot of all the (tracked) files in your directory. It's like a giant copy and paste, but even better!
@@ -116,7 +95,7 @@
 			move our work from bugFix directly onto the work from main
 		       (合并本地的多条提交(commit)记录 )。
 
-    ### Ramping Up
+
     	HEAD always points to the most recent commit
 		git log: 
 			see hashes of the commit
@@ -144,7 +123,8 @@
 			will move a branch backwards as if the commit had never been made in the first place.
 			ex: git revert HEAD
 
-	### Moving Work Around
+
+
 		git cherry-pick <Commit1> <Commit2> <...>
 			copy a series of commits below your current location (HEAD)
 			ex: git cherry-pick c2 c4
@@ -155,7 +135,8 @@
 		    EX: git rebase -i HEAD~4
 		    比如你选择了c2， c5，生成c3，c4的copy
 
-    ### A Mixed Bag
+
+
     	git tag v1 c1
     		name the tag v1 and referenced the commit C1 explicitly
     	git describe <ref>:
