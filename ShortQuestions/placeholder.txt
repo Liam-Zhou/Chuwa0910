@@ -1,1 +1,5 @@
-write your answer to this folder.
+problem 2: 
+git init: initialize new repository.
+git clone: clone a repository.
+git commit -m "commit message": commit with a message.
+git branch name: create a new branch.
