@@ -282,8 +282,6 @@ Click OK.
 13. In **Repo/MavenProject** directory, create a **maven Module** using Intellij, named it as belows:
     1. groupID: **com.chuwa.learn**
     2. artifactID: **java-core**
-   
-    
 
 14. Do **Code Review**: Go over the PRs in your repo, tried to leave some useful comments in other students’ PR, please don’t merge it.
 
