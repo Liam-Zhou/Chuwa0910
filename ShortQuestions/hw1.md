@@ -24,7 +24,7 @@ System.out.println(“Hello”);
 
     4. Add files to the repository.
 
-       If we have existing files in this directory and you want to track them with Git:
+       If we have existing files in this directory and we want to track them with Git:
 
        1. First, add the files to the staging area.
           ```
@@ -52,29 +52,73 @@ System.out.println(“Hello”);
 
 4. How to clone a repo from Github?
 
+   1. Navigate to the Repository on GitHub
 
+   2. Copy the Repository URL
 
+   3. Open a Terminal or Command Prompt on Your Local Machine
+
+   4. Clone the Repository
+      
+      Navigate to the directory where we want to place the cloned repository, and then use the git clone command followed by the URL you copied:
+      ```
+      git clone https://github.com/username/reponame.git
+      ```
+   5. Navigate to the Cloned Directory
+
+      Once the cloning process is complete, we can navigate into the repository's directory:
+      ```
+      cd reponame
+      ```
 5. How to create a new branch and checkout to that branch?
 
+   1. Open a Terminal or Command Prompt and navigate to your Git repository.
 
+   2. Create a New Branch
+      ```
+      git branch new-branch-name
+      ```
+   3. Switch to the New Branch
+      ```
+      git checkout new-branch-name
+      ```
+   4. Alternatively, Combine Both Steps
 
+      Git offers a shorthand command to create a new branch and immediately switch to it:
+      ```
+      git checkout -b new-branch-name
+      ```
 6. How to merge the branch_test to master branch in command? Show me the commands.
 
+   1. Ensure that we’re Up-to-Date
 
+      Before merging, make sure both our local branch_test and master branch have the latest changes from any remote repositories:
+      ```
+      git fetch
+      ```
+   2. Switch to the master Branch
+      ```
+      git checkout master
+      ```
+   3. Merge branch_test into master
+      ```
+      git merge branch_test
+      ```
+      This will merge changes from branch_test into the currently checked-out master branch. If there are any merge conflicts, we will need to resolve them manually.
 
-
-7. How to stash your new code before leaving branch branch_learn_stash and pop your stash when you checkout back to **branch_learn_stash**? Try commands way and intellij way.
-
+7. How to stash your new code before leaving branch **branch_learn_stash** and pop your stash when you checkout back to **branch_learn_stash**? Try commands way and intellij way.
 
 
 
 8. How do you understand **PR is based on Branch**?
 
+    When we say a "PR is based on a branch", it means: the changes proposed in the PR are contained within that specific branch.
+    
+    When we create a PR, we’re specifying two branches: the source branch (our feature/bugfix branch) and the target branch (often the main development branch, like master or main). The PR shows the differences between these two branches and allows for collaborative review, discussion, and testing of the changes.
 
-
+    The PR will continue to update as more commits are added to the branch it's based on. So if after submitting a PR we push another commit to our branch, that commit will automatically show up in the PR.
 
 9. What is  **maven** role? What it be used to do?
-
 
 
 
@@ -82,16 +126,41 @@ System.out.println(“Hello”);
 
 
 
+11. What is the difference between **package** and **install** in maven lifecycle?
 
-11. What is the difference between **package** and install in maven lifecycle?
+    1. package:
 
+       The package phase takes the compiled code and other files (like resources) from the project and packages them into a distributable format. The format is usually determined by the project's packaging setting (\<packaging\> tag in pom.xml). Common formats include JAR (for libraries or standalone applications), WAR (for web applications), and EAR (for Enterprise Java applications).
 
+       At the end of the package phase, we’ll have a built artifact ready for distribution, but it will only reside in our project's target directory. It hasn't been deployed or distributed anywhere yet.
 
+    2. install:
+
+       The install phase takes the packaged artifact from the package phase and installs it into local Maven repository. The local Maven repository is usually a .m2 directory in the user's home directory.
+    
+       Installing an artifact into the local repository means that other Maven projects on the same machine can now reference and use this artifact as a dependency. This is especially useful if we’re developing multiple interrelated projects on our local machine and we don't want to deploy artifacts to a remote repository just to test them together.
+    
+       In order for the install phase to run, all the preceding phases, including package, must have been executed successfully. So when we run mvn install, Maven will compile, test, and package our code before installing the resulting artifact into the local repository.
 
 12. What is **plugins** in maven, list some plugins.
 
+    In Maven, a plugin is a collection of one or more goals. A goal represents a specific task (finer than the build phase) which contributes to the building and managing of a project. It may be bound to zero or more build phases. A goal not bound to any build phase could be executed outside of the build lifecycle by direct invocation.
 
+    Maven uses plugins to do almost everything. Even basic commands like clean and compile are executed by Maven plugins. Each plugin can execute a number of goals.
 
+    Here are some commonly used Maven plugins:
+    1. maven-compiler-plugin: Compiles Java source code. It's responsible for invoking the Java compiler during the compile phase.
+    2. maven-surefire-plugin: Executes unit tests and generates test reports. It's often associated with the test phase.
+    3. maven-jar-plugin: Builds a JAR file from the current project. It's tied to the package phase.
+    4. maven-war-plugin: Like the JAR plugin but for building WAR files for web applications.
+    5. maven-clean-plugin: Cleans up the target/ directory used for the build. Typically tied to the clean phase.
+    6. maven-install-plugin: Installs the project's artifact into the local repository. This is usually done during the install phase.
+    7. maven-deploy-plugin: Deploys the project's artifact to a remote repository. It's tied to the deploy phase.
+    8. maven-failsafe-plugin: Designed for integration tests. It ensures that even if there are failures, the post-integration-test phase will still be executed to clean up resources.
+    9. maven-dependency-plugin: Provides operations on dependencies like copying, unpacking, analyzing, etc.
+    10. maven-release-plugin: Manages the release of a project including tagging and version management.
+    11. maven-site-plugin: Generates a site for the project, which can include documentation generated from the code as well as other documentation.
+    12. maven-assembly-plugin: Used to aggregate multiple artifacts together into a single distributable archive.
 
 13. In **Repo/MavenProject** directory, create a **maven Module** using Intellij, named it as belows:
     1. groupID: **com.chuwa.learn**
