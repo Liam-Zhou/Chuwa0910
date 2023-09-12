@@ -17,6 +17,10 @@
     - `git commit --amend`
     - `git tag <name> <node>`
     - `git describe <ref>`
+    - `git clone <url>`
+    - `git fetch`
+    - `git pull`
+    - `git push`
 3. What is the basic steps to init a git repo in you local ?  
    using `git init`.
 4. How to clone a repo from GitHub ?  
