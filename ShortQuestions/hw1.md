@@ -1,11 +1,25 @@
 1. Learn **MarkDown** and show all of basic usage.
 
-
-```
-System.out.println(“Hello”);
-```
+    
 
 2. Practice Git using the platform. List the git commands you learned.
+
+   1. git commit
+   2. git branch
+   3. git merge
+   4. git rebase
+   5. git init
+   6. git cherry-pick
+   7. git clone
+   8. git fetch
+   9. git pull
+   10. git push
+   11. git branch
+   12. git checkout
+   13. git add
+   14. git stash
+   15. git remote
+   16. git status
 
 3. What is the basic steps to init a git repo in your local?
 
