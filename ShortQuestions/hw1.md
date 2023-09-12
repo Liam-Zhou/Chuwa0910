@@ -158,9 +158,44 @@
 
 7. How to stash your new code before leaving branch **branch_learn_stash** and pop your stash when you checkout back to **branch_learn_stash**? Try commands way and intellij way.
 
-
-
-8. How do you understand **PR is based on Branch**?
+    Command Line (Git Commands):
+    1. Stash your changes:
+    
+       First, ensure we are on the correct branch:
+       ```
+       git checkout branch_learn_stash
+       ```
+       Now, stash your changes:
+       ```
+       git stash save "Descriptive stash message" 
+       ```
+    2. When you're ready to get your changes back:
+       
+       First, ensure we are back on the correct branch:
+       ```
+       git checkout branch_learn_stash
+       ```
+       Now, apply our stashed changes:
+       ```
+       git stash pop
+       ```
+    
+    IntelliJ IDEA:
+    1. Stash your changes:
+       1. Open the Version Control tool window (usually by clicking on the tab at the bottom of the screen or using the shortcut Alt + 9).
+       2. Click on the Local Changes tab.
+       3. Right-click on the modified files or changes you wish to stash.
+       4. Select Stash Changes... from the context menu.
+       5. Provide a name or message for the stash (this is optional but recommended).
+Click OK.
+    2. When you're ready to get your changes back:
+       1. Open the Version Control tool window again.
+       2. Click on the Stashes tab or section.
+       3. Locate the stash you want to apply.
+       4. Right-click on it.
+       5. From the context menu, we can select Apply Stash to apply the stash and keep it in the stash list or Pop Stash to apply it and remove it from the list.
+ 
+7. How do you understand **PR is based on Branch**?
 
     When we say a "PR is based on a branch", it means: the changes proposed in the PR are contained within that specific branch.
     
@@ -248,8 +283,7 @@
     1. groupID: **com.chuwa.learn**
     2. artifactID: **java-core**
    
-   
-   
+    
 
 14. Do **Code Review**: Go over the PRs in your repo, tried to leave some useful comments in other students’ PR, please don’t merge it.
 
