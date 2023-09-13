@@ -13,3 +13,4 @@ This is a <sub>subscript</sub> text <br>
 This is a <sup>superscript</sup> text <br>
 
 > Text that is a quote
+Use `git status` to list all new or modified files that haven't yet been committed.
