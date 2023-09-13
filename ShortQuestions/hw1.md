@@ -1,4 +1,4 @@
-1 .## show all the basic usage of markdown file ##
+1. ## show all the basic usage of markdown file ##
 ## headings ##
 # A first-level heading
 ## A second-level heading
@@ -28,9 +28,9 @@ This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-don
 1. Dong
 1. Changqing   <br>
 
-2.## List frequently command ##  <br>
+2. ## List frequently used Git command ##  <br>
 
-git init  <br>
+## git init  <br>
 This command turns a directory into an empty Git repository. This is the first step in creating a repository. After running git init, adding and committing files/directories is possible.
 
 
