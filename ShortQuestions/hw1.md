@@ -111,4 +111,11 @@ The main difference between package and install in the Maven lifecycle is that p
 
 ## 12.	What is plugins in maven, list some plugins. ##  
 
-Plugins in Maven are used to extend the functionality of Maven. There are many different plugins available, for tasks such as running unit tests, generating documentation, and deploying applications.
+Plugins in Maven are used to extend the functionality of Maven. There are many different plugins available, 
+
+* maven-compiler-plugin: Compiles Java source code. <br>
+* maven-surefire-plugin: Runs unit tests. <br>
+* maven-jar-plugin: Creates JAR files. <br>
+* maven-war-plugin: Creates WAR files. <br>
+* maven-clean-plugin: Deletes build output directories. <br>
+
