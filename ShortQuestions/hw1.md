@@ -20,15 +20,18 @@ This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-don
 
 ![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)  <br>
 
-- George Washington
-* John Adams
-+ Thomas Jefferson
+- Louis 
+* Dong
++ Changqing
 
-1. James Madison
-1. James Monroe
-1. John Quincy Adams
+1. Louis
+1. Dong
+1. Changqing
 
+2. List frequently command  <br>
 
+git init  <br>
+This command turns a directory into an empty Git repository. This is the first step in creating a repository. After running git init, adding and committing files/directories is possible.
 
 
 
