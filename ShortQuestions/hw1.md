@@ -12,5 +12,5 @@ _This text is italicized_ <br>
 This is a <sub>subscript</sub> text <br>
 This is a <sup>superscript</sup> text <br>
 
-> Text that is a quote
+> Text that is a quote  <br>
 Use `git status` to list all new or modified files that haven't yet been committed.
