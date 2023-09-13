@@ -15,3 +15,8 @@ This is a <sup>superscript</sup> text <br>
 > Text that is a quote  <br>
 
 Use `git status` to list all new or modified files that haven't yet been committed.
+
+This site was built using [GitHub Pages](https://pages.github.com/).
+
+
+
