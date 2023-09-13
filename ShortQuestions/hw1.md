@@ -1,4 +1,4 @@
-## 1 show all the basic usage of markdown file ##
+## 1. show all the basic usage of markdown file ##
 ## headings ##
 # A first-level heading
 ## A second-level heading
@@ -26,7 +26,7 @@ This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-don
 * Dong
 + Changqing  <br>
 
-## 2 List frequently used git command ##  
+## 2. List frequently used git command ##  
 
 `git init`
 
@@ -58,13 +58,13 @@ git config``
 
 `git rm`
 
-## 3 What are the basic steps to intialize a Git repo in your local ##  
+## 3. What are the basic steps to intialize a Git repo in your local ##  
 1. Create a new directory for your project. <br>
 1. Run the `git init` command in the new directory. <br> 
 1. Add the files you want to track to the repository using the `git add` command. <br>
 1. Commit the changes to the repository using the `git commit` command. <br>
 
-## 4 How to clone a repo from Github ? ##  
+## 4. How to clone a repo from Github ? ##  
 
 1. Go to the GitHub repository you want to clone.
 1. Click on the "Clone or download" button.
