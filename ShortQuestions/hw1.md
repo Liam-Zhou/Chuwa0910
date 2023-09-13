@@ -26,9 +26,43 @@ This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-don
 * Dong
 + Changqing  <br>
 
-## 2 List frequently used Git command ##  <br>
-## git init ##
-This command turns a directory into an empty Git repository. This is the first step in creating a repository. After running git init, adding and committing files/directories is possible.
+## 2 List frequently used git command ##  
+
+`git init`
+
+`git add`
+
+`git commit`
+
+`git status`
+
+git config``
+
+`git branch`
+
+`git checkout`
+
+`git merge`
+
+`git remote`
+
+`git clone`
+
+`git pull`
+
+`git push`
+
+`git stash`
+
+`git log`
+
+`git rm`
+
+## 3 What are the basic steps to intialize a Git repo in your local ##  
+1. Create a new directory for your project. <br>
+1. Run the `git init` command in the new directory. <br> 
+1. Add the files you want to track to the repository using the `git add` command. <br>
+1. Commit the changes to the repository using the `git commit` command. <br>
 
 
 
