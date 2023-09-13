@@ -27,7 +27,7 @@ This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-don
 + Changqing  <br>
 
 ## 2 List frequently used Git command ##  <br>
-## git init  <br>
+## git init  ## <br>
 This command turns a directory into an empty Git repository. This is the first step in creating a repository. After running git init, adding and committing files/directories is possible.
 
 
