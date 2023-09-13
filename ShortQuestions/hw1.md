@@ -36,7 +36,7 @@ This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-don
 
 `git status`
 
-git config``
+`git config`
 
 `git branch`
 
