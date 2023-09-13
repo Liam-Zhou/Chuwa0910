@@ -16,7 +16,7 @@ This is a <sup>superscript</sup> text <br>
 
 Use `git status` to list all new or modified files that haven't yet been committed.
 
-This site was built using [GitHub Pages](https://pages.github.com/).
+This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-dong-72788451/).
 
 
 
