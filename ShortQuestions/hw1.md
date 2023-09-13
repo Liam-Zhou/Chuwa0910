@@ -11,3 +11,5 @@ _This text is italicized_ <br>
 ***All this text is important*** <br>
 This is a <sub>subscript</sub> text <br>
 This is a <sup>superscript</sup> text <br>
+
+> Text that is a quote
