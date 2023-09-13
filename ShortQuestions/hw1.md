@@ -14,9 +14,13 @@ This is a <sup>superscript</sup> text <br>
 
 > Text that is a quote  <br>
 
-Use `git status` to list all new or modified files that haven't yet been committed.
+Use `git status` to list all new or modified files that haven't yet been committed. <br>
 
-This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-dong-72788451/).
+This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-dong-72788451/). <br>
+
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
+
+
 
 
 
