@@ -5,7 +5,7 @@
 ### A third-level heading
 
 **This is bold text** <br>
-_This text is italicized_<br>
+_This text is italicized_ <br>
 ~~This was mistaken text~~<br>
 **This text is _extremely_ important**<br>
 ***All this text is important***<br>
