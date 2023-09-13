@@ -18,7 +18,15 @@ Use `git status` to list all new or modified files that haven't yet been committ
 
 This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-dong-72788451/). <br>
 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)  <br>
+
+- George Washington
+* John Adams
++ Thomas Jefferson
+
+1. James Madison
+1. James Monroe
+1. John Quincy Adams
 
 
 
