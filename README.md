@@ -17,8 +17,8 @@ git clone https://github.com/Liam-Zhou/chuwa0910
 ### Create your feature branch to implement the assignment.
 
 ```bash
-git branch firstName_lastName/notes
-git checkout firstName_lastName/notes
+git branch firstName_lastName/master
+git checkout firstName_lastName/master
 
 example: 
 HW1:
