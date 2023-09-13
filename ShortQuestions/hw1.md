@@ -1,4 +1,4 @@
-1. ## show all the basic usage of markdown file ##
+## 1 show all the basic usage of markdown file ##
 ## headings ##
 # A first-level heading
 ## A second-level heading
@@ -19,17 +19,14 @@ Use `git status` to list all new or modified files that haven't yet been committ
 This is my Linkedin Profile [Linkedin](https://www.linkedin.com/in/changqing-dong-72788451/). <br>
 
 ![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)  <br>
-
-- Louis 
-* Dong
-+ Changqing
-
 1. Louis
 1. Dong
 1. Changqing   <br>
+- Louis 
+* Dong
++ Changqing  <br>
 
-2. ## List frequently used Git command ##  <br>
-
+## 2 List frequently used Git command ##  <br>
 ## git init  <br>
 This command turns a directory into an empty Git repository. This is the first step in creating a repository. After running git init, adding and committing files/directories is possible.
 
