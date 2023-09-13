@@ -1,4 +1,4 @@
-# HW1 - Ke Chen
+# Ke Chen - HW1
 
 ## 1. 
 	This is **Ke Chen**
