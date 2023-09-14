@@ -132,14 +132,23 @@ public Car implements Vehicle {
 
 ## 11. What is the Java load sequence?
 
+static variable/block -> constructor
+
 ## 12. What is Polymorphism ? And how Java implements it ?
 
+Polymorphism: the same object exhibiting different forms and behaviors
+
+- Static Polymorphism - Overload(same class) - compile time
+- Dynamic Polymorphism - Override(child class) - run time
+
 ## 13. What is Encapsulation ? How Java implements it? And why we need encapsulation?
+
+Encapsulation: binding the data and the methods to manipulate that data together in a single unit(class)
+
+Function: restrict the direct access to specific method/variable to make instance private
 
 ## 14. What is Interface and what is abstract class? What are the differences between them?
 
 ## 15. design a parking lot (put the code to codingQuestions/coding1 folder, )
-
-- If you have no ability to design it, please find the solution in internet, then understand it, and re-type it.(Do NOT just copy and paste)
 
 ## 16. What are Queue interface implementations and what are the differences and when to use what?
