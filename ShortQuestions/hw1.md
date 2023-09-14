@@ -245,7 +245,10 @@
         Common Goals: integration-test, verify
 
 ## 13.
-	![the picture to show how to make a maven project by IntelliJ IDEA](/Users/kechen/Desktop/work/chuwa0620/ShortQuestions/Q12.png)
+	![the picture to show how to make a maven project by IntelliJ IDEA](/Users/kechen/Desktop/work/Chuwa0910/ShortQuestions/Q12.png)
+
+
+
 
 
 
