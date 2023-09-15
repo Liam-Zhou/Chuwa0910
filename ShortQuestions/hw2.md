@@ -145,10 +145,27 @@ Polymorphism: the same object exhibiting different forms and behaviors
 
 Encapsulation: binding the data and the methods to manipulate that data together in a single unit(class)
 
+Implemented Way: use getter/setter instead of direct access
+
 Function: restrict the direct access to specific method/variable to make instance private
 
 ## 14. What is Interface and what is abstract class? What are the differences between them?
 
+Interface: a completely "abstract class" that is used to group related methods with empty bodies
+
+Abstract Class: a restricted class that cannot be used to create objects
+
+Differences:
+
+- Method Type: Interface can have only abstract methods. Whereas, an abstract class can have abstract method and concrete methods.
+- Final Variables: Variables declared in a Java interface are by default final. An abstract class can contain non-final variables.
+- Inheritance Key Words: Interface's inheritance key word is "implements" whereas Abstract Class is "extend"
+- One class can "implements" multiple interfaces whereas only can "extend" one abstract class
+
 ## 15. design a parking lot (put the code to codingQuestions/coding1 folder, )
 
 ## 16. What are Queue interface implementations and what are the differences and when to use what?
+
+The Queue interface is implemented by several ways in Java, including LinkedList, ArrayDeque, and PriorityQueue.
+
+Difference between each way: ArrayDeque is faster than LinkedList on average because of overhead. And since there is no need for adding an element in the middle of a queue, so ArrayDeque is better than LinkedList.
