@@ -7,7 +7,6 @@ import com.chuwa.shawnlearning.parking.impl.SizeFitFitPolicy;
 import com.chuwa.shawnlearning.vehicle.VehicleType;
 import com.chuwa.shawnlearning.vehicle.impl.VehicleFactory;
 
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,7 +18,7 @@ public class Main {
         }
 
         var factory = VehicleFactory.getInstance();
-        var car = factory.createVehicle(VehicleType.CAR);
+        var car = factory.createVehicle(VehicleType.CAR, "111111");
 
         var picked = lot.park(car);
 

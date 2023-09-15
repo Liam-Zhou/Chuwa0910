@@ -10,10 +10,13 @@ import com.chuwa.shawnlearning.parking.policy.PolicyContext;
 import com.chuwa.shawnlearning.vehicle.Vehicle;
 
 
+
 public class ParkingSlotManagement implements ParkingSlot {
 
     private final ParkingSlotSM sm = new ParkingSlotSM();
     private ParkingFitPolicy parkingFitPolicy;
+
+    private Vehicle vehicle =  null;
 
     private final SlotEventEmitter emitter = new SlotEventEmitterBase();
 
@@ -40,18 +43,20 @@ public class ParkingSlotManagement implements ParkingSlot {
 
     @Override
     public void park(Vehicle vehicle) {
-        sm.transit( SlotEvent.PARKING);
-        emit(SlotEvent.PARKING);
+        this.vehicle = vehicle;
+        var event = new ParkingSlotEvent(vehicle, this);
+        sm.transit(new ParkingSlotEvent(vehicle, this));
+        emit(event);
     }
 
     @Override
     public void onLeave(SlotEventListener listener) {
-        sm.getStateGraph().when(ParkingSlotStatus.OCCUPIED, ParkingSlotStatus.AVAILABLE, SlotEvent.LEAVING, listener);
+        sm.getStateGraph().when(ParkingSlotStatus.OCCUPIED, ParkingSlotStatus.AVAILABLE, new LeavingSlotEvent(vehicle, this), listener);
     }
 
     @Override
     public void leave() {
-        sm.transit(SlotEvent.LEAVING);
+        sm.transit(new LeavingSlotEvent(vehicle, this));
     }
 
     @Override
@@ -70,17 +75,17 @@ public class ParkingSlotManagement implements ParkingSlot {
     }
 
     @Override
-    public void on(SlotEvent event, SlotEventListener listener) {
+    public void on(String event, SlotEventListener listener) {
         emitter.on(event, listener);
     }
 
     @Override
-    public void off(SlotEvent event, SlotEventListener listener) {
+    public void off(String event, SlotEventListener listener) {
         emitter.off(event, listener);
     }
 
     @Override
-    public void once(SlotEvent event, SlotEventListener listener) {
+    public void once(String event, SlotEventListener listener) {
         emitter.once(event, listener);
     }
 }

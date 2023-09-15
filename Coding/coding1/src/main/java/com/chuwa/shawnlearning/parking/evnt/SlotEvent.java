@@ -1,7 +1,12 @@
 package com.chuwa.shawnlearning.parking.evnt;
 
-public enum SlotEvent {
-    PARKING,
-    LEAVING,
+public interface SlotEvent {
+    default String name(){
+        return this.getClass().getSimpleName();
+    }
 
+    static String byEventType(Class<? extends SlotEvent> clazz){
+        return clazz.getSimpleName();
+    }
 }
+

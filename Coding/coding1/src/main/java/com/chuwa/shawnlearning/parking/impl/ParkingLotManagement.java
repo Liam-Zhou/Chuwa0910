@@ -30,11 +30,15 @@ public class ParkingLotManagement implements ParkingLot {
     public void addSlot(ParkingSlot slot) {
         parkingLots.add(slot);
         slot.setParkPolicy(parkingFitPolicy);
-        slot.on(SlotEvent.PARKING, (event) -> {
-            System.out.println("slot " + slot.address() + " is parking");
+        slot.on(SlotEvent.byEventType(ParkingSlotEvent.class), (event) -> {
+            if(event instanceof ParkingSlotEvent e){
+                System.out.println("slot " + e.slot().address() + " is parking " + e.vehicle().getPlateNumber());
+            }
         });
         slot.onLeave((event) -> {
-            System.out.println("slot " + slot.address() + " is leaving");
+            if(event instanceof LeavingSlotEvent e){
+                System.out.println("slot " + e.slot().address() + " is leaving " + e.vehicle().getPlateNumber());
+            }
         });
     }
 

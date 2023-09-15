@@ -16,10 +16,10 @@ public class VehicleFactory {
     private VehicleFactory() {
     }
 
-    public Vehicle createVehicle(VehicleType type) {
+    public Vehicle createVehicle(VehicleType type, String plateNumber){
         return switch (type) {
-            case CAR -> new SmallCar();
-            case TRUCK -> new BigTruck();
+            case CAR -> new SmallCar(plateNumber);
+            case TRUCK -> new BigTruck(plateNumber);
             default -> throw new IllegalArgumentException("Unknown vehicle type: " + type);
         };
     }

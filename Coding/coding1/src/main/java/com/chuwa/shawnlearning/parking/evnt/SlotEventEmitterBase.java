@@ -13,10 +13,10 @@ public class SlotEventEmitterBase implements SlotEventEmitter {
     }
     protected record RegistryEntry(EventRegistryMode mode, SlotEventListener listener) {
     }
-    protected Map<SlotEvent, List<RegistryEntry>> entries = new HashMap<>();
+    protected Map<String, List<RegistryEntry>> entries = new HashMap<>();
 
     @Override
-    public void on(SlotEvent event, SlotEventListener listener) {
+    public void on(String event, SlotEventListener listener) {
         if(!entries.containsKey(event)){
             entries.put(event, new ArrayList<>());
         }
@@ -24,7 +24,7 @@ public class SlotEventEmitterBase implements SlotEventEmitter {
     }
 
     @Override
-    public void off(SlotEvent event, SlotEventListener listener) {
+    public void off(String event, SlotEventListener listener) {
         for (RegistryEntry entry : entries.getOrDefault(event, new ArrayList<>())) {
             if (entry.listener.equals(listener)) {
                 entries.get(event).remove(entry);
@@ -34,7 +34,7 @@ public class SlotEventEmitterBase implements SlotEventEmitter {
     }
 
     @Override
-    public void once(SlotEvent event, SlotEventListener listener) {
+    public void once(String event, SlotEventListener listener) {
         if(!entries.containsKey(event)){
             entries.put(event, new ArrayList<>());
         }
@@ -43,10 +43,10 @@ public class SlotEventEmitterBase implements SlotEventEmitter {
 
     @Override
     public void emit(SlotEvent event) {
-        for (RegistryEntry entry : entries.getOrDefault(event, new ArrayList<>())) {
+        for (RegistryEntry entry : entries.getOrDefault(event.name(), new ArrayList<>())) {
 
             entry.listener.onEvent(event);
         }
-        entries.getOrDefault(event, new ArrayList<>()).removeIf(entry -> entry.mode == EventRegistryMode.ONCE);
+        entries.getOrDefault(event.name(), new ArrayList<>()).removeIf(entry -> entry.mode == EventRegistryMode.ONCE);
     }
 }

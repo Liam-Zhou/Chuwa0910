@@ -24,6 +24,7 @@ public final class ParkingSlotSM implements SlotSM<SlotEvent, ParkingSlotStatus,
 
         @Override
         public void onTransit(ParkingSlotStatus start, ParkingSlotStatus end, SlotEvent event) {
+
             if(registry.containsKey(new GraphEdge(start, end))){
                 registry.get(new GraphEdge(start, end)).onEvent(event);
             }
