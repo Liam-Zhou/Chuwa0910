@@ -115,9 +115,12 @@
         2.  It means that all the objects of type A could execute all the methods present in its subtype B
         3.  It means if a method is present in class A, it should also be present in class B so that the object of type B could substitute object of type A.
         4.  It means that for the class B to inherit class A, objects of type B and objects of type A must be same.  
-     I choose **C**. Class B should adhere to the same contract (method signatures and behavior) as class A, ensuring that all methods present in class A are also present in class B.
-16.  Watch the design pattern video, and type the code, submit it to MavenProject folder
-     singleton: https://www.bilibili.com/video/BV1Np4y1z7BU?p=22
-     Factory: https://www.bilibili.com/video/BV1Np4y1z7BU?p=35&vd_source=310561eab1216a27f7accf859bf7f6d9
-     Builder: https://www.bilibili.com/video/BV1Np4y1z7BU?p=50&vd_source=310561eab1216a27f7accf859bf7f6d9
-     Publisher_Subscriber: https://www.bilibili.com/video/BV1Np4y1z7BU?p=114&vd_source=310561eab1216a27f7accf859bf7f6d9
+
+I choose **C**. Class B should adhere to the same contract (method signatures and behavior) as class A, ensuring that all methods present in class A are also present in class B.
+16.  Watch the design pattern video, and type the code, submit it to MavenProject folder  
+     singleton: https://www.bilibili.com/video/BV1Np4y1z7BU?p=22  
+     Factory: https://www.bilibili.com/video/BV1Np4y1z7BU?p=35&vd_source=310561eab1216a27f7accf859bf7f6d9  
+     Builder: https://www.bilibili.com/video/BV1Np4y1z7BU?p=50&vd_source=310561eab1216a27f7accf859bf7f6d9  
+     Publisher_Subscriber: https://www.bilibili.com/video/BV1Np4y1z7BU?p=114&vd_source=310561eab1216a27f7accf859bf7f6d9  
+
+See `Repo/MavenProject/com.chuwa.learn.designPattern`
