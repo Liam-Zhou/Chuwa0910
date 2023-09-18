@@ -49,7 +49,14 @@ This ensures that the `finally block` is executed even if an unexpected exceptio
 Q9. Coding Folder
 ************************************
 Q10. 
+
 Lambda Expression
+
+Arrays.sorting() v.s. Arrays.parallelSorting()
+> Arrays.parallelSort(). This sorting method is faster when the array size is large. 
+
+
+
 
 ************************************
 Q11. There are Singleton, Composition, and Aggregation. 
