@@ -11,6 +11,7 @@ public class ParkingLot {
         this.carPool = new Hashtable<>();
         this.poolSize = poolSize;
         this.currCar = 0;
+
     }
 
     public Hashtable<String, Car> getCarPool() {
