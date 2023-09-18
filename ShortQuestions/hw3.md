@@ -113,3 +113,11 @@ The Open-Closed Principle is one of the SOLID principles of object-oriented desi
 The key idea behind the OCP is to promote a design that allows you to add new features or functionality by creating new classes or modules that inherit from or compose with existing ones, rather than modifying existing code. This helps maintain the stability of existing code and reduces the risk of introducing bugs when extending the system.
 
 Achieving the OCP often involves the use of interfaces, abstract classes, and inheritance, allowing you to create new implementations or subclasses to introduce new behavior while keeping the existing code untouched. The use of polymorphism is a common technique to adhere to the OCP.
+
+## 15.
+
+The correct answer is:
+
+`It means if a method is present in class A, it should also be present in class B so that the object of type B could substitute the object of type A.`
+
+Liskov's Substitution Principle (LSP) is one of the five SOLID principles of object-oriented programming. It states that objects of a derived class (subtype) must be substitutable for objects of the base class (supertype) without affecting the correctness of the program. In other words, if class B is a subtype of class A, then you should be able to replace an object of class A with an object of class B without changing the desired behavior of the program. This implies that class B should have the same interface (methods and properties) as class A and should adhere to the same contracts and invariants, ensuring that the substitution is safe and doesn't lead to unexpected behavior.
