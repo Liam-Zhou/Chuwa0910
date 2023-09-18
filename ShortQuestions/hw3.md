@@ -42,7 +42,13 @@ It doesn't throw the exception itself but informs the caller that the method may
 
 `public void myMethod() throws IOException { // Method code that might throw an IOException }`
 
+## 6. 
 
+* For the first chunk of code, it prints `java.lang.ArithmeticException`
+
+* For the second chunk of code, it prints `java.lang.NullPointerException`
+
+* For the third chunk of code, it prints `java.lang.RuntimeException`
 ## 7.	What is optional? why do you use it? write an optional example. 
 
 Optional is a class introduced in Java to deal with the problem of null values and the potential for NullPointerExceptions. It represents an optional value that may or may not be present. The primary purpose of using Optional is to make it explicit that a value can be absent and to provide a more structured and safe way of handling such cases.
