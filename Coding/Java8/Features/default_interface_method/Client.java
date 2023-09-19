@@ -1,5 +1,3 @@
-package com.chuwa.tutorial.t06_java8.features.Features.default_interface_method;
-
 public class Client {
 
     public static void main(String[] args) {

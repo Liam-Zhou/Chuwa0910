@@ -1,4 +1,3 @@
-package com.chuwa.tutorial.t06_java8.features.Features.lambda;
 
 import org.junit.Test;
 

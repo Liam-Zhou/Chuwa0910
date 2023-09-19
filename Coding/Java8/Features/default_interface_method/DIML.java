@@ -1,4 +1,3 @@
-package com.chuwa.tutorial.t06_java8.features.Features.default_interface_method;
 
 public interface DIML {
     static final String BLOG = "is Chuwa a";

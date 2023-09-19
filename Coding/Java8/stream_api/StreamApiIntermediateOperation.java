@@ -1,5 +1,4 @@
-import com.chuwa.tutorial.t00_common.pojos.Employee;
-import com.chuwa.tutorial.t00_common.utils.EmployeeData;
+
 import org.junit.Test;
 
 import java.util.*;

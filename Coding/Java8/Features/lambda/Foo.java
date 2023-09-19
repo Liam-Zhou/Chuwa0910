@@ -1,4 +1,3 @@
-package com.chuwa.tutorial.t06_java8.features.Features.lambda;
 
 @FunctionalInterface
 public interface Foo {
