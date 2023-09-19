@@ -10,29 +10,22 @@ import com.chuwa.shawnlearning.vehicle.impl.VehicleFactory;
 
 public class Main {
     public static void main(String[] args) {
-        var pickPolicy = new FirstAvailablePickPolicy();
-        var fitPolicy = new SizeFitFitPolicy();
-        var lot = new ParkingLotManagement(fitPolicy, pickPolicy);
-        for(int i=0; i < 10; i++) {
-            lot.addSlot(new ParkingSlotManagement(String.valueOf(i)));
+        int a = 0;
+        int b = 3;
+        String s = null;
+        try {
+            System.out.println(b / a);
+            System.out.println(s.equals("aa"));
+            throw new RuntimeException();
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.getMessage();
         }
-
-        var factory = VehicleFactory.getInstance();
-        var car = factory.createVehicle(VehicleType.CAR, "111111");
-
-        var picked = lot.park(car);
-
-        var slot = picked.get();
-
-        System.out.println(slot.address());
-
-        System.out.println(slot.getStatus());
-
-        picked.get().leave();
-
-        System.out.println(slot.address());
-
-        System.out.println(slot.getStatus());
-
+        System.out.println("End ...");
     }
 }
