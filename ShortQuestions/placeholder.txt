@@ -1,1 +1,43 @@
-write your answer to this folder.
+5. Eager loading:
+public class EagerLoadedSingleton {//always create exactly one instance
+
+    private static final EagerLoadedSingleton instance = new EagerLoadedSingleton();
+
+    private EagerLoadedSingleton() {}
+
+    public static EagerLoadedSingleton getInstance() {
+        return instance;
+    }
+}
+
+Lazy Loading: 
+public class LazyLoadedSingleton {//create exactly one instance until we need it
+
+    private static LazyLoadedSingleton instance;
+
+    private LazyLoadedSingleton() {}
+
+    public static synchronized LazyLoadedSingleton getInstance() {
+        if (instance == null) {
+            instance = new LazyLoadedSingleton();
+        }
+        return instance;
+    }
+}
+
+6. Runtime execeptions are errors that the compiler couldn't detect during compile time. The best example would be array index out of bound exception.
+
+7. Nullpointer exception example: 
+new List<Integer> a = null;
+a.add(0);
+
+8. Optional class: a container that contains a null or non-null object.
+
+9. By using optional class, in the case of some code might produce null exceptions, we can just use optional to substitue the expected null value.
+
+10. @functionalInterface annotation marks an interface with only one abstract method, and multiple default method. You can override the methods in functional Interface in it's extended class.
+
+11. Lambda expression is something we use to implement the functional interface without creating a class. It's also called anonymous functions, because it eliminates the functions name, signature, and return type, and only keeps what it does.
+
+12. 
+
