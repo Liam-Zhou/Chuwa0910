@@ -79,3 +79,4 @@ Collections can be traverse many times, but stream API can only go once.
 Collections' elements are easily to access whilc stream API does not have a direct way to access specific element.
 Collection is a data store while stream API is an API to process data. Different meaning. 
 **********************************
+

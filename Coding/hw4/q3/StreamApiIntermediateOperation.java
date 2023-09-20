@@ -173,3 +173,4 @@ public class StreamApiIntermediateOperation {
         sorted.forEach(System.out::println);
     }
 }
+

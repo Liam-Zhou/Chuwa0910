@@ -116,3 +116,4 @@ public class StreamApiCreationTest {
         longStream.forEach(System.out::println);
     }
 }
+
