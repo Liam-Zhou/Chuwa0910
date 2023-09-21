@@ -229,3 +229,111 @@
     ```
 
     In this example, we create a Converter instance that converts strings to integers. We then use the convert() method to convert the string "123" to an integer.
+
+18. In Java 8, what is Method Reference?
+
+    Method references provide a concise way to refer to methods or constructors of classes and pass them around like lambda expressions.    
+
+19. What does the String::ValueOf expression mean?
+
+    The String::ValueOf expression in Java is a method reference to the valueOf() method on the String class. The valueOf() method converts a variety of data types to a String object.
+
+    The String::ValueOf expression can be used in place of a lambda expression whenever the lambda expression is only calling the valueOf() method.
+
+20. What are Intermediate and Terminal operations?
+
+    Intermediate operations in Java streams are operations that transform a stream into another stream. They do not produce a result themselves.
+   
+    Terminal operations in Java streams are operations that produce a result from a stream. They terminate the stream and return a value.
+   
+    Intermediate operations can be chained together to form a pipeline of operations. The pipeline is executed when a terminal operation is invoked. Terminal operations can only be invoked once on a stream.
+
+21. What are the most commonly used Intermediate operations?
+
+    The most commonly used intermediate operations in Java streams are:
+
+    * filter(): Filters the stream to only include elements that match a certain criteria.
+    * map(): Transforms each element in the stream into a new element.
+    * sorted(): Sorts the stream in a certain order.
+    * limit(): Limits the stream to a certain number of elements.
+    * skip(): Skips the first n elements of the stream.
+    * distinct(): Removes duplicate elements from the stream.
+    * flatmap(): Flattens a stream of streams into a single stream.
+    * peek(): Performs a given operation on each element in the stream, but does not modify the stream itself.
+   
+22. What is the difference between findFirst() and findAny()?
+
+    The findFirst() and findAny() methods in Java streams are both used to find a single element from a stream. However, there are some key differences between the two methods.
+
+    The findFirst() method returns the first element in the stream, or an empty Optional if the stream is empty. The findAny() method returns any element from the stream, or an empty Optional if the stream is empty.
+
+    Another difference between the two methods is that the findFirst() method is guaranteed to return the first element in the stream if the stream has an encounter order. The findAny() method is not guaranteed to return the first element in the stream, even if the stream has an encounter order.
+
+    The findFirst() method is typically used when you need to find the first element in a stream that meets a certain criteria. The findAny() method is typically used when you need to find any element in a stream, regardless of its position in the stream.
+
+    `Examples on how to use them` :
+
+```Java
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+// Find the first even number in the list
+Optional<Integer> firstEvenNumber = numbers.stream().filter(n -> n % 2 == 0).findFirst();
+
+// Find any even number in the list
+Optional<Integer> anyEvenNumber = numbers.stream().filter(n -> n % 2 == 0).findAny();
+
+if (firstEvenNumber.isPresent()) {
+    System.out.println("The first even number in the list is: " + firstEvenNumber.get());
+} else {
+    System.out.println("There are no even numbers in the list");
+}
+
+if (anyEvenNumber.isPresent()) {
+    System.out.println("Any even number in the list is: " + anyEvenNumber.get());
+} else {
+    System.out.println("There are no even numbers in the list");
+}
+
+```
+
+23. How are Collections different from Stream?
+
+    Collections and streams in Java are two different ways to represent and process data.
+   
+    Collections are data structures that store collections of elements. They are typically used to store data in a specific order, such as a list or a set. Collections are mutable, meaning that their elements can be added, removed, and modified.
+   
+    Streams are a pipeline of operations that can be performed on collections or other data sources. They are typically used to process data in a declarative way, without having to worry about the underlying implementation. Streams are immutable, meaning that they cannot be modified.
+
+    `Here are some examples of how to use collections and streams:`
+
+```Java
+    // Collections
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+// Add an element to the collection
+numbers.add(6);
+
+// Remove an element from the collection
+numbers.remove(3);
+
+// Sort the collection
+Collections.sort(numbers);
+
+// Iterate over the collection
+for (int number : numbers) {
+    System.out.println(number);
+}
+
+// Streams
+Stream<Integer> evenNumbers = numbers.stream().filter(n -> n % 2 == 0);
+
+// Perform a map operation on the stream
+Stream<Integer> squaredNumbers = evenNumbers.map(n -> n * n);
+
+// Perform a reduce operation on the stream
+int sumOfSquaredNumbers = squaredNumbers.reduce(0, (a, b) -> a + b);
+
+// Print the sum of the squared even numbers
+System.out.println(sumOfSquaredNumbers);
+
+```
