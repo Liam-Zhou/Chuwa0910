@@ -1,4 +1,8 @@
-### 6.  What is Runtime Exception? could you give me some examples?
+### 1. What is generic in Java?  and type the generic code by yourself.
+> - A generic type is a generic class or interface that is parameterized over types.
+```
+```
+### 6. What is Runtime Exception? could you give me some examples?
 > - Unchecked exceptions that are happened during running time, such as NPE
 ### 7. Could you give me one example of NullPointerException?
 ```
