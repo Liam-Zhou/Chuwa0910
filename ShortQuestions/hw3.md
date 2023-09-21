@@ -122,23 +122,50 @@ Some Aftercare operations need to be done even exception happens. E.g. Open a fi
 
 ## 11. What is Java 8 new features ?
 
+- Default method and static method in Interface
+- Lambda & Functional Interface
+- Method Reference
+- Optional
+- Stream API
+- CompletableFuture
+
 ## 12. What are the types of design patterns in Java ?
 
 ## 13. What are the SOLID Principles ?
 
+SOLID Principles are:
+
+- Single-responsibility principle: "There should never be more than one reason for a class to change."
+- Open–closed principle: "Software entities ... should be open for extension, but closed for modification."
+- Liskov substitution principle: "Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it." See also design by contract.
+- Interface segregation principle: "Clients should not be forced to depend upon interfaces that they do not use."
+- Dependency inversion principle: "Depend upon abstractions, concretions."
+
 ## 14. How can you achieve thread-safe singleton patterns in Java ?
 
-## 15. What do you understand by the Open-Closed Principle (OCP) ? 16. Liskov’s substitution principle states that if class B is a subtype of class A, then object of type A may be substituted with any object of type B. What does this actually mean? (from OA ) choose your answer.
+Three different ways:
 
-## 17. It mean that if the object of type A can do something, the object of type B could also be able to perform the same thing
+- Create the instance variable at the time of class loading
+- Synchronize the getInstance() method
+- Use synchronized block inside the if loop and volatile variable
 
-## 18. It means that all the objects of type A could execute all the methods present in its subtype B
+## 15. What do you understand by the Open-Closed Principle (OCP) ?
 
-## 19. It means if a method is present in class A, it should also be present in class B so that the object of type B could substitute object of type A.
+The code should be extensible, like Inferface declared a function that some class possess. It won't need to modify the existing code but can extend to new code(detailed function).
 
-## 20. It means that for the class B to inherit class A, objects of type B and objects of type A must be same.
+## 16. Liskov’s substitution principle states that if class B is a subtype of class A, then object of type A may be substituted with any object of type B. What does this actually mean? (from OA ) choose your answer.
 
-## 21. Watch the design pattern video, and type the code, submit it to MavenProject folder
+- A. It mean that if the object of type A can do something, the object of type B could also be able to perform the same thing
+
+- B. It means that all the objects of type A could execute all the methods present in its subtype B
+
+- C. It means if a method is present in class A, it should also be present in class B so that the object of type B could substitute object of type A.
+
+- D. It means that for the class B to inherit class A, objects of type B and objects of type A must be same.
+
+Choose A.
+
+## 17. Watch the design pattern video, and type the code, submit it to MavenProject folder
 
 - singleton: https://www.bilibili.com/video/BV1Np4y1z7BU?p=22
 - Factory: https://www.bilibili.com/video/BV1Np4y1z7BU?p=35&vd_source=310561eab1216a27f7accf859bf7f6d9
