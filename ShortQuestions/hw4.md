@@ -1,6 +1,6 @@
 # HW4. Xiao Yang
 ### 1.  Read those codes and type it one by one by yourself. the push the code to your branch
-
+[See Here](../Coding/coding3)
 ### 2. Write the Singleton design pattern include eager load and lazy load
 [See Here](../MavenProject/src/main/java/patterns/singleton)
 
