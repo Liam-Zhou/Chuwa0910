@@ -157,10 +157,10 @@
 
 13. What is Java 8 new features?
 
-    * `Lambda expressions`: Lambda expressions, also known as lambda functions, are a concise and expressive way to write code. A lambda expression is a short block of code that can be passed as a parameter to a method or assigned to a variable.
-    * `Method references`: Method references are a concise way to refer to a method without having to use a lambda expression. Method references can be used in place of lambda expressions whenever the lambda expression is only calling a single method.
-    * `Streams`: Streams are a powerful way to process data in Java. Streams provide a number of methods for filtering, mapping, and reducing data.
-    * `Optional class`: The Optional class provides a safe way to handle null values. The Optional class can be used to avoid NullPointerExceptions.
+    * `Lambda expressions`
+    * `Method references`
+    * `Streams`
+    * `Optional class`
 
 14. Lambda can use unchanged variable outside of lambda? what is the details?
 
@@ -184,7 +184,48 @@
     };
 
     ```
+15. Describe the newly added features in Java 8?
 
-    
+    * `Lambda expressions`: Lambda expressions, also known as lambda functions, are a concise and expressive way to write code. A lambda expression is a short block of code that can be passed as a parameter to a method or assigned to a variable.
+    * `Method references`: Method references are a concise way to refer to a method without having to use a lambda expression. Method references can be used in place of lambda expressions whenever the lambda expression is only calling a single method.
+    * `Streams`: Streams are a powerful way to process data in Java. Streams provide a number of methods for filtering, mapping, and reducing data.
+    * `Optional class`: The Optional class provides a safe way to handle null values. The Optional class can be used to avoid NullPointerExceptions.
 
-    
+16. Can a functional interface extend/inherit another interface?
+
+    Yes, a functional interface in Java can extend/inherit another interface.
+
+    `Example`
+
+    ```Java
+    public interface Converter<T, R> extends Function<T, R> {
+    @Override
+    R apply(T t);
+     }
+    ```
+17. What is the lambda expression in Java and How does a lambda expression relate to a functional interface?
+
+    A lambda expression in Java is a short block of code that can be passed as a parameter to a method or assigned to a variable. Functional interfaces in Java are interfaces that have exactly one abstract method. Lambda expressions can be used to implement functional interfaces.
+
+    `Functional Interfance` example :
+    this interface has exactly one abstract method, convert(), which takes an input 
+    value of type T and returns an output value of type R.
+
+    ```Java
+    @FunctionalInterface
+    public interface Converter<T, R> {
+    R convert(T t);
+    }
+    ```
+
+    `an example of how to use a lambda expression to implement the Converter interface:`
+
+    ```Java
+    Converter<String, Integer> converter = (input) -> Integer.parseInt(input);
+
+    Integer convertedValue = converter.convert("123");
+
+    System.out.println(convertedValue); // Prints 123
+    ```
+
+    In this example, we create a Converter instance that converts strings to integers. We then use the convert() method to convert the string "123" to an integer.
