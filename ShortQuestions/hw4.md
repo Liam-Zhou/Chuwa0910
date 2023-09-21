@@ -16,6 +16,8 @@
     }
    ```
 
+   For the rest , please refer to the coding file.
+
 2. Please refer to the coding file
 
 3. Please refer to the coding file
