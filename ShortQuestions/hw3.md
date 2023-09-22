@@ -1,82 +1,84 @@
-1. Practice  collection
-> see coding part
-2. What is the checked exception and unchecked exception in Java, could you give one example?
-> Checked Exceptions (Compile-Time Exceptions): <br>
-Checked exceptions are exceptions that must be explicitly handled in your code using try-catch or declared in the throws clause.
-Examples include IOException and SQLException.<br>
-> Unchecked Exceptions (Runtime Exceptions):<br>
-Unchecked exceptions are not required to be explicitly handled and often indicate programming errors.
-Examples include NullPointerException and ArrayIndexOutOfBoundsException.<br>
+1. What is generic in Java? and type the generic code by yourself.
+   a. https://github.com/TAIsRich/chuwa-eij-tutorial/tree/main/02-java-core
+   /src/main/java/com/chuwa/tutorial/t01_basic/generic
+> generics in Java enable you to write code that works with multiple data types while maintaining type safety and code reusability.
+2. Read those codes and type it one by one by yourself. then push the code to your
+   branch.
+   https://github.com/TAIsRich/chuwa-eij-tutorial/tree/main/02-java-core/src/mai
+   n/java/com/chuwa/tutorial/t06_java8
+3. practice stream API at least 3 times
+   a. https://blog.devgenius.io/15-practical-exercises-help-you-master-java�stream-api-3f9c86b1cf82
+4. Practice Optional methods at least 2 times
+   a. https://github.com/TAIsRich/chuwa-eij-tutorial/blob/main/02-java-cor
+   e/src/main/java/com/chuwa/tutorial/t06_java8/exercise/ShoppingCartU
+   til.java
+5. Write the Singleton design pattern include eager load and lazy load.
+> public class EagerSingleton { <br>
+> private static final EagerSingleton instance = new EagerSingleton();<br>
+>     private EagerSingleton() {<br>
+>     }<br>
+>     public static EagerSingleton getInstance() {<br>
+>         return instance;<br>
+>     }<br>
+> }<br>
 
-3. Can there be multiple finally blocks?
->  you can have multiple finally blocks associated with a single try block. However, each try block should have at most one finally block.
-4. When both catch and finally return values, what will be the final result?
-> the value returned by the finally block will override the value returned by the catch block.
-5. What is Runtime/unchecked exception? what is Compile/Checked Exception?
-> reference to question 2
-6. What is the difference between throw and throws?
-> throw is used to raise and throw an exception within code. <br>
-throws is used in a method declaration to specify the exceptions that the method may throw.
-7. Run the below three pieces codes, Noticed the printed exceptions. why do we put the Null/Runtime exception before Exception ?
-> because they are more specific and typically represent programming errors or unexpected conditions. Handling them first allows for more precise and focused error handling.
-8. What is optional? why do you use it? write an optional example.
-> Optional is a class in Java that represents an optional value, meaning it may or may not contain a non-null value. It's used to handle cases where a value could be absent, helping to prevent NullPointerExceptions and clearly express the absence of a value.
-9. Why finally always be executed ?
-> The finally block in Java always executes to ensure cleanup or resource release, regardless of whether an exception is thrown in the try block or not.
-10. Practice collection problems here: https://github.com/TAIsRich/chuwa-eij-tutorial/tree/main/02-java-core/src/main/java/com/chuwa/exercise/collection
-> See coding part
-11. What is Java 8 new features ?
-> Optional class<br>
-> Lambda expression<br>
-> Functional Interface<br>
-> Default Method<br>
+> public class LazySingleton {<br>
+> private static LazySingleton instance;<br>
+>     private LazySingleton() {}<br>
+>     public static LazySingleton getInstance() {<br>
+>         if (instance == null) {<br>
+>             instance = new LazySingleton();<br>
+>         }<br>
+>         return instance;<br>
+>     }<br>
+>}
+
+
+6. What is Runtime Exception? could you give me some examples?
+> Runtime exceptions are often caused by unexpected or exceptional conditions that the program encounters during execution. There are some common types like NullPointerException, NullPointerException, FileNotFound Exception.
+7. Could you give me one example of NullPointerException?
+> String str = null; <br>
+> int length = str.length(); // Throws NullPointerException
+
+8. What is the Optional class?
+> The Optional class is a container class that provides a more explicit and safer way to handle situations where a value may or may not be present, thereby reducing the chances of NullPointerExceptions.
+9. What are the advantages of using the Optional class?
+> Null Safety: Avoids null pointer exceptions.<br>
+> Explicit Intent: Clearly indicates the possibility of absent values.<br>
+> Functional Support: Enables cleaner, functional-style code.<br>
+> Avoids Defensive Checks: Reduces the need for explicit null checks.<br>
+> Clear API Contracts: Defines clear expectations for API users.<br>
+> Chaining: Allows concise operations on present values.<br>
+
+10. What is the @FunctionalInterface?
+> @FunctionalInterface is a Java annotation used to indicate that an interface is meant to have a single abstract method. It's primarily used with lambda expressions to simplify and enhance code readability for functional programming.
+11. what is lambda expression?
+> A lambda expression in Java is a concise way to define a small, anonymous function or block of code that can be passed as an argument to a method or stored in a variable.
+12. What is Method Reference?
+> Method reference in Java is a shorthand notation for invoking a method or referring to a method of a class or an object. It allows you to reuse existing method implementations and pass them around as function arguments.
+13. What is Java 8 new features?
+> Lambda Expressions<br>
+> Functional Interfaces<br>
 > Stream API<br>
-> Method Reference<br>
-> Date Time API<br>
-12. What are the types of design patterns in Java ?
-> Creational Patterns:<br>
-Singleton Pattern: Ensures a class has only one instance and provides a global point of access to it.<br>
-Factory Method Pattern: Defines an interface for creating objects, with subclasses deciding which class to instantiate.<br>
-Structural Patterns:<br>
-Adapter Pattern: Allows the interface of an existing class to be used as another interface.<br>
-Decorator Pattern: Attaches additional responsibilities to objects dynamically.<br>
-Proxy Pattern: Provides a surrogate or placeholder for another object to control access to it.<br>
-Behavioral Patterns:<br>
-Observer Pattern: Defines a one-to-many dependency between objects, so when one object changes state, all its dependents are notified and updated automatically.<br>
-Strategy Pattern: Defines a family of algorithms, encapsulates each one, and makes them interchangeable.<br>
-Concurrency Patterns:<br>
-Singleton Pattern (Concurrency): Ensures a single instance of a class in a multithreaded environment.<br>
-Immutable Object Pattern: Guarantees that an object's state cannot be modified after it is created.<br>
-Producer-Consumer Pattern: Coordinates the producer and consumer threads to efficiently exchange data.<br>
-13. What are the SOLID Principles ?
-> SOLID is an acronym representing a set of five design principles that help guide software design to produce maintainable and scalable code. These principles were introduced by Robert C. Martin and are widely adopted in the software development industry.<br>
-> Single Responsibility Principle (SRP): A class should have one reason to change, promoting focused responsibility.<br>
-Open/Closed Principle (OCP): Software entities should be open for extension but closed for modification, encouraging reusable and extendable code.<br>
-Liskov Substitution Principle (LSP): Subtypes should be substitutable for their base types without altering program correctness.<br>
-Interface Segregation Principle (ISP): Clients should not be forced to depend on unnecessary interfaces, advocating specific interfaces for specific clients.<br>
-Dependency Inversion Principle (DIP): High-level modules should depend on abstractions, not concrete details, for loose coupling.<br>
-
-14. How can you achieve thread-safe singleton patterns in Java ?
->Eager Initialization: This approach ensures thread safety but creates the instance eagerly when the class is loaded, which may not be efficient if the instance is not always needed.<br>
-Lazy Initialization with Synchronization: It is simple and thread-safe, but synchronization can introduce performance overhead, especially in high-concurrency scenarios.<br>
-Double-Checked Locking: Provides both thread safety and efficiency by minimizing synchronization overhead.<br>
-
-15. What do you understand by the Open-Closed Principle (OCP) ?
-> The Open-Closed Principle (OCP) is one of the SOLID principles of object-oriented software design<br>
-> Definition: Software entities (classes, modules, functions) should be open for extension but closed for modification.<br>
-> To adhere to the Open-Closed Principle, you typically use techniques like inheritance, interfaces, and polymorphism to allow for extension through subclassing or implementing new interfaces. This approach promotes code reusability and maintainability by reducing the risk of introducing bugs or breaking existing functionality when making changes.
-16. Liskov’s substitution principle states that if class B is a subtype of class A, then object of type A may be substituted with any object of type B. What does this actually mean? (from OA ) choose your answer.
-> It mean that if the object of type A can do something, the object of type B could also be able tp
-perform the same thing
-17. Watch the design pattern video, and type the code, submit it to MavenProject folder
-> Ok, see coding part!<br>
-> Pros and Cons:<br>
-> 1 Simple Factory Pattern:<br>
-Pros: Simple to understand and use. Centralizes object creation.<br>
-Cons: Violates Open-Closed Principle. May lead to a large factory class.<br>
-2 Factory Method Pattern:<br>
-Pros: Follows Open-Closed Principle. Provides extensibility.<br>
-Cons: Requires multiple factory classes. Clients need to know the factory to use.<br>
-3 Abstract Factory Pattern:<br>
-Pros: Creates related product families. Follows Open-Closed Principle. Reduces coupling.<br>
-Cons: Requires creating many factory classes for new families.<br>
+> Default and Static Methods in Interfaces<br>
+> Method References
+14. Lambda can use unchanged variable outside of lambda? what is the details?
+> Lambda expressions can access instance variables (i.e., fields of an object) from their enclosing class. These variables don't need to be declared as final or effectively final, but they must be accessible within the lambda's scope.
+15. Describe the newly added features in Java 8?
+> see question 13
+16. Can a functional interface extend/inherit another interface?
+> A functional interface can extend another interface as long as the resulting interface adheres to the single abstract method rule and doesn't introduce additional abstract methods.
+17. What is the lambda expression in Java and How does a lambda expression relate to a functional interface?
+> A lambda expression in Java is a concise way to define and use an anonymous function. It's often used with functional interfaces, which are interfaces with a single abstract method. Lambda expressions allow you to provide a quick implementation for that single method, making your code more compact and enabling a more functional programming style in Java.
+18. In Java 8, what is Method Reference?
+> In Java 8, a method reference is a shorthand notation that allows you to refer to a method of a class or an instance of a class directly. It simplifies the use of lambda expressions when a lambda expression simply calls an existing method. Method references provide a more readable and concise way to express such calls.
+19. What does the String::ValueOf expression mean?
+> It refers to the valueOf method of the String class. This method is a static method and is used to convert various types of data into their string representations.
+20. What are Intermediate and Terminal operations?
+>  Intermediate operations in Java Streams are used to transform and filter data in a stream lazily, creating a pipeline of operations. Terminal operations triggers the execution of these operations and produce a final result.
+21. What are the most commonly used Intermediate operations?
+> map, filter, distinct, sorted, flatmap
+22. What is the difference between findFirst() and findAny()?
+> the main difference between findFirst() and findAny() is that findFirst() returns the first element in an ordered stream and is deterministic, while findAny() returns any element and is typically used when you don't need a specific element or when working with unordered streams, especially in parallel processing.
+23. How are Collections different from Stream?
+> collections are suitable for managing and manipulating a fixed set of objects in memory, whereas streams are designed for functional and often parallel data processing. Streams provide a more declarative and efficient way to work with data, especially for large or potentially infinite datasets.
