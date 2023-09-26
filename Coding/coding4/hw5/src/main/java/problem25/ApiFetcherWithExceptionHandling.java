@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class ApiFetcher {
+public class ApiFetcherWithExceptionHandling {
     private static final String API_URL = "https://jsonplaceholder.typicode.com";
 
     public static String fetchData(String endpoint) throws Exception {
