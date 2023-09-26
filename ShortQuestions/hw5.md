@@ -126,6 +126,43 @@ Done.
 
 ## 22. Read those interview questions and pick some important questions to this homework.
 
+#### Q1. What are the benefits of using Multithreading?
+
+- Allow the program to run continuously even if a part of it is blocked.
+- Improve performance as compared to traditional parallel programs that use multiple processes.
+- Improves the responsiveness of complex applications or programs.
+- Increase use of CPU resources and reduce costs of maintenance.
+- Saves time and parallelism tasks.
+- If an exception occurs in a single thread, it will not affect other threads as threads are independent.
+
+#### Q2: What's the difference between thread and process?
+
+Thread: It simply refers to the smallest units of the particular process. It has the ability to execute different parts (referred to as thread) of the program at the same time.
+
+Process: It simply refers to a program that is in execution i.e., an active program. A process can be handled using PCB (Process Control Block).
+
+#### Q3: What is daemon thread and how to create one?
+
+JVM does not wait for daemon threads to finish their tasks before termination. To create daemon threads in java using the thread class setDaemon(true).
+
+#### Q4: What’s the difference between notify() and notifyAll()?
+
+notify(): It sends a notification and wakes up only a single thread instead of multiple threads that are waiting on the object’s monitor.
+
+notifyAll(): It sends notifications and wakes up all threads and allows them to compete for the object's monitor instead of a single thread.
+
 ## 23. write a code to create 2 threads, one thread print 1,3,5,7,9, another thread print 2,4,6,8,10.
 
 (solution is in com.chuwa.tutorial.t08_multithreading.c05_waitNotify.OddEventPrinter)
+
+Presented in the Coding folder
+
+25. completable future:
+
+- a. Homework 1: Write a simple program that uses CompletableFuture to asynchronously get the sum and product of two integers, and print the results.
+- b. Homework 2: Assume there is an online store that needs to fetch data from three APIs: products, reviews, and inventory. Use CompletableFuture to implement this scenario and merge the fetched data for further processing. (需要找 public api 去模拟，)
+  - i. Sign In to Developer.BestBuy.com
+  - ii. Best Buy Developer API Documentation
+    (bestbuyapis.github.io)
+  - iii. 可以用 fake api https://jsonplaceholder.typicode.com/
+- c. Homework 3: For Homework 2, implement exception handling. If an exception occurs during any API call, return a default value and log the exception information.
