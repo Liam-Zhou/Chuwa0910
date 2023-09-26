@@ -110,10 +110,10 @@ Concurrent collections are thread-safe collections introduced in Java to support
 ## 17.	what kind of locks you know? 
 There are various types of locks in Java, including:
 
-synchronized blocks/methods
-ReentrantLock
-ReadLock and WriteLock in ReadWriteLock
-StampedLock
+* synchronized blocks/methods
+* ReentrantLock
+* ReadLock and WriteLock in ReadWriteLock
+* StampedLock
 
 ## 18.	What is the difference between class lock and object lock?
 
