@@ -10,7 +10,6 @@ The final block contains the final return value, regardless of the return value 
 ### Problem 5
 Runtime exceptions are checked during runtime. The compiler doesn’t detect the errors during compile time. It’s usually something wrong with the logic of the code. For example, null pointer execution, array index out of bound exception.
 
-### Problem 6
 Compile-time exceptions are checked at compile-time. It’s usually more critical because the code wouldn’t start running. For example, file not found exceptions, class not found exception.
 
 ### Problem 6
