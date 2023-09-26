@@ -42,7 +42,7 @@ Callable is also a functional interface, introduced in Java 5, similar to Runnab
 A Runnable does not return a result or throw checked exceptions directly; you need to handle exceptions within the run method.
 A Callable returns a Future object representing the result of the computation and can throw checked exceptions.
 
-## 4.	what is the diff between t.start() and t.run()?
+## 4.	What is the diff between t.start() and t.run()?
 
 t.start() is used to start a new thread of execution and invokes the run method on that thread asynchronously.
 
@@ -76,16 +76,16 @@ sleep() is a method of the Thread class and is used for making a thread pause fo
 
 Deadlock is a situation in multithreading where two or more threads are unable to proceed because each is waiting for the other to release a resource. It's a state in which no progress can be made because the threads are effectively stuck.
 
-## 9.	how do threads communicate with each other?
+## 9.	How do threads communicate with each other?
 Thread Communication:
 Threads can communicate with each other using mechanisms like wait(), notify(), notifyAll(), and join(). These methods allow threads to coordinate and synchronize their activities.
 
-## 10.	what is join() method?
+## 10.	What is join() method?
 
 join() Method:
 The join() method is used to wait for a thread to finish its execution. When one thread calls join() on another thread, it will block until the thread being joined has completed.
 
-## 11.	what is yield() method
+## 11.	What is yield() method
 
 yield() Method:
 The yield() method is used to hint to the scheduler that the current thread is willing to yield its current execution time to allow other threads to run. However, it doesn't guarantee that the thread will yield; it depends on the thread scheduler.
@@ -107,7 +107,7 @@ Atomic classes in Java, like AtomicInteger and AtomicBoolean, provide atomic ope
 ## 16.	What is the cocurrent collections?
 Concurrent collections are thread-safe collections introduced in Java to support concurrent access by multiple threads without the need for explicit synchronization. Examples include ConcurrentHashMap and ConcurrentLinkedQueue.
 
-## 17.	what kind of locks you know? 
+## 17.	What kind of locks you know? 
 There are various types of locks in Java, including:
 
 * synchronized blocks/methods
@@ -126,5 +126,12 @@ Object Lock: It's a lock on an instance of the class, ensuring that only one thr
 Future is a placeholder for a result that will be available in the future. It represents the result of an asynchronous computation.
 CompletableFuture is a more flexible and feature-rich implementation of Future. It allows you to compose multiple asynchronous operations and handle exceptions and timeouts more effectively.
 
-## 20.	what is ThreadLocal?
+## 20.	What is ThreadLocal?
 ThreadLocal is a class in Java that provides thread-local variables. Each thread accessing a ThreadLocal variable has its own independent copy of that variable, isolated from other threads. It's often used for storing thread-specific data.
+
+## 22. Read those interview questions and pick some important question to this homework
+   * how many ways can we create a thread for a task?
+     new Thread(new Task("name"))
+     es.submit( new Task("name"))
+   * what is the main difference between synchronized reentrantLock?
+     The main difference between synchronized and ReentrantLock is that ReentrantLock provides more functionality and control. Synchronized is a keyword that can be used to lock a block of code or an entire object. ReentrantLock is a class that implements the Lock interface. 
