@@ -1,5 +1,3 @@
-package com.chuwa.learn;
-
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.io.BufferedReader;
@@ -8,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Main {
+public class CompletableFutureExample {
 
     // Uses CompletableFuture to asynchronously get the sum and product of two integer.
     private static void homework1(int x, int y){

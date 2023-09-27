@@ -123,15 +123,24 @@ All the atomic classes have the get() and set() methods that work on the volatil
 ### 16. What is cocurrent collections?
 Concurrent collections refer to a set of classes that allow multiple threads to access and modify a collection concurrently, without the need for explicit synchronization.
 ### 17. What kind of locks do you know?
-
+1. Reentrant Lock: Allows a thread to acquire the same lock multiple times. Java's ReentrantLock class from the java.util.concurrent.locks package is an example.
+3. Read-Write Lock: Allows multiple threads to read shared data simultaneously but restricts write access to only one thread at a time. Java's ReadWriteLock interface and its implementation, ReentrantReadWriteLock, provide this functionality.
+4. Stamped Lock: Introduced in Java 8, this lock offers capabilities like optimistic reading, which can improve the performance in some scenarios compared to ReentrantReadWriteLock.
+7. Shared Lock: Allows multiple threads to hold the lock at the same time, typically used for read operations.
+8. Exclusive/Binary Lock: Only one thread can hold the lock at any given time, usually used for write operations.
+9. Advisory Lock: Not enforced by the system but instead relies on all threads/processes to cooperate (often seen in database systems).
+10. Mutex (Mutual Exclusion) Lock: Ensures that only one thread can execute a specific section of code at a time.
+11. Semaphore: Not exactly a lock, but a related synchronization mechanism that controls access based on the number of available permits.
 ### 18. What is the difference between class lock and object lock?
-
+The difference between class lock and object lock pertains to which entity the lock is associated with and the scope of the lock.
+ThreadLocal is useful when you need to store data that is specific to a particular thread, such as user sessions, database connections, or other thread-specific configurations.
 ### 19. What is future and completableFuture?
 
 ### 20. What is ThreadLocal?
-
+ThreadLocal is a Java class that provides thread-local variables. Each thread accessing a ThreadLocal variable has its own independent copy, which is not shared with other threads. This allows each thread to have its own instance of a variable, isolated from others.
 ### 21. Read those interview questions and pick some important questions to this homework.
 
-### 22. Completable Future:
+### 22. Completable Future
+[Codes are here](../Coding/coding4/CompletableFutureExample.java)
 
 
