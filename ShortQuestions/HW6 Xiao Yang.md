@@ -98,4 +98,4 @@ DELETE FROM oms_company_address WHERE city = "New York";
     db.oms_company_address.remove({address_name: "Santa Clara XXXX"})
     ```
 
-2. API Exercise
+2. REST API Exercise
