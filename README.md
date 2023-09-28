@@ -9,7 +9,7 @@ open your teminal, run below command.
 
 ```bash
 cd your_work_dir
-git clone https://github.com/DPFP/chuwa0620
+git clone https://github.com/Liam-Zhou/chuwa0910
 ```
 
 ### Student TODO: send your github email address to me by slack. I will add you to this repo
@@ -17,8 +17,8 @@ git clone https://github.com/DPFP/chuwa0620
 ### Create your feature branch to implement the assignment.
 
 ```bash
-git branch firstName_lastName/notes
-git checkout firstName_lastName/notes
+git branch firstName_lastName/master
+git checkout firstName_lastName/master
 
 example: 
 HW1:
