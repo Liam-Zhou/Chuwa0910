@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "e309f61e-1f43-492f-baba-49c8ee833074",
+		"name": "HW6_Posman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20858346",
+		"_collection_link": "https://restless-water-715376.postman.co/workspace/My-Workspace~cf91c8e9-286e-4bfd-81fb-c67b5fa848cc/collection/20858346-e309f61e-1f43-492f-baba-49c8ee833074?action=share&source=collection_link&creator=20858346"
+	},
+	"item": [
+		{
+			"name": "5 GET APIs",
+			"item": [
+				{
+					"name": "JSON API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://jsonplaceholder.typicode.com/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "HTML API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://www.example.com"
+					},
+					"response": []
+				},
+				{
+					"name": "CSV API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://people.sc.fsu.edu/~jburkardt/data/csv/hw_200.csv"
+					},
+					"response": []
+				},
+				{
+					"name": "XML API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://v2.jokeapi.dev/joke/Programming?format=txt",
+							"protocol": "https",
+							"host": [
+								"v2",
+								"jokeapi",
+								"dev"
+							],
+							"path": [
+								"joke",
+								"Programming"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "txt"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PlainText API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://v2.jokeapi.dev/joke/Programming?format=txt",
+							"protocol": "https",
+							"host": [
+								"v2",
+								"jokeapi",
+								"dev"
+							],
+							"path": [
+								"joke",
+								"Programming"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "txt"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5 POST APIs",
+			"item": [
+				{
+					"name": "GitHub API (Create a New Repository)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"my-new-repo\",\r\n  \"description\": \"A new repository created via API\",\r\n  \"private\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.github.com/user/repos"
+					},
+					"response": []
+				},
+				{
+					"name": "Twitter API (Post a Tweet)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"text\": \"Hello, Twitter! This is a tweet posted via API.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.twitter.com/2/tweets"
+					},
+					"response": []
+				},
+				{
+					"name": "JSONPlaceholder (Create a New Post)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": 1,\r\n  \"title\": \"New Post\",\r\n  \"body\": \"This is the body of the new post.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://jsonplaceholder.typicode.com/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "ReqRes (Register a New User)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"password\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://reqres.in/api/register"
+					},
+					"response": []
+				},
+				{
+					"name": "JSONPlaceholder (Create a New User)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Jane Smith\",\r\n  \"username\": \"janesmith\",\r\n  \"email\": \"janesmith@example.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://jsonplaceholder.typicode.com/users"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3 PUT APIs",
+			"item": [
+				{
+					"name": "JSONPlaceholder (Update a Post)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": 1,\r\n  \"id\": 1,\r\n  \"title\": \"Updated Post Title\",\r\n  \"body\": \"This is the updated content of the post.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://jsonplaceholder.typicode.com/posts/1"
+					},
+					"response": []
+				},
+				{
+					"name": "GitHub API (Update an Issue)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Updated Issue Title\",\r\n  \"body\": \"This is the updated description of the issue.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.github.com/repos/octocat/hello-world/issues/1"
+					},
+					"response": []
+				},
+				{
+					"name": "JSONPlaceholder (Update a Comment)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"postId\": 1,\r\n  \"id\": 1,\r\n  \"name\": \"Updated Name\",\r\n  \"email\": \"updated.email@example.com\",\r\n  \"body\": \"This is the updated content of the comment.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://jsonplaceholder.typicode.com/comments/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2 DELETE APIs",
+			"item": [
+				{
+					"name": "JSONPlaceholder (Delete a Post)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://jsonplaceholder.typicode.com/posts/1"
+					},
+					"response": []
+				},
+				{
+					"name": "GitHub API (Delete a Repository)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://api.github.com/repos/username/repo-name"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
