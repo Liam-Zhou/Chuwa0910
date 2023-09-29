@@ -1,24 +1,27 @@
-package com.chuwa.mongoblog.model;
+package com.chuwa.mongoblog.payload;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Document(collection = "posts")
-public class Post {
+public class PostDTO {
     private String title;
     private String description;
     private String content;
+
     private LocalDateTime createDateTime;
     //private LocalDateTime updateDateTime;
-    public Post() {
-    }
-    public Post(String title, String description, String content, LocalDateTime createDateTime) {
+    public PostDTO(String title, String description, String content) {
         this.title = title;
         this.description = description;
         this.content = content;
-        this.createDateTime = createDateTime;
-        //this.updateDateTime = updateDateTime;
     }
+
+    public PostDTO(){
+
+    }
+
     public String getTitle() {
         return title;
     }
@@ -43,19 +46,19 @@ public class Post {
         this.content = content;
     }
 
-    public LocalDateTime getCreateDateTime() {
-        return createDateTime;
-    }
-
-    public void setCreateDateTime(LocalDateTime createDateTime) {
+    public void setCreateDateTime(LocalDateTime createDateTime){
         this.createDateTime = createDateTime;
     }
 
-    //public LocalDateTime getUpdateDateTime() {
-    //    return updateDateTime;
+    //public void setUpdateDateTime(LocalDateTime updateDateTime){
+    //    this.updateDateTime = updateDateTime;
     //}
 
-    //public void setUpdateDateTime(LocalDateTime updateDateTime) {
-    //    this.updateDateTime = updateDateTime;
+    public LocalDateTime getCreateDateTime(){
+        return createDateTime;
+    }
+
+    //public LocalDateTime getUpdateDateTime(){
+    //    return updateDateTime;
     //}
 }
