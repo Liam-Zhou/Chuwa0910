@@ -99,3 +99,129 @@ DELETE FROM oms_company_address WHERE city = "New York";
     ```
 
 2. REST API Exercise
+
+### 2.1 5 GET APIs with different response type.
+
+- GET https://www.google.com/ 200;
+- GET https://www.google.com/1 404 NOT FOUND;
+- GET http://localhost:8080/api/v1/posts 500 500 Internal Server Error;
+- GET https://httpstat.us/403 403 403 Forbidden;
+- GET https://httpstat.us/400 400 400 Bad Request;
+
+### 2.2 5 Post API with json request body, please also paste the response here.
+
+1. POST https://jsonplaceholder.typicode.com/posts
+       
+       - Request Body
+         ```
+         {
+            {
+                "title": "test title",
+                "body": "test body",
+                "userId": 1
+            }
+         }
+         ```
+       - Response
+         ```
+         {
+            "title": "test title",
+            "body": "test body",
+            "userId": 1,
+            "id": 101
+         }
+         ```
+
+### 2.3 PUT API with json request body, please also paste the response here.
+    1. PUT https://jsonplaceholder.typicode.com/posts/1
+       
+       - Request Body
+         ```
+         {
+           "id": 1,
+           "title": "Test Updated Title",
+           "body": "Test Updated body text",
+           "userId": 1
+         }
+         ```
+       - Response
+         ```
+         {
+           "id": 1,
+           "title": "Test Updated Title",
+           "body": "Test Updated body text",
+           "userId": 1
+         }
+         ```
+
+### 2.4 2 DELETE API.
+    - DELETE https://jsonplaceholder.typicode.com/posts/1
+
+### 2.5 Each example with 404, 501, 500 and any http status codes you know.
+    - 404 Not Found
+       This status code means the requested resource could not be found on the server.
+
+    - 501 Not Implemented
+       This means the request method is not supported by the server and cannot be handled.
+       
+    - 500 Internal Server Error
+       
+       A generic error message, given when an unexpected condition was encountered and could not be handled.
+    
+    - 200 Success
+       
+       This status code means everything going well.
+       
+    - 504 Gateway Timeout
+       
+       The server, while acting as a gateway or proxy, did not receive a timely response from an upstream server or some other auxiliary server.
+
+### 2.6 API Design
+1. Find 2 collection of APIs example, ie. Twitter, Paypal, Youtube, etc.
+
+    1. Twitter APIs:
+       
+       - GET https://api.twitter.com/2/tweets/{id}
+       - POST https://api.twitter.com/2/tweets
+       - PUT https://api.twitter.com/2/users/{id}
+       - DELETE https://api.twitter.com/2/tweets/{id}
+    
+    2. PayPal APIs:
+       
+       - GET https://api.paypal.com/v1/payments/payment/{payment_id}
+       - POST https://api.paypal.com/v1/payments/payment
+       - PUT https://api.paypal.com/v1/invoicing/invoices/{invoice_id}
+       - DELETE https://api.paypal.com/v1/vault/credit-card/{credit_card_id}
+       
+2. Design a collection of APIs for a Blog Website, please specify GET, POST, PUT, DELETE. 
+    1. Posts APIs:
+       - GET /api/posts - Retrieve all posts
+       - POST /api/posts - Create a new post
+       - PUT /api/posts/{post_id} - Update a specific post by ID
+       - DELETE /api/posts/{post_id} - Delete a specific post by ID
+    2. Comments APIs:
+       - GET /api/posts/{post_id}/comments - Retrieve all comments of a post
+       - POST /api/posts/{post_id}/comments - Create a new comment on a post
+       - PUT /api/comments/{comment_id} - Update a specific comment by ID
+       - DELETE  /api/comments/{comment_id} - Delete a specific comment by ID
+**Design APIs for the following features:**
+1. Find the customer’s payments, like credit card 1, credit card 2, paypal, Apple Pay.
+    ```
+    GET /api/customers/{customer_id}/payments
+    ```
+ 
+2. Find the customer’s history orders from 10/10/2022 to 10/24/2022.
+    ```
+    GET /api/customers/{customer_id}/orders?start_date=2022-10-10&end_date=2022-10-24
+    ```
+ 
+3. Find the customer’s delivery address.
+    ```
+    GET /api/customers/{customer_id}/addresses
+    ```
+4. If I also want to get customer’s default payment and default delivery address, what kind of the API (URL) should be?
+    ```
+    GET /api/customers/{customer_id}/default-payment
+    GET /api/customers/{customer_id}/default-address
+    ```
+
