@@ -1,3 +1,5 @@
+### MySQL Relational Database
+
 ### 1. Create `oms_company_address` tabel
 
 ```SQL
@@ -38,3 +40,57 @@ CREATE TABLE oms_company_address (
 ![update phone 1](https://github.com/Liam-Zhou/Chuwa0910/assets/70967683/c04d4a22-93e7-46ab-b746-602f669dd116)
 
 ![update phone 2](https://github.com/Liam-Zhou/Chuwa0910/assets/70967683/f18e2731-e868-48e9-bed5-99deb877d328)
+
+
+### MongoDB No-SQL Database
+
+### 1. Create `test` DB
+
+``` 
+use test
+```
+
+### 2. Create oms_company_address collection
+
+```
+db.createCollection("oms_company_address")
+```
+
+### 3. Insert a few random entries to `oms_company_address` collection
+
+```
+db.oms_company_address.insert([
+    { id: "1", address: "364 Quinby Road", phone: "912-123-4067" },
+    { id: "2", address: "368 Quinby Road", phone: "212-123-0567" },
+    { id: "3", address: "370 Quinby Road", phone: "612-923-2567" },
+    { id: "4", address: "372 Quinby Road", phone: "412-123-4567" },
+    { id: "5", address: "472 Quinby Road", phone: "812-123-4567" }
+])
+```
+
+### 4. Read one entry from `oms_company_address` collection
+
+```
+db.oms_company_address.findOne()
+```
+
+### 5. Read all entrie from `oms_company_address` collection
+
+```
+db.oms_company_address.find()
+```
+
+### 6. Update one entry from oms_company_address collection.
+
+```
+db.oms_company_address.update(
+  {address_name: "364 Quinby Road"}, 
+  {$set: {phone: "666-666-6666"}}
+)
+```
+
+### 7. Remove one entry from oms_company_address collection 
+
+```
+db.oms_company_address.remove({address_name: "364 Quinby Road"})
+```
