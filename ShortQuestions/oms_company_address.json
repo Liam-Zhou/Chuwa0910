@@ -1,0 +1,7 @@
+db.oms_company_address.insert([
+    { id: "1", address: "364 Quinby Road", phone: "912-123-4067" },
+    { id: "2", address: "368 Quinby Road", phone: "212-123-0567" },
+    { id: "3", address: "370 Quinby Road", phone: "612-923-2567" },
+	{ id: "4", address: "372 Quinby Road", phone: "412-123-4567" },
+	{ id: "5", address: "472 Quinby Road", phone: "812-123-4567" }
+])
