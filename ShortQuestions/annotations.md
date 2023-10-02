@@ -202,3 +202,9 @@ When an API is called by Postman, the following steps occur:
 * The business layer returns a response to the API.
 * The API returns the response to Postman.
 * Postman displays the response to the user.
+
+### 6.	What is the application.properties? do you know application.yml?
+
+Application properties (application.properties or application.yml) are files that contain configuration settings for Spring Boot applications. 
+
+These files are typically located in the root directory of the application classpath. Application properties can be specified in either a .properties or .yml file. .properties files are a simple text format that stores key-value pairs. .yml files are a YAML file format that is more concise and easier to read. Spring Boot will automatically load application properties from the application.properties and application.yml files.
