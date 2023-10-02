@@ -66,3 +66,40 @@
 * /blogs/:id/posts/:id: Delete a specific post.
 * /blogs/:id/categories/:id: Delete a specific category.
 * /blogs/:id/tags/:id: Delete a specific tag.
+
+
+### Design APIs for the following features
+
+ ### `Find the customer's payments:`
+  
+To retrieve a list of customer's payments, you can use the following API endpoint:
+
+- Endpoint: /customers/{customerId}/payments <br />
+- HTTP Method: GET <br />
+- Path Variable: {customerId} represents the unique identifier for the customer. <br />
+- Response: A list of payment methods associated with the customer. <br />
+
+ ###  `Find the customer's history orders from 10/10/2022 to 10/24/2022:` <br />
+- To retrieve the customer's historical orders within a specific date range, you can use the following API endpoint:
+
+- Endpoint: /customers/{customerId}/orders <br />
+- HTTP Method: GET <br />
+- Path Variable: {customerId} represents the unique identifier for the customer. <br />
+- Query Parameters: startDate=10/10/2022 and endDate=10/24/2022 <br />
+- Response: A list of orders placed by the customer between the specified dates. <br />
+
+###  `Find the customer's delivery addresses:` <br />
+- To retrieve a list of customer's delivery addresses, you can use the following API endpoint:<br />
+
+- Endpoint: /customers/{customerId}/addresses<br />
+- HTTP Method: GET<br />
+- Path Variable: {customerId} represents the unique identifier for the customer.<br />
+- Response: A list of delivery addresses associated with the customer.<br />
+
+ ### `Get customer's default payment and default delivery address:`<br />
+- To retrieve the customer's default payment method and default delivery address, you can use the following API endpoint:<br />
+
+- Endpoint: /customers/{customerId}/defaults<br />
+- HTTP Method: GET<br />
+- Path Variable: {customerId} represents the unique identifier for the customer.<br />
+- Response: An object containing the customer's default payment method and default delivery address.<br />
