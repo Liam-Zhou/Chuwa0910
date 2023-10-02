@@ -168,3 +168,8 @@ In this case, the name field in the database table will be of type VARCHAR with 
 * nullable = false: Specifies that the studentName field cannot be null, meaning a value must be provided during insertion.*
 
 * unique = false: Specifies that the values in the studentName column are not required to be unique across all records in the table.
+
+
+### 3. What is the default column names of the table in database for @Column ?
+
+By default, the @Column annotation uses the Java property name as the database column name. Therefore, the default column names for the firstName and operatingSystem properties are firstName and operatingSystem, respectively.
