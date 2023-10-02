@@ -173,3 +173,32 @@ In this case, the name field in the database table will be of type VARCHAR with 
 ### 3. What is the default column names of the table in database for @Column ?
 
 By default, the @Column annotation uses the Java property name as the database column name. Therefore, the default column names for the firstName and operatingSystem properties are firstName and operatingSystem, respectively.
+
+### 4. What are the layers in springboot application? what is the role of each layer?
+
+There are three main layers in a Spring Boot application:
+
+* Presentation layer: This layer is responsible for interacting with the user. It typically consists of web pages, mobile apps, or other forms of user interface.
+* Business layer: This layer contains the core business logic of the application. It is responsible for processing data and performing business operations.
+* Persistence layer: This layer is responsible for storing and retrieving data from a database.
+
+### 5.	Describe the flow in all of the layers if an API is called by Postman.
+
+The following diagram shows the flow of a typical Spring Boot application:
+
+* The user sends a request to the presentation layer.
+* The presentation layer forwards the request to the business layer.
+* The business layer processes the request and performs any necessary business operations.
+* The business layer interacts with the persistence layer to store and retrieve data.
+* The business layer returns a response to the presentation layer.
+* The presentation layer returns the response to the user.
+  
+When an API is called by Postman, the following steps occur:
+
+* The user sends a request to the API using Postman.
+* The API is implemented in the business layer of the Spring Boot application.
+* The business layer processes the request and performs any necessary business operations.
+* The business layer interacts with the persistence layer to store and retrieve data.
+* The business layer returns a response to the API.
+* The API returns the response to Postman.
+* Postman displays the response to the user.
