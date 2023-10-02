@@ -147,6 +147,31 @@ Content-Type: application/json
 }
 ```
 
+### 3. 2 DELETE API
+
+1. Delete a user
+```
+DELETE /api/users/1
+```
+
+Response:
+```
+HTTP/1.1 204 No Content
+```
+
+2. Delete a product
+
+```
+DELETE /api/products/1
+```
+
+Response:
+
+```
+HTTP/1.1 204 No Content
+```
+
+
 ### 3. PUT API with json request body, please also paste the response here 
 
 1. Update a user's profile
@@ -225,6 +250,25 @@ Content-Type: application/json
   "updatedAt": "2023-10-01T22:48:40.000Z"
 }
 ```
+
+### 4. Each example with 404, 401,500 and any http status codes you know 
+
+ Delete a user
+
+```
+DELETE /api/users/1
+```
+- 204 No Content: The user was successfully deleted.
+- 404 Not Found: The user with the specified ID does not exist.
+- 401 Unauthorized: The user is not authorized to delete the specified user.
+- 500 Internal Server Error: An unexpected error occurred while trying to delete the user.
+
+Other possible HTTP status codes for DELETE APIs include:
+
+* 400 Bad Request: The request is invalid. For example, the request body may be missing required fields or the request may be trying to delete a resource that cannot be deleted.
+* 403 Forbidden: The user is not allowed to delete the specified resource. For example, the user may not have the appropriate permissions or the resource may be locked.
+* 409 Conflict: The deletion cannot be completed because of a conflict. For example, the resource may be referenced by another resource.
+* 410 Gone: The resource no longer exists.
 
 ### API Design
 
