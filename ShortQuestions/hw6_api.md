@@ -10,7 +10,221 @@
 
 `GET` : https://s3.amazonaws.com/your-bucket-name/your-object-key `Status Code` : 403Forbidden;
 
+### 2. 5 Post API with json request body, please also paste the response here
 
+1. Create a new user
+
+```
+POST /api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "mypassword"
+}
+```
+
+Response:
+
+```
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+```
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "createdAt": "2023-10-01T22:48:40.000Z"
+}
+
+2. Update a user's profile
+
+```
+PUT /api/users/1
+Content-Type: application/json
+
+{
+  "name": "Jane Doe"
+}
+```
+
+Response:
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Jane Doe",
+  "email": "john.doe@example.com",
+  "updatedAt": "2023-10-01T22:48:40.000Z"
+}
+```
+
+3. Create a new product
+
+```
+POST /api/products
+Content-Type: application/json
+
+{
+  "name": "My Product",
+  "description": "This is a great product!",
+  "price": 19.99
+}
+```
+
+Response:
+
+```
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "My Product",
+  "description": "This is a great product!",
+  "price": 19.99,
+  "createdAt": "2023-10-01T22:48:40.000Z"
+}
+```
+
+4. Place an order
+
+```
+POST /api/orders
+Content-Type: application/json
+
+{
+  "customer_id": 1,
+  "product_ids": [1, 2, 3],
+  "total": 59.97
+}
+```
+
+Response:
+
+```
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "id": 1,
+  "customer_id": 1,
+  "product_ids": [1, 2, 3],
+  "total": 59.97,
+  "status": "pending",
+  "createdAt": "2023-10-01T22:48:40.000Z"
+}
+```
+
+5. Send a message to a user
+
+```
+POST /api/users/1/messages
+Content-Type: application/json
+
+{
+  "body": "Hello, world!"
+}
+```
+
+Response:
+
+```
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "id": 1,
+  "sender_id": 1,
+  "recipient_id": 1,
+  "body": "Hello, world!",
+  "createdAt": "2023-10-01T22:48:40.000Z"
+}
+```
+
+### 3. PUT API with json request body, please also paste the response here 
+
+1. Update a user's profile
+
+```
+PUT /api/users/1
+Content-Type: application/json
+
+{
+  "name": "Jane Doe"
+}
+```
+
+Response:
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Jane Doe",
+  "email": "john.doe@example.com",
+  "updatedAt": "2023-10-01T22:48:40.000Z"
+}
+```
+
+2. Update a product
+
+```
+PUT /api/products/1
+Content-Type: application/json
+
+{
+  "name": "My Updated Product",
+  "description": "This is a great product!",
+  "price": 29.99
+}
+```
+Response:
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "My Updated Product",
+  "description": "This is a great product!",
+  "price": 29.99,
+  "updatedAt": "2023-10-01T22:48:40.000Z"
+}
+```
+
+3. Update an order
+```
+PUT /api/orders/1
+Content-Type: application/json
+
+{
+  "status": "shipped"
+}
+```
+
+Response:
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 1,
+  "customer_id": 1,
+  "product_ids": [1, 2, 3],
+  "total": 59.97,
+  "status": "shipped",
+  "updatedAt": "2023-10-01T22:48:40.000Z"
+}
+```
 
 ### API Design
 
