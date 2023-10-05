@@ -6,6 +6,7 @@
 2. `@Repository`: used on the repository interfaces to indicate that they are Spring-managed components and should be eligible for Spring's component scanning.
 3. `@Service`: used to indicate that a class is a service component in a Spring Boot. In Spring, a service is typically a class that performs business logic or service-layer operations.
 4. `@Autowired`: automatically inject dependencies into a Spring bean, typically through constructor injection, setter injection, or field injection.
+5. `@ResponseStatus`: cause Spring boot to respond with the specified HTTP status code whenever this exception is thrown from your controller.
 
 ## used by Entity
 
@@ -48,8 +49,19 @@
     public class PostController {
     ```
 3. `@PostMapping`: define the method as an HTTP POST method.
-4. `@RequestBody`: Binds the body of an HTTP request to a method parameter.
-    ```java
-    @PostMapping
-        public ResponseEntity<PostDTO> createPost(@RequestBody PostDTO postDTO){
+4. `@GetMapping`: define the method as an HTTP GET method.
+5. `@PutMapping`: define the method as an HTTP PUT method.
+6. `@DeleteMapping`: define the method as an HTTP DELETE method.
+7. `@RequestBody`: Binds the body of an HTTP request to a method parameter.
+8. `@PathVariable`: Binds the variable inside the URL path to program.
+   ```java
+    @PutMapping("/{id}")
+    public ResponseEntity<PostDTO> updateAuthorById(@PathVariable(name="id") long id, @RequestBody AuthorDTO authorDTO){
     ```
+9. `@RequestParam`: Binds the HTTP requests parameter to a variable.
+
+## used by GraphQL
+1. `@Controller`: define class as a controller.
+2. `@QueryMapping`: define a method that only read data from api, like GET.
+3. `@MutationMapping`: define a method that will send new data to api, like POST or PUT.
+4. `@Argument`: Binds the parameter that sent to api.

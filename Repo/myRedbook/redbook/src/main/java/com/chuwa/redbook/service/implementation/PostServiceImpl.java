@@ -1,18 +1,18 @@
 package com.chuwa.redbook.service.implementation;
 
 
-import com.chuwa.redbook.ResourcesNotFoundException;
+import com.chuwa.redbook.exceptions.ResourcesNotFoundException;
 import com.chuwa.redbook.dao.PostRepository;
 import com.chuwa.redbook.entity.Post;
 import com.chuwa.redbook.payload.PostDTO;
+import com.chuwa.redbook.payload.PostResponse;
 import com.chuwa.redbook.service.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -52,6 +52,27 @@ public class PostServiceImpl implements PostService {
         List<Post> posts = postRepository.findAll();
 
         return posts.stream().map(this::mapPostEntityToDTO).toList();
+    }
+
+    @Override
+    public PostResponse getAllPost(int pageNo, int pageSize, String sortBy, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                Sort.by(sortBy).ascending() :
+                Sort.by(sortBy).descending();
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize, sort);
+        Page<Post> pagePosts = postRepository.findAll(pageRequest);
+
+        List<Post> posts = pagePosts.getContent();
+        List<PostDTO> postDTOs = posts.stream().map(this::mapPostEntityToDTO).toList();
+
+        PostResponse postResponse = new PostResponse();
+        postResponse.setContent(postDTOs);
+        postResponse.setPageNo(pagePosts.getNumber());
+        postResponse.setPageSize(pagePosts.getSize());
+        postResponse.setTotalElements(pagePosts.getTotalElements());
+        postResponse.setTotalPages(pagePosts.getTotalPages());
+        postResponse.setLast(pagePosts.isLast());
+        return postResponse;
     }
 
     @Override

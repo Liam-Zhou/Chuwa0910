@@ -1,4 +1,4 @@
-package com.chuwa.redbook;
+package com.chuwa.redbook.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

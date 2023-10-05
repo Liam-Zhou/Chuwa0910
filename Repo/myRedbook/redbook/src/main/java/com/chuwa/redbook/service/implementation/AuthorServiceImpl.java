@@ -1,6 +1,6 @@
 package com.chuwa.redbook.service.implementation;
 
-import com.chuwa.redbook.ResourcesNotFoundException;
+import com.chuwa.redbook.exceptions.ResourcesNotFoundException;
 import com.chuwa.redbook.dao.AuthorRepository;
 import com.chuwa.redbook.entity.Author;
 import com.chuwa.redbook.payload.AuthorDTO;
