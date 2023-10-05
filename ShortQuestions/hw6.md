@@ -175,12 +175,31 @@ https://ghibliapi.herokuapp.com/create-address
 ![POST API with JSON  type](/Users/kechen/Desktop/work/Chuwa0910/ShortQuestions/images/hw6-10)
 
 ### 3. 3 PUT API with json request body, please also paste the response here
-
-
+```
+PUT https://api.example.com/update-user/1
+PUT https://api.example.com/update-product/5
+```
 ### 4. 2 DELETE API
+```
+DELETE https://api.example.com/delete-user/1
+DELETE https://api.example.com/delete-product/5
+```
 
 ### 5. Each example with 404, 401,500 and any http status codes you know
+404: "Resource not found"
 
+![404](/Users/kechen/Desktop/work/Chuwa0910/ShortQuestions/images/hw6-11)
+
+401: "Unauthorized: Please provide valid credentials"
+
+![401](/Users/kechen/Desktop/work/Chuwa0910/ShortQuestions/images/hw6-12)
+
+500："Unauthorized: Please provide valid credentials"
+
+![500](/Users/kechen/Desktop/work/Chuwa0910/ShortQuestions/images/hw6-13)
+
+200: "Request processed successfully",
+400: "Bad Request: Invalid input data"
 
 ## 3. API Design  
 ### 1.  Find 2 collection of APIs example. ie. Twitter, Paypal, Youtube etc.  -- 命名规范
@@ -225,5 +244,5 @@ GET /api/customers/{customer_id}/addresses
 GET /api/customers/{customer_id}/defaults
 
     Description: Retrieve the customer's default payment method and default delivery address.
-    
+
     Example: /api/customers/123/defaults
