@@ -246,3 +246,75 @@
          }
       }
       ```
+
+7. Global Exception Handling in Controller Layer
+
+    Every Spring project should have global exception handling for the Controller layer. Here is how we can implement it:
+
+    Annotations Used:
+    
+    - @ControllerAdvice: This annotation is used to define a global exception handling class.
+    - @ExceptionHandler: This annotation is used to declare an exception handling method.
+
+    Here is an example of how to use these annotations. Suppose there is a parameter validation in section 5. If the method parameter is incorrect, a MethodArgumentNotValidException will be thrown. We can handle this exception as follows:
+    
+    ```
+    @ControllerAdvice
+    @ResponseBody
+    public class GlobalExceptionHandler {
+
+       /**
+        * Handling request parameter exception
+        */
+       @ExceptionHandler(MethodArgumentNotValidException.class)
+       public ResponseEntity<?> handleMethodArgumentNotValidException(
+          MethodArgumentNotValidException ex, 
+          HttpServletRequest request) {
+             // Implementation...
+       }
+    }
+    ```
+
+8. JPA Related
+    
+    - Creating a Table
+      
+      - @Entity: Declares a class to correspond to a database entity.
+      - @Table: Sets the table name.
+    
+    - Creating a Primary Key
+      
+      - @Id: Declares a field as the primary key.
+      - @GeneratedValue: Specifies how the primary key is generated.
+    
+    - Setting Field Types
+
+      - @Column: Declares a field, allowing you to set attributes such as name, nullable, and length.
+
+    - Specifying Non-Persistent Specific Fields
+      
+      - @Transient: Declares fields that do not need to be mapped to the database.
+    
+    - Declaring Large Fields
+      
+      - @Lob: Declares a field as a large object.
+    
+    - Creating an Enum Type Field
+      
+      Use an enum type field, but it must be annotated with @Enumerated.
+    
+    - Adding Audit Functionality
+      
+      Classes that inherit from AbstractAuditBase will automatically have four additional fields.
+
+    - Deleting/Modifying Data
+      
+      - @Modifying: Indicates a modifying query. It must be used with @Transactional.
+    
+    - Relationship Annotations
+      
+      - @OneToOne: Declares a one-to-one relationship.
+      - @OneToMany: Declares a one-to-many relationship.
+      - @ManyToOne: Declares a many-to-one relationship.
+      - @ManyToMany: Declares a many-to-many relationship.
+
