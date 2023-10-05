@@ -90,6 +90,24 @@ The @RequestBody annotation tells Spring to deserialize the request body into an
         public ResponseEntity<String> create(@RequestBody MyDto myDto) {
         // Process myDto and return a response
         }
+5. @PutMapping: This annotation is used to handle HTTP PUT requests. It specifies that the annotated method should be invoked when a PUT request is sent to a specific URL or URI path. PUT requests are typically used for updating existing resources on the server.
+         
+         @PutMapping("/products/{id}")
+         public ResponseEntity<Void> updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
+            Update the product with the given ID
+            Return an appropriate response
+         }
+
+6. @DeleteMapping: This annotation is used to handle HTTP DELETE requests. It specifies that the annotated method should be invoked when a DELETE request is sent to a specific URL or URI path. DELETE requests are used for deleting resources on the server.
+7. @PostMapping: This annotation is used to handle HTTP POST requests. It specifies that the annotated method should be invoked when a POST request is sent to a specific URL or URI path. POST requests are typically used for creating new resources on the server.
+8. @GetMapping:  This annotation is used to handle HTTP GET requests. It specifies that the annotated method should be invoked when a GET request is sent to a specific URL or URI path. It is commonly used for retrieving data from the server.
+   
+         @GetMapping("/products")
+         public List<Product> getAllProducts() {
+         // Return a list of products
+         }
+
+9. @RequestParam:
 **Services**
 1. @Service: typically used for service classes. In this example, PostServiceImplementation class implements an interface. That is a real class, so marked @Service.
 
@@ -116,3 +134,4 @@ The @RequestBody annotation tells Spring to deserialize the request body into an
                 SpringApplication.run(MyApplication.class, args);
             }
         }
+3. @ResponseStatus(value = HttpStatus.NotFound):
