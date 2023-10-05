@@ -110,3 +110,8 @@ public ResponseEntity<User> getUserById(@PathVariable Long id) {
     // ...
 }
 ```
+
+@JsonProperty()
+- It is a Java annotation used in the context of object serialization and deserialization with libraries like Jackson.
+
+- It is typically applied to a field or getter method within a Java class to specify the mapping between a JSON property and a Java object property when converting JSON data to Java objects or vice versa.
