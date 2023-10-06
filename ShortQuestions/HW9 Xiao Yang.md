@@ -122,7 +122,12 @@ Jackson: The Jackson library is included for JSON serialization and deserializat
 
 Validation: Dependencies for Spring's validation framework are included. This is helpful for form validation and data validation in your web application.
 ### 7. Do you know  @RequestMapping(value = "/users", method = RequestMethod.POST) ? Could you list CRUD by this style
-
+It defines a controller method that handles HTTP POST requests at path `/users`. 
+- create: `@RequestMapping(value = "/users", method = RequestMethod.POST)`
+- get all: `@RequestMapping(value = "/users", method = RequestMethod.GET)`
+- get one: `@RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)`
+- update: `@RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT)`
+- delete: `@RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)`
 
 
 ### 8. What is ResponseEntity? why do we need it?
@@ -139,9 +144,38 @@ The reasons why we use it:
 - Handling Errors: When dealing with exceptions or errors in your application, you can use ResponseEntity to create structured error responses. For example, you can return a JSON object with an error message and an appropriate status code (e.g., 404 for resource not found, 400 for a bad request).
 
 
-### 9. What is ResultSet in jdbc? and describe the flow how to get data using J
+### 9. What is ResultSet in jdbc? and describe the flow how to get data using JDBC.
+In JDBC (Java Database Connectivity), a `ResultSet` is an interface that represents a result set of data retrieved from a relational database after executing a SQL query. It provides methods for traversing and manipulating the data retrieved from the database. A ResultSet essentially acts as a cursor or iterator for the query results, allowing you to navigate through the rows and retrieve column values.
+
+Here's the flow for getting data using JDBC:
+
+- Load the JDBC Driver:
+Before you can connect to a database, you need to load the appropriate JDBC driver for your database system. This is typically done using the` Class.forName()` method to dynamically load the driver class.
+
+- Establish a Database Connection:
+Use the DriverManager class to establish a connection to the database by providing the database URL, username, and password.
+
+- Create a Statement:
+To execute SQL queries, you need to create a Statement or a PreparedStatement object. Statement is used for simple SQL queries, while PreparedStatement is used for parameterized queries to prevent SQL injection.
+
+- Execute a SQL Query:
+
+Use the executeQuery() method of the Statement or PreparedStatement object to execute a SQL query. This method returns a ResultSet containing the result set of data from the query.
+
+- Retrieve Data from the ResultSet:
+
+You can use methods like next(), getString(), getInt(), etc., to traverse the ResultSet and retrieve data.
+
+- Close Resources:
+
+After you have finished working with the ResultSet, Statement, and Connection, it's important to close these resources to release database connections and resources.
+
+- Handle Exceptions:
+
+JDBC operations can throw exceptions, such as SQLException. It's crucial to handle these exceptions properly, either by handling them in your code or by propagating them up the call stack.
 
 ### 10. What is the ORM framework?
+ORM stands for Object-Relational Mapping. It is a programming technique and framework that allows developers to work with relational databases in an object-oriented manner. ORM bridges the gap between the object-oriented programming world and the relational database world by providing a way to map database tables and their relationships to classes and objects in code.
 
 ### 11. Learn how to use ObjectMapper by this example
 
@@ -152,6 +186,12 @@ objectMapper.readTree() // learn how to use it?
 ```
 
 ### 12. What is the serialization and desrialization?
+[See here](#4-what-is-jsonpropertydescription_yyds)
+### 13. Use stream api to get the average of the array [20, 3, 78, 9, 6, 53, 73, 99, 24]
 
-### 13. use stream api to get the average of the array [20, 3, 78, 9, 6, 53, 73, 99, 24]
+```java
+int[] arr = new int[]{20, 3, 78, 9, 6, 53, 73, 99, 24};
+
+double avg = Arrays.stream(arr).average().orElse(0.0);
+```
 
