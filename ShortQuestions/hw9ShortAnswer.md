@@ -49,3 +49,27 @@ return new ResponseEntity<>("Deleted", HttpStatus.OK)
 
 ### 8. ResponseEntity
 ResponseEntity is a Springboot Class that represents the http response, including the status code, the http headers, and the response body. 
+
+### 9. Result Set
+An interface that provides methods to retrieve and read the results returned by executing queries against a database. 
+
+### 10. ORM framework: Object-Relational Mapping.
+Map sql queries to objects, classes and methods, and the framework will then translates these high-level operations to sql queries and execute them.
+
+### 12. Serialization
+converting data object-a combination of code and data represented within a region of data storage-into a series of bytes that saves the state of the object in an easily transmittable form.
+Deserialization: constructing a data structure or object from a series of bytes.
+
+### 13. stream API calculating average of array.
+```java
+        int[] nums = {1, 2, 3, 4, 5, 6};
+        OptionalDouble ans = Arrays.stream(nums).average();
+        if(ans.isPresent()){
+            System.out.println(ans.getAsDouble());
+        }
+        else{
+            System.out.println("-1");
+        }
+```
+
+### 14. 
