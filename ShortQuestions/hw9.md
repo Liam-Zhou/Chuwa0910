@@ -3,12 +3,13 @@
 1.  List all of the new annotations to your annotaitons.md and explain its role.  
     see `ShortQuestions/annotations.md`.
 2.  how do you do the debug?  
+    In production, the first thing is to find the Logs and see the error message.  
     When I encounter some bugs, I will add a breakpoint in my IDE, and then using debug mode to execute the program. By doing this, I can see the variable at the point of my breakpoint, so that allows me to find the error in the code.
 3.  What is DTO, VO, Payload, DO, model?  
     DTO: Data Transfer Object, used to carry data among different layers of an application.  
     VO: Value Object, immutable, represent attributes or values that don't have a distinct identity.  
     Payload: the real meaningful data itself rapped by the outer data structure, like the request body of HTTP requests.  
-    DO: Domain Object, represent the core business entities or concepts within an application.  
+    DO: Data Object, represent the core business entities or concepts within an application.  
     Model: include both domain objects (DOs) that represent the business entities and DTOs or VOs used for data transfer between the application's layers.
 4.  What is `@JsonProperty("description_yyds")`?  
     `@JsonProperty` is an annotation provided by the Jackson library, it maps a class to a JSON property. `description_yyds` define the field within the Json property.  
@@ -63,9 +64,9 @@
     `ObjectMapper` is provided by the Jackson library, allows user to convert between Java objects and JSON data, making it easy to serialize Java objects into JSON format (serialization) and deserialize JSON data into Java objects (deserialization).  
     - Serialization: ```String s = objectMapper.writeValueAsString(foodOutlet);```
     - Deserialization: ```FoodOutlet foodOutlet = objectMapper.readValue(resBody, FoodOutlet.class);```
-12. What is the serialization and desrialization? https://hazelcast.com/glossary/serialization/  
+12. What is the serialization and deserialization? https://hazelcast.com/glossary/serialization/  
     - Serialization: converting a data object—a combination of code and data represented within a region of data storage—into a series of bytes that saves the state of the object in an easily transmittable form, like Json.
-    - the reverse process of Serialization, unpack data like Json into a data structure in prodram.
+    - the reverse process of Serialization, unpack data like Json into a data structure in program.
 13. use stream api to get the average of the array [20, 3, 78, 9, 6, 53, 73, 99, 24, 32].
     ```java
     class Solution{
