@@ -180,3 +180,29 @@ public class Main {
 An ORM (object-relational mapping) framework is a software development tool that helps developers map objects in their code to relational database tables. This makes it easier to interact with databases and perform CRUD operations (create, read, update, and delete) on data.
 
 ORM frameworks typically work by generating code that translates between object-oriented programming concepts and SQL. This code can then be used to execute database queries and manage data in a way that is natural and efficient for developers.
+
+### 10 What is the serialization and desrialization?
+
+Serialization is the process of converting a data structure or object state into a format that can be stored or transmitted and reconstructed later. Deserialization is the reverse process of converting the serialized data back into the original object.
+
+### 11 Use stream api to get the average of the array [20, 3, 78, 9, 6, 53, 73, 99, 24, 32].
+
+```Java
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class Example {
+  public static void main(String[] args) {
+    int[] array = {20, 3, 78, 9, 6, 53, 73, 99, 24, 32};
+
+    // Convert the array to a stream.
+    IntStream stream = IntStream.of(array);
+
+    // Calculate the average using the averagingDouble() method.
+    double average = stream.averagingDouble().getAsDouble();
+
+    // Print the average to the console.
+    System.out.println(average);
+  }
+}
+```
