@@ -73,3 +73,53 @@ Yes, there are many other Spring Boot starters available. Here are a few example
 * spring-boot-starter-thymeleaf - Provides dependencies for using Thymeleaf to render HTML templates.
 * spring-boot-starter-security - Provides dependencies for using Spring Security to secure your application.
 * spring-boot-starter-actuator - Provides dependencies for exposing application metrics and health information.
+
+### 6. Do you know @RequestMapping(value = "/users", method = RequestMethod.POST) ?  ? could you list CRUD by this style?
+
+Yes, it is a Spring Boot annotation that maps a POST request to the /users endpoint.
+
+Here is a list of CRUD operations using the same style:
+
+```Java
+
+// Create a new user
+@RequestMapping(value = "/users", method = RequestMethod.POST)
+public User createUser(@RequestBody User user) {
+  // ...
+}
+
+// Read all users
+@RequestMapping(value = "/users", method = RequestMethod.GET)
+public List<User> readUsers() {
+  // ...
+}
+
+// Read a single user by ID
+@RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+public User readUser(@PathVariable("id") Long id) {
+  // ...
+}
+
+// Update a user
+@RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
+public User updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+  // ...
+}
+
+// Delete a user
+@RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+public void deleteUser(@PathVariable("id") Long id) {
+  // ...
+}
+```
+
+### 7. What is ResponseEntity ?  why do we need it?
+
+
+ResponseEntity is a Spring Boot class that represents an HTTP response. It contains the status code, headers, and body of the response.
+
+We need ResponseEntity because it gives us complete control over the HTTP response. We can use it to set the status code, headers, and body of the response to whatever we want. This is useful for a variety of reasons, such as:
+
+* We can use it to return custom error messages.
+* We can use it to set custom caching headers.
+* We can use it to return different types of content, such as JSON, XML, or HTML.
