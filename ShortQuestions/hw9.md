@@ -123,3 +123,60 @@ We need ResponseEntity because it gives us complete control over the HTTP respon
 * We can use it to return custom error messages.
 * We can use it to set custom caching headers.
 * We can use it to return different types of content, such as JSON, XML, or HTML.
+
+### 8. What is ResultSet in jdbc? and describe the flow how to get data using JDBC
+
+ResultSet in JDBC is a tabular data structure that represents the results of a database query. It contains a cursor that can be used to iterate through the rows of the data.
+
+To get data using JDBC, you can follow these steps:
+
+<ol>
+<li> Create a Connection object to the database.</li>
+<li>Create a Statement object to execute the query.</li>
+<li>Execute the query using the Statement object.</li>
+<li>Get the ResultSet object from the Statement object.</li>
+<li>Iterate through the rows of the ResultSet object using the cursor.</li>
+<li>Get the data from each column of the row using the getter methods of the ResultSet object.</li>
+<li>Close the ResultSet object, the Statement object, and the Connection object.</li>
+</ol>
+
+Here is an example of how to get data using JDBC:
+
+```Java
+import java.sql.*;
+
+public class Main {
+  public static void main(String[] args) throws Exception {
+    // Create a Connection object to the database.
+    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_database", "root", "password");
+
+    // Create a Statement object to execute the query.
+    Statement statement = connection.createStatement();
+
+    // Execute the query.
+    ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
+
+    // Iterate through the rows of the ResultSet object.
+    while (resultSet.next()) {
+      // Get the data from each column of the row.
+      int id = resultSet.getInt("id");
+      String name = resultSet.getString("name");
+      String email = resultSet.getString("email");
+
+      // Print the data to the console.
+      System.out.println("id: " + id + ", name: " + name + ", email: " + email);
+    }
+
+    // Close the ResultSet object, the Statement object, and the Connection object.
+    resultSet.close();
+    statement.close();
+    connection.close();
+  }
+}
+```
+
+### 9 What is the ORM framework?
+
+An ORM (object-relational mapping) framework is a software development tool that helps developers map objects in their code to relational database tables. This makes it easier to interact with databases and perform CRUD operations (create, read, update, and delete) on data.
+
+ORM frameworks typically work by generating code that translates between object-oriented programming concepts and SQL. This code can then be used to execute database queries and manage data in a way that is natural and efficient for developers.
