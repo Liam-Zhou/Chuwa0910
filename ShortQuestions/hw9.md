@@ -44,3 +44,32 @@ In this example, the @JsonProperty("description_yyds") annotation is applied to 
     "description_yyds": "some description"
 }
 ```
+### 4. Do you know what is jackson?
+
+Jackson is a high-performance JSON processor for Java. It is a popular library for serializing and deserializing Java objects to and from JSON. Jackson is fast, efficient, and easy to use. It also supports a variety of other data formats, such as XML, CSV, and YAML.
+
+
+### 5. what is spring-boot-starter? what dependecies in the below starter? do you know any starters?
+
+What is spring-boot-starter?
+
+A Spring Boot starter is a dependency that provides a set of common dependencies for a particular type of application. For example, the spring-boot-starter-web dependency provides all of the dependencies needed to build a basic web application using Spring Boot.
+
+What dependencies are in the spring-boot-starter-web starter?
+
+The spring-boot-starter-web starter includes the following dependencies:
+
+* spring-boot-starter-tomcat
+* spring-boot-starter-validation
+* jackson-databind
+* spring-web
+* spring-webmvc
+  
+Do you know any other starters?
+
+Yes, there are many other Spring Boot starters available. Here are a few examples:
+
+* spring-boot-starter-data-jpa - Provides dependencies for using JPA to access a database.
+* spring-boot-starter-thymeleaf - Provides dependencies for using Thymeleaf to render HTML templates.
+* spring-boot-starter-security - Provides dependencies for using Spring Security to secure your application.
+* spring-boot-starter-actuator - Provides dependencies for exposing application metrics and health information.
