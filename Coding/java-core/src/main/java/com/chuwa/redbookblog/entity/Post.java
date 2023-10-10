@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
                 @UniqueConstraint(columnNames = {"title"})
         }
 )
+@NamedQuery(name="Post.getAll", query="select p from Post p")
 public class Post {
 
     @Id
@@ -28,9 +29,11 @@ public class Post {
 //    private String author;
 
     @CreationTimestamp
+    @Column(name = "create_date_time")
     private LocalDateTime createDateTime;
 
     @UpdateTimestamp
+    @Column(name = "update_date_time")
     private LocalDateTime updateDateTime;
 
     public Post(){
