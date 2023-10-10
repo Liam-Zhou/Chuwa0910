@@ -33,6 +33,26 @@ inverseJoinColumns = @JoinColumn(name = "course_id"))
 private List<Course> courses = new ArrayList<>();
 ```
 
+### 7. CASCADE
+Cascade allows operations performed on a source entity to cascade to target entities. Casade.ALL
+contains all the operations including: persist(save a parent entity and also the related entities).
+merge(update the parent entity when the related entities is called). remove(if a parent entity is deleted, child entity will also be deleted). Detach: Owning entity manually detached => 
+related entity detached). orphanRemoval=true is used when the child entities shouldn't exist without 
+the parent entity.
+
+### 8. FetchType
+FetchType.LAZY means the related data will not be loaded when the parent entity is loaded.
+If you have a User entity with lazy collecions of 'Orders', when you retrieve 'User' from the
+database, 'Orders' won't be loaded until you explicitly try to access them.
+
+FetchType.EAGER on the other hand, will load the related data immediately when the parent entity is retrieved.
+
+### 9. jpa naming conventions.
+Entities: Upper case the first letter: 'User', 'Order', 'Product'.
+Attributes: camelCase, like firstName, lastName.
+Database tables: upper case, like USER, ORDER.
+Database Columns: upper case, like FIRSTNAME, LASTNAME.
+
 ### 14. JPQL
 Java persistence Query Language. used to perform queries against entities stored in a relational database.
 For example:
@@ -68,5 +88,26 @@ Root<Student> studentRoot = criteriaQuery.from(Student.class);
 ### 18.
 EntityManager is the core primary interface between the Java application and the databse in the context 
 of JPA and ORM. You can perform many tasks like crud operations, query exectuions, and many more.
+
+### 19.
+SessionFactory is similar to a connection pool. It's a heavyweight object that's typically instantiated once for an application.
+Session is analogous to an individual database connection. It's a lightweight object and is instantiated per user or transaction, and closed when the unit of work is done.
+
+### 20.
+In the context of database and object-relational mapping, a transaction is 'single unit of a complete work' to ensure data integrity and consistency. The lifecycle of a transaction includes 
+beginning a transaction to turn on the database, commit a transaction that saves the changes from the database, and then rollback to end the transaction.
+
+### 21 & 22. What is hibernate Caching?
+Hibernate cache database queries, entities, and other related elements to improve the performance
+by reducing database interactions.
+The first level cache is the default one, it simply create the cahce when you make a query. When the session end, the cache is removed.
+The second level of cache goes accross all the sessions. It's more useful for caching entites and collections that are infrequently updated and are frequently accessed.
+
+### 23. @Transactional
+As shown in the in class example, @Transactional guarantees the mutual succsess of two table's update(especially for transaction management). The sender and receiver must succesuffly sent and received the payment at the same time. Or else the transaction wouldn't be approved and no one lose or gain money.
+
+### 24.
+
+
 
 
