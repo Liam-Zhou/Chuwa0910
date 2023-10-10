@@ -87,6 +87,11 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    @Override
+    public void hw42P10() {
+        postRepository.findAllByTitle("hello");
+    }
+
     private PostDTO MapPost2DTO(Post post) {
         PostDTO postDTO  = new PostDTO();
         postDTO.setId(post.getId());
