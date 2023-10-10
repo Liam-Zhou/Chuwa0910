@@ -71,7 +71,31 @@ ResponseEntity represents the whole HTTP response: status code, headers, and bod
 
 ## 9. What is ResultSet in jdbc? and describe the flow how to get data using JDBC
 
+Java ResultSet interface is a part of the java.sql package. It is one of the core components of the JDBC Framework. ResultSet Object is used to access query results retrieved from the relational databases.
+
+```
+//https://www.digitalocean.com/community/tutorials/java-resultset
+Class.forName("com.mysql.jdbc.Driver");
+conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/empdb", "root", "root");
+stmt = conn.createStatement();
+ResultSet rs = stmt.executeQuery(query);
+while (rs.next()) {
+    Integer empId = rs.getInt(1);
+    String firstName = rs.getString(2);
+    String lastName = rs.getString(3);
+    Date dob = rs.getDate(4);
+    System.out.println("empId:" + empId);
+    System.out.println("firstName:" + firstName);
+    System.out.println("lastName:" + lastName);
+    System.out.println("dob:" + dob);
+    System.out.println("");
+}
+rs.close();
+```
+
 ## 10. What is the ORM framework?
+
+Object-relational mapping (ORM) is a way to align programming code with database structures. ORM uses metadata descriptors to create a layer between the programming language and a relational database.
 
 ## 11. Learn how to use ObjectMapper by this example.
 
@@ -87,7 +111,11 @@ objectMapper.readTree() // learn how to use it?
 
 - a. https://hazelcast.com/glossary/serialization/
 
+Serialization means converting an object into a sequence of bytes, deserialization is exactly the opposite. In deserialization, an object is reconstructed back from the sequence of bytes. In Java, Serialization and deserialization play a great role in the transfer of data and saving it to a database or disk.
+
 ## 13. use stream api to get the average of the array [20, 3, 78, 9, 6, 53, 73, 99, 24, 32].
+
+`Arrays.stream(array).average(arr).orElse(Double.NaN);`
 
 ## 14. 抄写，https://github.com/TAIsRich/springboot-redbook/tree/03_post_pageable, 你也可以像我一样分 branch 添加新代码。
 
