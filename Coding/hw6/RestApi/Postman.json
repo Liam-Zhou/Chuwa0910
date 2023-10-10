@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "22c21bb5-6622-4ccb-b016-c24572b8ed94",
+		"name": "Chuwa_hw6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17804444"
+	},
+	"item": [
+		{
+			"name": "Get01",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://httpbin.org/ip"
+			},
+			"response": []
+		},
+		{
+			"name": "Get02",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://httpbin.org/anything"
+			},
+			"response": []
+		},
+		{
+			"name": "Get03",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://httpbin.org/user-agent "
+			},
+			"response": []
+		},
+		{
+			"name": "Get04",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "hello",
+							"value": "world",
+							"type": "text"
+						}
+					]
+				},
+				"url": "https://httpbin.org/get"
+			},
+			"response": []
+		},
+		{
+			"name": "Get05",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://google.com"
+			},
+			"response": []
+		},
+		{
+			"name": "Post1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"world\": \"hello\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://my-json-server.typicode.com/typicode/demo?hello =world",
+					"protocol": "https",
+					"host": [
+						"my-json-server",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"typicode",
+						"demo"
+					],
+					"query": [
+						{
+							"key": "hello ",
+							"value": "world"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post02",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.notion.com/v1/databases/:id/query",
+					"protocol": "https",
+					"host": [
+						"api",
+						"notion",
+						"com"
+					],
+					"path": [
+						"v1",
+						"databases",
+						":id",
+						"query"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post03",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"model\": \"text-davinci-003\",\n    \"prompt\": \"{{testDataPrompt}}\",\n    \"temperature\": 0,\n    \"max_tokens\": 50\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://api.openai.com/v1/completions"
+			},
+			"response": []
+		},
+		{
+			"name": "Post04",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"hello\" : \"world\",\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://httpbin.org "
+			},
+			"response": []
+		},
+		{
+			"name": "Post05",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": "https://httpbin.org "
+			},
+			"response": []
+		},
+		{
+			"name": "Put01",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": "https://catfact.ninja/fact"
+			},
+			"response": []
+		}
+	]
+}
