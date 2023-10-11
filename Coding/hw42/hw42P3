@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "6fd96171-50b0-4f68-bb19-7820d8baee3e",
+		"name": "Chuwa-redbook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17804444"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/api/v1/authors",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"a\",\n  \"password\": \"a\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/authors"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/v1/authors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{local}}/api/v1/authors"
+			},
+			"response": []
+		},
+		{
+			"name": "{{local}}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"comment\",\n    \"email\" : \"email\",\n    \"body\" : \"damn\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{local}}/api/v1/posts/1/comments"
+			},
+			"response": []
+		},
+		{
+			"name": "{{local}}/api/v1/posts/1/comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{local}}/api/v1/posts/1/comments"
+			},
+			"response": []
+		},
+		{
+			"name": "{{local}}/api/v1/posts/1/commentsById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{local}}/api/v1/posts/1/comments/1"
+			},
+			"response": []
+		},
+		{
+			"name": "{{local}}/api/v1/posts/1/comments/1",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"comment\",\n    \"email\" : \"email\",\n    \"body\" : \"damn\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{local}}/api/v1/posts/1/comments/1"
+			},
+			"response": []
+		},
+		{
+			"name": "{{local}}/api/v1/posts/1/comments/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{local}}/api/v1/posts/1/comments/1"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "http://localhost:8080"
+		}
+	]
+}

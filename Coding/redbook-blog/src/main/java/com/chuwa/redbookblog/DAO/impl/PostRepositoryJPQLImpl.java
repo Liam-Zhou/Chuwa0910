@@ -2,12 +2,10 @@ package com.chuwa.redbookblog.DAO.impl;
 
 import com.chuwa.redbookblog.DAO.PostRepositoryJPQL;
 import com.chuwa.redbookblog.entity.Post;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository

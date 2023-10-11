@@ -4,11 +4,16 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(
         name = "posts",
         uniqueConstraints = {@UniqueConstraint(columnNames={"title"})}
@@ -24,23 +29,15 @@ public class Post {
     private String description;
     @Column(name="content",nullable = false)
     private String content;
+
+    @OneToMany(mappedBy = "post")
+    private Set<Comment> comments = new HashSet<>();
+
     @CreationTimestamp
     private LocalDateTime createDateTime;
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
 
-    public Post() {
-
-    }
-
-    public Post(Long id, String title, String description, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.content = content;
-        this.createDateTime = createDateTime;
-        this.updateDateTime = updateDateTime;
-    }
 
     public void setId(Long id) {
         this.id = id;
