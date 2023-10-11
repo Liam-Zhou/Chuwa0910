@@ -7,6 +7,7 @@
 3. `@Service`: used to indicate that a class is a service component in a Spring Boot. In Spring, a service is typically a class that performs business logic or service-layer operations.
 4. `@Autowired`: automatically inject dependencies into a Spring bean, typically through constructor injection, setter injection, or field injection.
 5. `@ResponseStatus`: cause Spring boot to respond with the specified HTTP status code whenever this exception is thrown from your controller.
+6. `@EnableTransactionManagement`: enable Transaction management inside the application.
 
 ## used by Entity
 
@@ -39,6 +40,14 @@
         @UpdateTimestamp
         private LocalDateTime updateDateTime;
     ```
+9. `@OneToOne`: define a one-to-one relationship between two table.
+10. `@ManyToOne`: define a many-to-one relationship between two table.
+11. `@OneToMany`: define a one-to-many relationship between two table.
+12. `@ManyToMany`: define a many-to-many relationship between two table.
+13. `@JoinColumn`: define how two tables should be joined.
+14. `@NamedQuery`: using JPQL to define a query method at the class.
+15. `@NamedQueries`: define multiple NamedQuery.
+16. `@Query`: define a query method using sql or JPQL.
 
 ## used by Controller
 1. `@RestController`: used for building RESTful APIs, where the return values of methods are automatically converted to JSON or XML and included in the response body. 
@@ -65,3 +74,6 @@
 2. `@QueryMapping`: define a method that only read data from api, like GET.
 3. `@MutationMapping`: define a method that will send new data to api, like POST or PUT.
 4. `@Argument`: Binds the parameter that sent to api.
+
+## used by service
+1. `@Transactional`: make the method transactional.
