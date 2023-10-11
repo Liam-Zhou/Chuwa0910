@@ -1,0 +1,29 @@
+# hw9
+### 2. 
+Add breakpoint on the line of code you're interested in and run the application in debug mode.
+
+### 3.
+- DTO: Data transfer object is an object that carries data between processes. DTOs have flat structures without any business logic. A DTO only contains data, accessors, and methods related to serializing or parsing.
+- VO: Value Object is a special type of object that can hold values such as Integer and Long. VOs generally encapsulate small objects such as numbers, dates, strings, and more. They follow the value semantics, i.e., they directly change the object’s value and pass copies around instead of references.
+- Payload: The payload contains the data that could be stored or updated. In the setting of Spring Boot Application, payload is usually the package that holds all the DTOs.
+- model: the data container of the application. 
+
+### 4.
+It creates a map between the java field name and the JSON field name.
+
+### 5.
+Jackson is one of the most used libraries of spring boot which translates JSON data to a Java POJO by itself and vice-versa
+
+### 6.
+
+### 7.
+Same as @PostMapping("/users").
+- GET: @RequestMapping(value = "/users", method = RequestMethod.GET)
+- PUT: @RequestMapping(value = "/users", method = RequestMethod.PUT)
+- DELETE: @RequestMapping(value = "/users", method = RequestMethod.DELETE)
+
+### 8.
+It wraps a java object with a http status into one response.
+
+### 9.
+
