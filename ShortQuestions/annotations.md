@@ -108,3 +108,25 @@ They are meta annotations that are themselves annotated with @SchemaMapping and 
 
 ### @Argument
 For access to a named field argument bound to a higher-level, typed Object.
+
+### @ManyToOone @ManyToMany
+Used in ORM frameworks to represent a many-to-one/many-to-many relationship between database entities
+
+### @JoinColumn
+Used in object-relational mapping (ORM) frameworks to specify the mapping of a foreign key column in one entity to a primary key column in another entity.
+
+### @PersistenceContext
+Used in Java EE (Enterprise Edition) and JPA (Java Persistence API) to inject a container-managed EntityManager into a managed bean or component.
+
+### @NamedQueries
+Used in Java Persistence API (JPA) to define named queries for entities. 
+
+### @Query @Param
+Used in various Java Persistence frameworks to define custom database queries that are associated with a method in a repository or DAO interface. 
+Parameters for the corresponding query
+
+### @Transactional
+Used to declare that a method or class should be executed within a transaction
+
+### @EnableTransactionManagement
+Used in Spring Framework-based applications to enable support for transaction management.
