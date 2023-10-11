@@ -4,12 +4,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-
-/**
- * @author Yanan Lyu
- * @date 5/9/22 4:03 PM
- */
-
 public class MethodReferenceExample {
     public static void main(String[] args) {
         // 1. 静态方法引用
