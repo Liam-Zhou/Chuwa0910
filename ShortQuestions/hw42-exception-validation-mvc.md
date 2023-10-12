@@ -1,0 +1,22 @@
+1. what is the @configuration and @bean?
+> @Configuration is an annotation in Spring that indicates that a class defines Spring beans. It's typically used in conjunction with @Bean. @Bean is used to define a method that produces a bean, and this method is managed by the Spring container. The @Configuration class is essentially a replacement for an XML configuration file.
+2. How do you handle the exception in Spring?
+> In Spring, you can handle exceptions using various mechanisms, such as @ExceptionHandler to define methods that handle specific exceptions in controllers, global exception handling through @ControllerAdvice, and declarative exception handling in XML-based configurations. Spring provides flexibility to handle exceptions by redirecting to error pages, returning custom error messages, or performing specific actions based on the exception type.
+3. How do you do the validations in Spring? And list some validation annotations
+   you know.
+> Spring provides validation support through the Java Bean Validation framework (JSR-380). You can use validation annotations like @NotNull, @Size, @Email, and @Pattern to validate properties of beans in your application. Spring also provides custom validation through implementing Validator interfaces and using @Valid to trigger validation in controller methods. Validation errors can be handled in Spring with error messages and automatic binding to form fields.
+4. What is the actuator?
+> Spring Boot Actuator is a set of production-ready features that help you monitor and manage your application. It provides endpoints for gathering application metrics, inspecting the application's environment, managing logging levels, and even shutting down the application gracefully. Actuator exposes this information and functionality over HTTP or JMX, making it valuable for monitoring and managing Spring Boot applications in production environments.
+5. What is MVC pattern?
+> The Model-View-Controller (MVC) pattern is a software architectural design pattern commonly used in web applications. It separates the application into three interconnected components: Model (for data and business logic), View (for user interface and presentation), and Controller (for handling user input and managing the interaction between Model and View). MVC promotes the separation of concerns, making applications more maintainable and testable.
+6. What is Front-Controller?
+> A Front-Controller is a design pattern in web applications where a single entry point is responsible for handling all incoming requests and dispatching them to appropriate handlers. It centralizes request processing and can provide features like security, request logging, and routing.
+7. What is DispatcherServlet? please decribe how it works.
+> In the context of Spring Framework and the Model-View-Controller (MVC) pattern, the DispatcherServlet is a key component. It acts as a front-controller and is responsible for handling incoming web requests. It routes requests to appropriate controllers, manages view resolution, and ensures the proper flow of the request processing. The DispatcherServlet is configured in the web.xml file or through annotations and is a central part of the Spring MVC framework.
+8. What is JSP and What is ModelAndView？(please google to have a basic
+   knowlege)
+> JSP (JavaServer Pages) is a technology that allows embedding Java code in HTML to create dynamic web pages. JSP pages are translated into servlets and executed on the server to generate dynamic content. ModelAndView is a class in Spring MVC that combines both a Model (data to be displayed) and a View (presentation template). It's often used to pass data from a controller to a view template and render dynamic content.
+9. Could you please google any other servlets
+> Some common ones like HttpServlet, GenericServlet, and HttpSession. These are core components for handling web requests and sessions in Java web applications.
+10. How many web server do you know? (Tomcat, Jetty, Jboss)
+> Some well-known web servers for hosting Java web applications include Apache Tomcat, Jetty, and WildFly (inheriting JBoss). These web servers are designed to serve web content and execute Java servlets, making them essential for deploying and running web applications.
