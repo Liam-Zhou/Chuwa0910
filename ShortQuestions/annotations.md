@@ -106,6 +106,7 @@ The @RequestBody annotation tells Spring to deserialize the request body into an
          public List<Product> getAllProducts() {
          // Return a list of products
          }
+9. @ControllerAdvice: Class Level, >make this class be a bean
 
 9. @RequestParam:
 **Services**
@@ -179,3 +180,16 @@ It provides methods for querying, persisting, updating, and removing entities.
 5. @Query: It also can define a native SQL query. SQL语句中的变量以":"开头`.
                
          @Query("select p from Post p where p.id = :key or p.title =:title")
+
+**Exception**
+1. @ControllerAdvice: Class Level, >make this class be a bean
+2. @ExceptionHandler: Method Level, >handle exception
+
+        @ControllerAdvice
+        public class GlobalExceptionHandler {
+            @ExceptionHandler(NotFoundException.class)
+            @ResponseStatus(HttpStatus.NOT_FOUND)
+            public void handleNotFound() {
+                // Nothing to do
+            }
+        }
