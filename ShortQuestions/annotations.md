@@ -8,6 +8,9 @@
 4. `@Autowired`: automatically inject dependencies into a Spring bean, typically through constructor injection, setter injection, or field injection.
 5. `@ResponseStatus`: cause Spring boot to respond with the specified HTTP status code whenever this exception is thrown from your controller.
 6. `@EnableTransactionManagement`: enable Transaction management inside the application.
+7. `@configuration`: indicate that a class is a configuration class.
+8. `@Bean`: define Spring beans within a configuration class.
+9. `@ExceptionHandler`: create a global exception handler class
 
 ## used by Entity
 
@@ -68,6 +71,7 @@
     public ResponseEntity<PostDTO> updateAuthorById(@PathVariable(name="id") long id, @RequestBody AuthorDTO authorDTO){
     ```
 9. `@RequestParam`: Binds the HTTP requests parameter to a variable.
+10. `@ControllerAdvice`: handle custom exception with global exception handler.
 
 ## used by GraphQL
 1. `@Controller`: define class as a controller.
