@@ -108,3 +108,41 @@ They are meta annotations that are themselves annotated with @SchemaMapping and 
 
 ### @Argument
 For access to a named field argument bound to a higher-level, typed Object.
+
+### @ExceptionHandler
+Used to define methods that handle exceptions thrown by controller methods. 
+
+### @ControllerAdvice
+Used to define global exception handling for your Spring MVC application. 
+
+### @NotEmpty
+Used in Java bean validation frameworks like Hibernate Validator or Java Validation API to indicate that a field or property should not be empty or null.
+
+### @Valid
+Used in Java bean validation frameworks, like Hibernate Validator or Java Validation API (javax.validation.constraints), to indicate that an object should be validated according to its associated validation constraints.
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
