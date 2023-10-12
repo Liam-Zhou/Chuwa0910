@@ -165,16 +165,173 @@ The @Query annotation is typically used in repository interfaces that extend the
 Repository interfaces define methods for data access, and you can use the @Query annotation to specify custom queries for these methods.
 
 ### 17.  What is HQL and Criteria Queries?
+HQL (Hibernate Query Language) and Criteria Queries are two approaches for querying data in Hibernate. Both approaches allow you to retrieve data from a database, but they have different syntax and usage patterns.
+
+HQL Example:
+```java
+Query query = session.createQuery("FROM Employee WHERE department = :dept");
+query.setParameter("dept", department);
+List<Employee> employees = query.list();
+```
+
+Criteria Queries Example:
+```java
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Employee> criteriaQuery = builder.createQuery(Employee.class);
+Root<Employee> root = criteriaQuery.from(Employee.class);
+
+criteriaQuery.select(root)
+    .where(builder.equal(root.get("department"), department));
+
+List<Employee> employees = session.createQuery(criteriaQuery).list();
+
+```
 
 ### 18. What is EnityManager?
+`EnityManager` plays a central role in JPA and is used for managing the lifecycle of entity objects and for performing various database operations. The EntityManager is typically provided by JPA implementations, such as Hibernate, EclipseLink, or the Java Persistence API reference implementation.
 
 ### 19. What is SessionFactory and Session?
+SessionFactory and Session are core components in Hibernate, they play a central role in managing the interaction between Java objects (entities) and a relational database. 
+- SessionFactory:
+The SessionFactory is a central, heavyweight, and thread-safe factory that creates Session instances.
+It is typically created once during the application's initialization and is responsible for initializing Hibernate, configuring the database connection, and loading mapping metadata from XML or annotations.
+The SessionFactory is relatively expensive to create, so it's meant to be reused throughout the application's lifetime. It is responsible for maintaining a cache of database connections, database metadata, and other information needed to interact with the database.
+
+Here's an example of how to create a SessionFactory in Hibernate:
+```java
+SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+
+```
+
+- Session:
+The Session is a lightweight and non-thread-safe object representing a single unit of work with the database. It is created from the SessionFactory and is used to interact with the database in a specific scope.
+A Session is responsible for executing CRUD (Create, Read, Update, Delete) operations, HQL (Hibernate Query Language) queries, and managing the object-relational state of entities.
+
+Here's an example of how to create and use a Session in Hibernate:
+```java
+Session session = sessionFactory.openSession();
+Transaction transaction = null;
+
+try {
+    // Begin a transaction
+    transaction = session.beginTransaction();
+
+    // Create, read, update, or delete entities
+    // Execute HQL queries
+
+    // Commit the transaction
+    transaction.commit();
+} catch (Exception e) {
+    if (transaction != null) {
+        transaction.rollback();
+    }
+} finally {
+    session.close();
+}
+
+```
 ### 20. What is Transaction? how to manage your transaction?
+[see question 19](#19-what-is-sessionfactory-and-session)
 
 ### 21. What is hibernate Caching?
 
-### 22. What is the difference between first-level cache and second-level cache?
+Hibernate caching is a feature that allows Hibernate to store and manage the data it retrieves from a database in memory. Caching can significantly improve the performance and efficiency of database operations by reducing the need to repeatedly query the database for the same data. Hibernate provides several levels of caching, each serving a specific purpose:
+- First-Level Cache (Session Cache):
 
+The first-level cache, also known as the session cache, is associated with a single Session instance.
+It stores the objects retrieved or persisted during the course of a single Hibernate Session.
+When you query for an entity within a session, Hibernate stores that entity in the session cache, and if you query for the same entity again in the same session, it will return the cached instance instead of issuing another database query.
+```java
+Session session = sessionFactory.openSession();
+Transaction transaction = session.beginTransaction();
+
+// Entity retrieved from the database is stored in the first-level cache
+Employee employee1 = session.get(Employee.class, 1L);
+
+// No additional database query; the entity is retrieved from the cache
+Employee employee2 = session.get(Employee.class, 1L);
+
+transaction.commit();
+session.close();
+
+```
+- Second-Level Cache:
+
+The second-level cache is a more extensive cache that can be shared across multiple sessions.
+It stores data on a per-entity or per-collection basis, allowing data to be shared across different sessions and even multiple application instances.
+Hibernate supports various second-level cache providers like Ehcache, Infinispan, and more.
+Caching configurations can be specified for each entity or collection to determine which data is cached and for how long.
+```java
+@Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Employee {
+    // ...
+}
+
+```
+
+### 22. What is the difference between first-level cache and second-level cache?
+[See question 21](#21-what-is-hibernate-caching)
 ### 23. How do you understand @Transactional? (不要clone，要自己抄写并测试transactional，https://github.com/TAIsRich/tutorial-transaction)
 
-### 24. Write a simple factory design patter
+@Transactional is used to define the scope and behavior of a database transaction in a Spring-based application. When applied to a method or class, it instructs Spring to manage the transactional behavior for that method or class.
+When you annotate a method or class with @Transactional, you're specifying that the operations within that method or class should be executed within the context of a database transaction.A database transaction ensures that a series of database operations are treated as a single unit of work, with either all of the operations succeeding or all of them failing. It provides data consistency and integrity.
+When applying @Transactional annotation, these is no need to handle every middle exception in codes.
+
+### 24. Write a simple factory design pattern
+```java
+// Step 1: Create an interface or abstract class for the product
+interface Product {
+    void displayInfo();
+}
+
+// Step 2: Create concrete classes that implement the product interface
+class ConcreteProductA implements Product {
+    @Override
+    public void displayInfo() {
+        System.out.println("This is Product A");
+    }
+}
+
+class ConcreteProductB implements Product {
+    @Override
+    public void displayInfo() {
+        System.out.println("This is Product B");
+    }
+}
+
+// Step 3: Create a factory interface or abstract class
+interface ProductFactory {
+    Product createProduct();
+}
+
+// Step 4: Create concrete factory classes that implement the factory interface
+class ConcreteProductAFactory implements ProductFactory {
+    @Override
+    public Product createProduct() {
+        return new ConcreteProductA();
+    }
+}
+
+class ConcreteProductBFactory implements ProductFactory {
+    @Override
+    public Product createProduct() {
+        return new ConcreteProductB();
+    }
+}
+
+// Step 5: Client code that uses the factories to create objects
+public class FactoryPatternExample {
+    public static void main(String[] args) {
+        ProductFactory factoryA = new ConcreteProductAFactory();
+        Product productA = factoryA.createProduct();
+        productA.displayInfo();
+
+        ProductFactory factoryB = new ConcreteProductBFactory();
+        Product productB = factoryB.createProduct();
+        productB.displayInfo();
+    }
+}
+
+```
