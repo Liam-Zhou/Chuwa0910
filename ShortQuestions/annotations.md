@@ -115,3 +115,14 @@ public ResponseEntity<User> getUserById(@PathVariable Long id) {
 - It is a Java annotation used in the context of object serialization and deserialization with libraries like Jackson.
 
 - It is typically applied to a field or getter method within a Java class to specify the mapping between a JSON property and a Java object property when converting JSON data to Java objects or vice versa.
+
+### Annotations Used by Repository(JPA):
+@Query()
+- Used to customize own query method in Repository, must extend JPARepository.
+
+### Annotations Used by Exception:
+@ControllerAdviosr
+- Used to handle those exceptions throwed by controller.
+
+@ExceptionHandler
+- Used to customize own method to handle specific exceptions. 
