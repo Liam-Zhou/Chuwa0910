@@ -8,9 +8,15 @@
 4. `@Autowired`: automatically inject dependencies into a Spring bean, typically through constructor injection, setter injection, or field injection.
 5. `@ResponseStatus`: cause Spring boot to respond with the specified HTTP status code whenever this exception is thrown from your controller.
 6. `@EnableTransactionManagement`: enable Transaction management inside the application.
-7. `@configuration`: indicate that a class is a configuration class.
+7. `@Configuration`: indicate that a class is a configuration class.
 8. `@Bean`: define Spring beans within a configuration class.
-9. `@ExceptionHandler`: create a global exception handler class
+9. `@ExceptionHandler`: create a global exception handler class.
+10. `@ComponentScan`: define where to find the bean.
+11. `@EnableAutoConfiguration`: enable automatic configuration of the Spring application context.
+12. `@Resource`: from Java EE. to inject resources.
+13. `@Inject`: used for dependency injection in Java applications.
+14. `@Primary`: assign a primary class that should be injected of the same type.
+15. `@Qualifier`: specify which bean should be injected when there are multiple candidate beans of the same type.
 
 ## used by Entity
 
