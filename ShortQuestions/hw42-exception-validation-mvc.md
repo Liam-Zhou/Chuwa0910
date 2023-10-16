@@ -41,6 +41,4 @@ HttpServlet
 # 11. How many web server do you know? 
 Tomcat, Jetty, Nginx
 
-# 12. 
-
 
