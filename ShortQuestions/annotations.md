@@ -193,3 +193,16 @@ It provides methods for querying, persisting, updating, and removing entities.
                 // Nothing to do
             }
         }
+
+
+**Bean**
+@Service
+@Controller
+@RestController
+@Component
+@Configuration
+@Repository
+@ControllerAdvice
+@Bean
+
+
