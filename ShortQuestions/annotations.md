@@ -1,37 +1,17 @@
-### @SpringBootApplication
-Used to mark the main class of a Spring Boot application.
+### @Argument
+For access to a named field argument bound to a higher-level, typed Object.
 
-    @SpringBootApplication
-    public class MyApplication {
-        public static void main(String[] args) {
-            SpringApplication.run(MyApplication.class, args);
+### @Autowired
+Used to inject dependencies automatically.
+
+    @Service
+    public class UserService {
+        private final UserRepository userRepository;
+
+        @Autowired
+        public UserService(UserRepository userRepository) {
+            this.userRepository = userRepository;
         }
-    }
-
-### @Entity
-Used to mark a class as a JPA (Java Persistence API) entity.
-### @Id
-Used to mark a field as the primary key of an entity.
-### @GeneratedValue
-Specifies how the primary key value is generated (e.g., auto-increment).
-
-    @Entity
-    public class User {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-        private String name;
-        private String address;
-        ...
-    }
-
-### @Table
-Used to specify the table name for an entity in the database.
-
-    @Entity
-    @Table(name = "User")
-    public class User {
-        ...
     }
 
 ### @Column
@@ -51,6 +31,43 @@ Used to automatically populate creation and update timestamps in the database.
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+### @Entity
+Used to mark a class as a JPA (Java Persistence API) entity.
+
+### @GeneratedValue
+Specifies how the primary key value is generated (e.g., auto-increment).
+
+    @Entity
+    public class User {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+        private String name;
+        private String address;
+        ...
+    }
+
+### @SpringBootApplication
+Used to mark the main class of a Spring Boot application.
+
+    @SpringBootApplication
+    public class MyApplication {
+        public static void main(String[] args) {
+            SpringApplication.run(MyApplication.class, args);
+        }
+    }
+
+### @Id
+Used to mark a field as the primary key of an entity.
+### @Table
+Used to specify the table name for an entity in the database.
+
+    @Entity
+    @Table(name = "User")
+    public class User {
+        ...
+    }
+
 ### @Repository
 Used to indicate that a class is a Spring Data repository.
 
@@ -61,19 +78,6 @@ Used to indicate that a class is a Spring Data repository.
 
 ### @Service
 Used to mark a class as a Spring service.
-### @Autowired
-Used to inject dependencies automatically.
-
-    @Service
-    public class UserService {
-        private final UserRepository userRepository;
-
-        @Autowired
-        public UserService(UserRepository userRepository) {
-            this.userRepository = userRepository;
-        }
-    }
-
 
 ### @RestController @RequestMapping @PostMapping @RequestBody @GetMapping @PutMapping @PathVaribale @ResponseStatus
 They are used for creating RESTful web services. They define endpoints, HTTP methods, request/response handling, and status codes. 
@@ -106,5 +110,40 @@ They are used for creating RESTful web services. They define endpoints, HTTP met
 ### @QueryMapping @MutationMapping @SubscriptionMapping
 They are meta annotations that are themselves annotated with @SchemaMapping and have the typeName preset to Query, Mutation, or Subscription respectively. Effectively, these are shortcut annotations for fields under the Query, Mutation, and Subscription types respectively. 
 
-### @Argument
-For access to a named field argument bound to a higher-level, typed Object.
+### @ComponentScan
+Directs Spring to search for components in the path specified
+
+### @EnableAutoConfiguration
+Allows the application to add beans using classpath definitions
+
+### @Resource
+By Name > By Type
+
+### @Inject
+Another kind of autowired
+
+### @Primary
+Set the primary bean for the injection.
+
+### @Qualifier 
+Specific the bean for the injection
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
+
+### 
