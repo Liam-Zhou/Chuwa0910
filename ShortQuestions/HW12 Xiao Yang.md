@@ -2,7 +2,7 @@
 
 ### 1. List all of the annotations you learned from class and homework to annotaitons.md
 
- 
+[See Here](./annotations.md)
 
 ### 2.  What is Spring and Springboot? What is the benfits of using Springboot?
 
@@ -354,14 +354,105 @@ Using Constructor injection is the best way. Here are the benefits:
 
 ### 12.  If we have multiple beans for one type, how to set one is primary? and how to let the spring to pick one bean to inject if no primary.
 
+In Spring, if you have multiple beans of the same type and you want to specify one of them as the primary bean, you can use the @Primary annotation. The @Primary annotation indicates that a particular bean should be considered as the primary candidate for autowiring when multiple beans of the same type exist. 
+```java
+@Component
+@Primary
+public class PrimaryBean implements MyInterface {
+    // ...
+}
+```
 
+In this example, the PrimaryBean is marked as the primary candidate. If you have multiple beans of type MyInterface, Spring will prioritize injecting the PrimaryBean when autowiring by type.
+
+If you have multiple beans of the same type, and none of them are marked as primary, Spring will throw an exception during autowiring because it won't know which bean to choose as the primary candidate.
+
+To provide a default bean to be injected when there's no primary candidate, you can use the @Qualifier annotation to specify the bean to be injected by name. 
+
+```java
+@Component
+public class BeanA implements MyInterface {
+    // ...
+}
+
+@Component
+public class BeanB implements MyInterface {
+    // ...
+}
+```
+To specify that BeanA should be injected by default, you can use the @Qualifier annotation with the bean's name:
+```java
+@Autowired
+@Qualifier("beanA")
+private MyInterface myBean;
+```
 
 ### 13.  What is the difference between BeanFactory and ApplicationContext in Spring?
 
+`BeanFactory` and `ApplicationContext` are two important interfaces in the Spring Framework for managing and accessing Spring beans (components). While they both serve the purpose of managing beans and providing dependency injection, they differ in their features and capabilities.
 
+Here are the key differences between BeanFactory and ApplicationContext:
+
+- Container Loading and Initialization:
+`BeanFactory` is the simplest and lightest container. It is responsible for loading and initializing beans on-demand. Beans are created when they are first requested.
+`ApplicationContext`, on the other hand, eagerly initializes and preloads singleton beans during the container's startup, which makes them available for immediate use. This can improve application startup time but consumes more memory.
+
+- Bean Lifecycle Management:
+`BeanFactory` primarily focuses on bean instantiation and wiring. It doesn't provide advanced features like internationalization, event propagation, and application context publishing.
+`ApplicationContext` extends BeanFactory and adds support for advanced features and bean lifecycle management, such as event publishing, internationalization (i18n), resource loading, and AOP (Aspect-Oriented Programming).
+
+In practice, ApplicationContext is more commonly used in Spring applications because it provides a richer set of features, including internationalization, event handling, AOP, and resource loading. However, if you have very specific memory constraints and need to minimize resource usage, you may opt for BeanFactory to load beans only when they are explicitly requested.
 
 ### 14.  What is the Scope of a Bean?  and list the examples for each scope.
+In Spring, the scope of a bean defines the lifecycle and visibility of instances created from that bean definition. Different scopes determine when a new instance is created and when it's reused. 
+- Singleton:
+Singleton scope creates a single instance of the bean for the entire application context.
+This is the default scope if not specified.
+Example: A database connection pool, logging service, or a service that should be shared globally.
 
+- Prototype:
+Prototype scope creates a new instance of the bean every time it's requested.
+This results in a new object for each request, making it stateful.
+Example: A shopping cart or a form-backing object in a web application, where each user needs their own instance.
+
+- Request:
+Request scope creates a new instance of the bean for each HTTP request in a web application.
+The bean is created when an HTTP request is made and destroyed when the request ends.
+Example: Storing user-specific data for the duration of an HTTP request.
+
+- Session:
+Session scope creates a new instance of the bean for each user session in a web application.
+The bean is created when a user session starts and destroyed when the session ends.
+Example: Storing user-specific data for the duration of a user's session, like user preferences.
+
+- Global Session (Portlet-specific):
+Global Session scope creates a new instance of the bean for each user session but at the application scope in a portlet environment.
+Example: Portlet-specific equivalent of the Session scope.
+
+- Application:
+Application scope creates a single instance of the bean for the entire lifetime of the web application.
+The bean is created when the application starts and destroyed when it shuts down.
+Example: Storing application-wide configuration or shared resources.
+
+- WebSocket (Spring 4.0+):
+WebSocket scope creates a new instance of the bean for each WebSocket session.
+The bean is created when a WebSocket session is established and destroyed when the session is closed.
+Example: Managing WebSocket-related state for each connected client.
+
+- Custom Scopes:
+Spring allows you to define custom bean scopes to meet specific application requirements. You can implement custom scope handling by implementing the Scope interface and registering it in the Spring application context.
+
+Using @Scope annotation:
+```java
+@Component
+@Scope("singleton")
+public class MySingletonBean { /* ... */ }
+```
+
+Using scope attribute in XML configuration:
+```xml
+<bean id="mySingletonBean" class="com.example.MySingletonBean" scope="singleton" />
+```
 
 
 ### 15.  Configure a bean using xml. If bean has parameters/dependencies, how can we configure the bean? (you can google the tutorial how to configure beans in xml, and feel free to ask me any quesitons if you don't understand. it is a little bit old,  I am not sure if I need to exaplain it in class)
