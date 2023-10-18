@@ -2,6 +2,7 @@ package com.chuwa.redbook.controller;
 
 import com.chuwa.redbook.payload.CommentDTO;
 import com.chuwa.redbook.service.CommentService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ public class CommentController {
 
     @PostMapping("/comments")
     public ResponseEntity<CommentDTO> createComment(@PathVariable(value = "postId") Long postId,
-                                                    @RequestBody CommentDTO commentDTO){
+                                                    @Valid @RequestBody CommentDTO commentDTO){
         return new ResponseEntity<>(commentService.createComment(postId, commentDTO), HttpStatus.CREATED);
     }
 
@@ -39,7 +40,7 @@ public class CommentController {
     @PutMapping("/comments/{id}")
     public ResponseEntity<CommentDTO> updateComment(@PathVariable(value = "postId") Long postId,
                                                     @PathVariable(value = "id") Long id,
-                                                    @RequestBody CommentDTO commentDTO){
+                                                    @Valid @RequestBody CommentDTO commentDTO){
         CommentDTO updateComment = commentService.updateComment(postId, id, commentDTO);
         return new ResponseEntity<>(updateComment, HttpStatus.OK);
     }

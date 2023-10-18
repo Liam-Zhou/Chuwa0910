@@ -1,10 +1,22 @@
 package com.chuwa.redbook.payload;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
+import java.util.Set;
+
 public class PostDTO {
     private Long id;
+    @NotEmpty
+    @Size(min = 5, message = "Post title should have at least 5 characters")
     private String title;
+    @NotEmpty
+    @Size(min = 10, message = "Post description should have at least 10 characters")
     private String description;
+    @NotEmpty
     private String content;
+
+    private Set<CommentDTO> comments;
 
     public PostDTO() {
     }
@@ -52,5 +64,13 @@ public class PostDTO {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Set<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<CommentDTO> comments) {
+        this.comments = comments;
     }
 }

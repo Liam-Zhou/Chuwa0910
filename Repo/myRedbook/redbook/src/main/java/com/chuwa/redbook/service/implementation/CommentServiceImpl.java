@@ -9,12 +9,14 @@ import com.chuwa.redbook.exceptions.ResourcesNotFoundException;
 import com.chuwa.redbook.payload.CommentDTO;
 import com.chuwa.redbook.service.CommentService;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CommentServiceImpl implements CommentService {
-    private CommentRepository commentRepository;
-    private PostRepository postRepository;
+    private final CommentRepository commentRepository;
+    private final PostRepository postRepository;
 
     public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository) {
         this.commentRepository = commentRepository;
