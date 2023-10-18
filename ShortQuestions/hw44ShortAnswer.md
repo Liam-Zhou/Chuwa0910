@@ -15,3 +15,5 @@ jsp(javaServer Pages) is used to embed java code directly to html page.
 Model: Contains the business logic(dao and service implementation), and the connection to database.
 View: the front end, css and html page design.
 
+
+### 7. Tomcat, Jetty, Jboss.
