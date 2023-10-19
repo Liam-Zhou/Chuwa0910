@@ -23,10 +23,34 @@ Default Component name would be the class name but with the initial character ch
 Default bean name would just be the name of the method that declaares bean.
 
 ### 9. 
+@Component refers to the general spring-managed component.
+@Service is a type of component, it's usually the data object class's business logic.
+@Repository is a specialized component as well. It's for the dto(data access object).
+
+### 10. Bean Injections.
+@Autowired. By Type > By Name
+@Inject. By Name > By Type.
+@Resource. By Name > By Type. 
 
 ### 11. 3 Types of Beans Injection.
 Constructor Injection: Inject the object dependencies within the object's constructor. This alwasy gets the dependencies before it's used and once the dependencies are set, they cannot be changed.
 Setter injection: Inject through setter method.
 Field Injection: Inject dependency explicitly by creating a new field.
+
+
+### 12. Setting bean injections in case of duplicate in one type.
+Use the @Primary annotation to set the bean you want to inject first, or use @Qualify to specify
+the injection points.
+
+### 13. BeanFactory and ApplicationContext
+'BeanFactory' let us configure and manage, creating and retrieving beans. It's the core of IoC and Dependency injections.
+ApplicationContext is built on top of the Bean Factory, it adds a few more functionality.
+
+### 14. Scope of the bean.
+Singleton: this scopes the bean definition to single instance per Spring IoC container(default).
+Prototype: this scopes a single bean definition to have any number of object instances.
+Request: Scopes a bean definition to an http request.
+Session: Scopes a bean definition to an http session.
+Global-session: scopes a bean defition to global http session.
 
 
