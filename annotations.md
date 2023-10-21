@@ -87,8 +87,5 @@
 
         @UpdateTimestamp
         private LocalDateTime updateDateTime;
-<<<<<<< grace_hu/hw42
-    }
-=======
     }
 >>>>>>> gracehu_master
