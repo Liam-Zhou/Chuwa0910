@@ -88,4 +88,3 @@
         @UpdateTimestamp
         private LocalDateTime updateDateTime;
     }
->>>>>>> gracehu_master
