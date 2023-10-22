@@ -87,3 +87,7 @@
 
 ## used by service
 1. `@Transactional`: make the method transactional.
+
+## used by security
+1. `@PreAuthorize`: define which role can access this controller.
+2. `@EnableRedisHttpSession`: enable distributed and centralized session management using Redis.
