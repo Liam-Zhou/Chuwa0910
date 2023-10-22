@@ -44,6 +44,158 @@ helper: https://zhuanlan.zhihu.com/p/137507309
 - `@InitBinder`: 用来设置WebDataBinder，WebDataBinder用来自动绑定前台请求参数到Model中。
 - `@ModelAttribute`: 本来的作用是绑定键值对到Model里，在@ControllerAdvice中是让全局的@RequestMapping都能获得在此处设置的键值对。
 
+## Spring Security:
+
+### annotations:
+
+1. `@EnableWebSecurity`: 是 Spring Security 用于启用Web安全的注解。典型的用法是该注解用在某个Web安全配置类上(实现了接口WebSecurityConfigurer或者继承自WebSecurityConfigurerAdapter)。This annotation is used to enable Spring Security for your application. It should be placed on a configuration class that extends `WebSecurityConfigurerAdapter`. You can customize security settings by overriding methods in this class.
+
+2. `@EnableGlobalMethodSecurity`: 用于启用<u>全局 方法 安全性</u>。This annotation is used to <u>enable method-level security globally in your application</u>. 
+
+    You can specify which annotations to use for securing methods, such as `@Secured`, `@PreAuthorize`, etc.
+
+    其中属性prePostEnabled和securedEnabled都是它的属性，分别表示是否允许使用`@PreAuthorize`和`@Secured`注解来控制方法的访问权限。
+    当prePostEnabled为true时，表示允许使用@PreAuthorize和@Secured注解来控制方法的访问权限；当securedEnabled为true时，表示允许使用@Secured注解来控制方法的访问权限。
+
+3. `@PreAuthorize`:通过使用 @PreAuthorize 注解，可以<u>在方法执行之前进行对用户的权限进行校验，只有具备相应权限的用户才能执行被注解的方法</u>。 支持Spring EL表达式.
+
+    主要是配合以下的验证方法对用户进行权限验证hasRole(“manager”)、hasAnyAuthority(“admin”,“manager”)、hasAuthority(“admin”)、hasAnyRole(“admin”)
+
+4. `@PostAuthorize`: <u>在方法执行后再进行权限校验，适合验证带有返回值的权限</u>。 可以使用内置的表达式returnObject表示方法的返回值
+
+5. `@Secured`: 判断是否具有角色，注意这里匹配的字符串需要添加前缀ROLE_. This annotation is used to specify that a method requires specific roles or authorities to access it.
+
+6. `@RolesAllowed`: Similar to `@Secured`, this annotation specifies the roles allowed to access a method. 该注解需要开启jsr250Enabled
+
+7. `@PreFilter` and `@PostFilter`： 
+    - `@PreFilter` 用于<u>在请求处理之前对请求进行过滤</u>。该注解可以应用于方法级别或类级别，用于指定只有满足特定条件的请求才能通过过滤器。例如，我们可以使用@PreFilter注解来限制只有拥有特定角色的用户才能访问某个接口。
+    - `@PostFilter`用于<u>在请求处理之后对请求进行过滤，过滤返回的结果</u>。该注解可以应用于方法级别或类级别，用于指定只有满足特定条件的请求才能通过过滤器。例如，我们可以使用@PostFilter注解来限制只有经过身份验证的用户才能访问某个接口。
+
+8. `@AuthenticationPrincipal`: 用于获取当前用户的认证信息。它可以用于方法参数上，表示将当前用户的认证信息注入到该参数中。通常情况下，我们可以使用它来获取当前用户的用户名、角色、权限等信息，以便进行业务逻辑的处理。This annotation is used to access the currently authenticated principal (user) directly in a method.
+
+
+### example:
+
+1. `@EnableWebSecurity`:
+    ```java
+    @Configuration
+    @EnableWebSecurity
+    public class MyWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    }
+
+2. `@EnableGlobalMethodSecurity`: This annotation is used to enable method-level security globally in your application. You can specify which annotations to use for securing methods, such as `@Secured`, `@PreAuthorize`, etc. For example:
+
+   ```java
+   @Configuration
+   // 属性prePostEnabled和securedEnabled都是它的属性，分别表示是否允许使用`@PreAuthorize`,`@Secured`和 `@RolesAllowed`注解来控制方法的访问权限。
+   @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true,jsr250Enabled = true)
+   public class MethodSecurityConfig {
+   }
+   ```
+
+3. `@PreAuthorize`:
+
+   ```java
+   // 先开启注解功能
+    @EnableGlobalMethodSecurity(prePostEnabled = true)
+    public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    }
+
+   @PreAuthorize("hasRole('ROLE_ADMIN')")
+   public void adminOnlyMethod() {
+       // Method that requires ROLE_ADMIN
+   }
+   ```
+
+4. `@PostAuthorize`:
+
+    ```java
+    // 先开启注解功能
+    @EnableGlobalMethodSecurity(prePostEnabled = true)
+    public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    }
+
+    @PostAuthorize("hasAnyAuthority('write')")
+    @RequestMapping(value = "/testPostAuthorize")
+    @ResponseBody
+    public String postAuthorize() {
+        System.out.println("方法进入了。。。。");
+        return "preAuthorize";
+    }
+
+    @PostAuthorize("returnObject.equals('PostAuthorize ok')")
+    ```
+
+5. `@Secured`: This annotation is used to specify that a method requires specific roles or authorities to access it. For example:
+
+   ```java
+   // 开启注解功能
+   @EnableGlobalMethodSecurity(securedEnabled = true)
+    public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    }
+
+   @Secured("ROLE_USER")
+   public void userMethod() {
+       // Method that requires ROLE_USER
+   }
+   ```
+
+6. `@RolesAllowed`: Similar to `@Secured`, this annotation specifies the roles allowed to access a method. For example:
+
+   ```java
+
+   @EnableGlobalMethodSecurity(jsr250Enabled = true)        /* 开启注解功能 */
+    public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    }
+
+   @RolesAllowed("ROLE_ADMIN")
+   public void adminMethod() {
+       // Method that requires ROLE_ADMIN
+   }
+   ```
+
+7. `@PreFilter` and `@PostFilter`： 
+    ```java
+    RequestMapping("/getTestPreFilter")
+    @PreFilter("hasRole('ADMIN')")
+    @ResponseBody
+    public List<UserPO> getTestPreFilter(@RequestBody List<UserPO> list) {
+        list.forEach(t -> {
+            System.out.println(t.getId() + "\t" + t.getUsername());
+        });
+        return list;
+    }
+
+    @RestController
+    public class MyController {
+        @PostFilter("hasRole('ADMIN')")
+        @GetMapping("/admin")
+        public String admin() {
+            // ...
+        }
+    }
+
+    // filterObject是执行过滤操作的内置对象。
+    @PostFilter("filterObject.username == 'zhansan'") 	//这里指的是只返回username为zhangsan的内容
+
+    ```
+
+8. `@AuthenticationPrincipal`: This annotation is used to access the currently authenticated principal (user) directly in a method. For example:
+
+   ```java
+   @GetMapping("/user-info")
+   public String getUserInfo(@AuthenticationPrincipal CustomUserDetails userDetails) {
+       // Access the authenticated user details
+       return "User: " + userDetails.getUsername();
+   }
+   ```
+
+
 **General Purpose Annotations:**
 
 1. `@Autowired` 自动注入
@@ -63,6 +215,9 @@ helper: https://zhuanlan.zhihu.com/p/137507309
 - `@EnableTransactionManagement` 开启注解式事务的支持
 - `@EnableTransactionManagement` 开启注解式事务的支持
 - `@EnableCaching` 开启注解式的缓存支持
+
+
+
 
 **Annotations Used by Entity (JPA/Hibernate):**
 
@@ -248,7 +403,6 @@ public class MyService {
    - Explanation: Specifies that a method produces a bean to be managed by the Spring container.
 
 ```
-```
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -299,3 +453,5 @@ public class MyConfig {
     }
 }
 ```
+
+
