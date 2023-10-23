@@ -1,0 +1,23 @@
+type Query{
+    postById(id: ID): Post
+    authorById(id: ID): Author
+}
+
+type Mutation{   # "!" -->required
+    createPost(title:String!, description:String!, content:String!): Post
+    createAuthor(name: String!, gender: String!, description: String): Post
+}
+
+type Post{
+    id:ID
+    title: String
+    description: String
+    content: String
+}
+
+type Author{
+    id:ID
+    name: String
+    gender: String
+    description: String
+}
