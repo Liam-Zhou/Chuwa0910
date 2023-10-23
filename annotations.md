@@ -1,5 +1,11 @@
 # annotations - Grace Hu
 
+
+## Config
+
+**@Configuration**/**@Bean**: **@Configuration** indicates a class contains one or more bean definitions, and any methods within the class that are annotated with **@Bean** will be used to create and configure beans.
+
+
 ## Entity
 **@Entity**: Marks a class as a JPA entity, indicating that it will be persisted to the database.
 
@@ -29,6 +35,23 @@
 
 **@UpdateTimestamp**
 
+## Payload
+**@NotNull**: Checks if a field is not null.
+
+**@NotEmpty**: Ensures that a field is not null and not an empty string.
+
+**@NotBlank**: Checks that a string field is not null and has at least one non-whitespace character.
+
+**@Size**: Validates the size of a field, specifying minimum and maximum length.
+
+**@Min**: Ensures that a numeric field is greater than or equal to the specified minimum value.
+
+**@Max**: Validates that a numeric field is less than or equal to the specified maximum value.
+
+**@Email**: Ensures that a field is a valid email address.
+
+**@Pattern**: Allows you to define a custom regular expression for validation.
+
 ## DAO
 **@Repository**
 **@Query**: is used in Spring Data JPA to define custom queries for repository methods. It allows us to write JPQL or native SQL queries and associate them with specific repository methods.
@@ -50,6 +73,9 @@
 **@RequestBody**: Annotation indicating a method parameter should be bound to the body of the web request.
 
 **@Autowired**: Marks a constructor, field, or setter method to be autowired by Spring's dependency injection facilities.
+
+
+**@valid**: Apply the validation Rule here, if invalid, throw exception
 
 ## Exception
 **@ResponseStatus**: declares the HTTP status code that should be returned in the response when a particular exception is thrown
@@ -88,3 +114,5 @@
         @UpdateTimestamp
         private LocalDateTime updateDateTime;
     }
+    
+
