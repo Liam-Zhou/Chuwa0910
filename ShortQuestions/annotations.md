@@ -205,4 +205,9 @@ It provides methods for querying, persisting, updating, and removing entities.
 @ControllerAdvice
 @Bean
 
+**Security**
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity
+@PreAuthorize("hasRole('ROLE_ADMIN')")
+@EnableRedisHttpSession
 
