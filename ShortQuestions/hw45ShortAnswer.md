@@ -51,3 +51,25 @@ For us user to deploy it, we need to:
 6: Create JWTAuthResponseDTO.
 7: Configure JWT in Spring Security Configuration.
 8: Change login/signinAPI to return token to client.
+
+### 12. Passwords Encoding.
+Springboot provides password hashing depedency. You can create a pssword encoder bean in the configuration class, and can inject it to where you can use it. You'll get a String of encoded Password.
+
+### 13. 
+UserDetailService retrive user-related data. AuthenticationProvider is used for authentication.
+AuthenticationManager defines the main strategy interface for authentication. AuthenticationFilter extract credential inforamtion.
+
+### 14. Disadvantage of html session.
+Session is stateful, meaning that there's always something to consider when you're scaling up things. To overcome it we can use the stateless authentication tokens. Also, session dependent on cookies. So if a user disable cookies, session won't function properly. To address that, we can store the dataa in the browser's local storage.
+
+### 15. Injecting value from application.properties.
+myobject.value=Hello, World! in the properties file.
+
+In the java class, we do: @Value("${myproperty.value}")
+                          private String myValue;(myValue prints out "hello world".)
+
+### 16. Configure
+Configure in httpSecurity is used to configure web-absed security for specific http requests. By default it is applied to all requests, but it can be restricted to specific request based on their attributes.
+Configure(AuthenticationManagerBuilder auth) is a builder object provided by Spring Security to help you set up an manager. It's the main spring secruity interface for authentication.
+
+### 17. Authentication vs Authorization
