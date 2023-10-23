@@ -72,4 +72,4 @@ In the java class, we do: @Value("${myproperty.value}")
 Configure in httpSecurity is used to configure web-absed security for specific http requests. By default it is applied to all requests, but it can be restricted to specific request based on their attributes.
 Configure(AuthenticationManagerBuilder auth) is a builder object provided by Spring Security to help you set up an manager. It's the main spring secruity interface for authentication.
 
-### 17. Authentication vs Authorization
+### 17. Authentication vs Authorization. Answered in number 2 and 3.
