@@ -126,3 +126,16 @@ public ResponseEntity<User> getUserById(@PathVariable Long id) {
 
 @ExceptionHandler
 - Used to customize own method to handle specific exceptions. 
+
+
+### Aonntations Used by Security
+
+@PreAuthorize("...")
+- Used to authorize which user can call APIs.
+
+@Value("")
+- Used to get varibles in properties
+```java
+@Value("${app.xxx.xxx}")
+private String xxx;
+```
