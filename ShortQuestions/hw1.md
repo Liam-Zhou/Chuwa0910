@@ -148,15 +148,16 @@ In Maven, plugins are extensions or modules that provide additional functionalit
         Common Goals: integration-test, verify
 
 
+
 ## 13. In Repo/MavenProject directory, create a maven Module using Intellij, named it as belows:
 1.  groupID: com.chuwa.learn
 2.  artifactID: java-core
 
 	![the picture to show how to make a maven project by IntelliJ IDEA](/Users/kechen/Desktop/work/Chuwa0910/ShortQuestions/Q12.png)
 
+
 ## 14.  Do Code Review: Go over the PRs in your repo, tried to leave some useful or useful comments in other 
 students' PR, please don't merge it.
-
 
 
 
