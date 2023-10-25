@@ -90,6 +90,24 @@
 ## Main
 **@EnableTransactionManagement**
 
+**@SpringBootApplication** is a combination of three annotations:
+- **@Configuration**
+- **@EnableAutoConfiguration**
+- **@ComponentScan**
+
+## Bean
+**@Configuration** with **@Bean** with **@Primary**
+
+**@component**
+
+**@Autowired**: By Type > By Name, could use with @Qualifier
+
+**@Qualifier**
+
+**@Resource**: By Name > By Type, specifying the name of the bean
+
+**@Inject**
+
 ## Example
 
     @Entity
