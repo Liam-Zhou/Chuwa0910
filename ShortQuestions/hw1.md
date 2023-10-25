@@ -1,4 +1,4 @@
-# Ke Chen - HW1
+# Ke Chen - HW1 - Maven & Git & Pr
 
 ## 1. Learn MarkDown and show all of basic usage in the ShortQuestions/README.md
 https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
@@ -7,34 +7,34 @@ see file : README.md
 
 ## 2. practice git using the platform. list the git commands you learned: https://learngitbranching.js.org
 		
-git commit : 
-make a new commit 相当于提交copy
-A commit in a git repository records a snapshot of all the (tracked) files in your directory. It's like a giant copy and paste, but even better!
-can think of commits as snapshots of the project
+**git commit:**
+- make a new commit 相当于提交copy
+- A commit in a git repository records a snapshot of all the (tracked) files in your directory. It's like a giant copy and paste, but even better!
+- can think of commits as snapshots of the project
 	
-git branch: 
-create new branch 创建新的分支
+**git branch:**
+- create new branch 创建新的分支
 
-git checkout: 
-checkout the branch with name。查看分支，跳转到指定分支
-git switch: 
-eplace git checkout, but still use git checkout
+**git checkout:** 
+- checkout the branch with name。查看分支，跳转到指定分支
+**git switch:** 
+- eplace git checkout, but still use git checkout
 
-git checkout -b: 
-create a new branch and check it out 创建并且跳转到指定分支
+**git checkout -b:**
+- create a new branch and check it out 创建并且跳转到指定分支
 
-git merge: 
-merge the branch with other branch  合并两个分支
+**git merge:** 
+- merge the branch with other branch  合并两个分支
 
-git rebase:
-move our work from bugFix directly onto the work from main(合并本地的多条提交(commit)记录 )。
+**git rebase:**
+- move our work from bugFix directly onto the work from main(合并本地的多条提交(commit)记录 )。
 
 
 HEAD always points to the most recent commit
-git log: 
-see hashes of the commit
+**git log:**
+- see hashes of the commit
 	
-find parent:
+**find parent:**
 1. Moving upwards one commit at a time with ^ ：
 find the parent of the specified commit 找到父母
 ex：git checkout bugFix^
@@ -47,19 +47,19 @@ ex: git branch -f main HEAD~3
 当前在bugFix的分支，然后直接从mian分支往上找第3个父母，找到之后还是在bugFix分支
 moves (by force) the main branch to three parents behind HEAD.
 
-git reset: 
+**git reset:** 
 撤销older commit
 reverses changes by moving a branch reference backwards in time to an older commit.
 "rewriting history;
 ex: git rest HEAD~1
-git revert:
+**git revert:**
 为了把reversed changes 分享给其他人，做备份
 will move a branch backwards as if the commit had never been made in the first place.
 ex: git revert HEAD
 
 
 
-git cherry-pick <Commit1> <Commit2> <...>
+**git cherry-pick <Commit1> <Commit2> <...>**
 copy a series of commits below your current location (HEAD)
 ex: git cherry-pick c2 c4
 git rebase -i HEAD~4
@@ -69,7 +69,7 @@ an interactive rebase window will appear. Reorder some commits around (or feel f
 EX: git rebase -i HEAD~4
 比如你选择了c2， c5，生成c3，c4的copy
 
-git tag v1 c1
+**git tag v1 c1**
 name the tag v1 and referenced the commit C1 explicitly
 git describe <ref>:
 the output of the command looks like: <tag>_<numCommits>_g<hash>
