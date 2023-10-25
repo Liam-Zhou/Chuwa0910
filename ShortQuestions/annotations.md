@@ -139,3 +139,30 @@ public ResponseEntity<User> getUserById(@PathVariable Long id) {
 @Value("${app.xxx.xxx}")
 private String xxx;
 ```
+
+
+### Aonntations Used by AOP
+
+@Aspect
+- Used to clarify the class to define all aop self methods
+
+@Pointcut
+- Expression to find all main application methods to insert advice
+
+@Before 
+- Run before the method execution
+
+@After 
+- Run after the method returned a result
+
+@AfterReturning 
+- Run after the method returned a result, intercept the 
+returned result as well.
+
+@AfterThrowing 
+- Run after the method throws an exception
+
+@Around 
+- Run around the method execution, combine all three advices above.
+
+`Object result = joinPoint.proceed()` -- to invoke proxy methods
