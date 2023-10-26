@@ -187,16 +187,18 @@ Here are some commonly used Maven plugins:
 - maven-site-plugin: Generates a site for the project, which can include documentation generated from the code as well as other documentation.
 - maven-assembly-plugin: Used to aggregate multiple artifacts together into a single distributable archive.
 
+
 ## 13. In Repo/MavenProject directory, create a maven Module using Intellij, named it as belows:
 1.  groupID: com.chuwa.learn
 2.  artifactID: java-core
 
 see coding file : MavenProject
 
-## 14.  Do Code Review: Go over the PRs in your repo, tried to leave some useful or useful comments in other students' PR, please don't merge it.
+
+## 14.  Do Code Review: Go over the PRs in your repo, tried to leave some useful or useful comments in other 
+students' PR, please don't merge it.
 
 done
-
 
 
 
