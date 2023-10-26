@@ -37,7 +37,7 @@ git checkout branch_name
 
 ## 6. How to merge the branch_test to master branch in command ? show me the commands
 
-**using merger**
+**using merger 本地**
 git merge先做的就是产生当前branch的copy commit， 然后这个commit再同时指向2个parent commits
 ```
 	git checkout master
@@ -47,12 +47,12 @@ git merge先做的就是产生当前branch的copy commit， 然后这个commit�
 	git merge master  // git merge先做的就是产生当前branch的copy commit，但是因为因为 master 继承自 bugFix，Git 什么都不用做，只是简单地把 bugFix 移动到 main 所指向的那个commit
 ```
 
-**using rebase**
+**using rebase 远程分享**
 ```
-	git chekout branch_test
+	git checkout branch_test
 	git rebase master  //把branch_test放到master的下面
 
-	git chekout master
+	git checkout master
 	git rebase branch_test // 由于 branch_test 继承自 master，所以 Git 只是简单的把 master 分支的引用向前移动了一下而已
 ```
 
@@ -60,7 +60,7 @@ git merge先做的就是产生当前branch的copy commit， 然后这个commit�
 
 - https://blog.csdn.net/weixin_44799217/article/details/128277154
 - 需求背景
-        有时候在开发过程中，在一个分支上（dev1）已经写了一部分代码，但是需要紧急切换到别的分支(dev2)上修改某个代码，这时候不能直接从dev1分支上切换到dev2分支上，提示你需要保存代码。此时dev1分支上的代码还没有写完，暂时还不能提交。但是想在不提交代码的情况下能够临时保存dev1分支上的代码，然后切换到dev2分支上。等dev2分支上处理完成后，再切换到dev1分支上可以继续工作。
+        <u>有时候在开发过程中，在一个分支上（dev1）已经写了一部分代码，但是需要紧急切换到别的分支(dev2)上修改某个代码，这时候不能直接从dev1分支上切换到dev2分支上，提示你需要保存代码。此时dev1分支上的代码还没有写完，暂时还不能提交。但是想在不提交代码的情况下能够临时保存dev1分支上的代码，然后切换到dev2分支上。等dev2分支上处理完成后，再切换到dev1分支上可以继续工作。</u>
 - git stash介绍
         git stash会把所有未提交的修改（包括暂存的和非暂存的）都保存起来，用于后续恢复当前工作目录。通过git stash命令推送一个新的储藏，当前的工作目录就干净了。
 
@@ -109,23 +109,23 @@ git merge先做的就是产生当前branch的copy commit， 然后这个commit�
 	Click on the "Git" in the menu
 	Click on "Unstash Changes"
 
-![stash IntelliJ IDEA way]()
-
-
 ## 8. How do you understand PR is based on Branch?
 a PR <u>is stand for "Pull Request"</u>.
 
-A Pull Request is a mechanism for <u>proposing and merging changes from one branch into another branch within a Git repository</u>, often used in platforms like GitHub, GitLab, or Bitbucket. 
+A Pull Request is a mechanism for <u>proposing and merging changes from one branch into another branch</u> within a Git repository, often used in platforms like GitHub, GitLab, or Bitbucket.  (Pull Request是一种在Git存储库中提出更改并将其从一个分支合并到另一个分支的机制，通常用于GitHub、GitLab或Bitbucket等平台。)
 
 the changes proposed in the PR are the changes made in the source branch compared to the traget branch.
 
 ## 9. What is maven role ? what it be used to do ?
 
-Maven is <u>a popular build automation and project management tool</u>(构建自动化 + 项目管理 的工具) used primarily for Java projects.
+**Role:**
+- Maven is software project management and comprehension tool(软件项目管理和理解 的工具).
+- Easy to download add and remove the dependencies/libraries
 
-Its primary purpose is <u>to manage and automate various aspects of the software development lifecycle, including building, packaging, and dependency management</u>. (管理和自动化软件开发生命周期的各个方面，包括构建、打包和依赖关系管理。)
-
-In summary, Maven simplifies and standardizes the build and project management process for Java-based applications. 
+**Used to do:**
+- Dependency Management: Automatically handles projects dependencies and fetch them from online repo.
+- manage a project's build(the lifecycle of maven)
+- reporting and documentation from a central piece of information
 
 
 ## 10. What is the lifecycle of maven? could you tell me the details ?
@@ -157,49 +157,48 @@ copies the final package to the remote repository.
 ## 11. what is the difference between package and install in maven lifecycle ?
 
 **Purpose**:
-
-- package phase: packages the compiled code and resources into an artifact, such as a JAR or WAR file.
-- install phase: Installs the packaged artifact in local/remote maven repository.
+- package phase: <u>creates the JAR/WAR package(artifact)</u> as mentioned in the packaging in POM.xml.
+(packages the compiled code and resources into an artifact)
+- install phase: <u>Installs the package in local/remote maven repository.</u>
 
 **Artifact Destination**:
+package phase: The resulting artifact is created <u>in the project's target directory</u> (e.g., target/my-project.jar).
+install phase: The artifact <u>is copied from the target directory of the project and placed into your local Maven repository</u> (e.g., ~/.m2/repository/groupId/artifactId/version/artifactId-version.jar).
 
-package phase: The resulting artifact is created in the project's target directory (e.g., target/my-project.jar).
-install phase: The artifact is copied from the target directory of the project and placed into your local Maven repository (e.g., ~/.m2/repository/groupId/artifactId/version/artifactId-version.jar).
-
-**Local Respository**:
-package phase:The artifact created in the package phase is not installed in the local repository. It remains in the project's target directory, and it's typically used for local testing and development.
-install phase:The primary purpose of the install phase is to make the artifact available locally for other Maven projects on the same machine. This allows other projects to use your project as a dependency during their builds.
-
-In summary, the key difference between the package and install phases lies in where the resulting artifact is stored:
-
-package: creates the artifact in the project's target directory but doesn't install it in the local repository. It's mainly used for local testing and development within the project.
-install: not only creates the artifact but also copies it to the local Maven repository, making it available for use as a dependency in other Maven projects on your machine.
+**Goal**:
+package phase:The artifact created in the package phase is not installed in the local repository. It remains in the project's target directory, and it's typically used <u>for local testing and development</u>.
+install phase:The primary purpose of the install phase is to <u>make the artifact available locally for other Maven projects</u> on the same machine. This allows other projects to use your project as a dependency during their builds.
 
 ## 12. What is plugins in maven, list some plugins.
-In Maven, plugins are extensions or modules that provide additional functionality to the build process.
 
-1. Maven Compiler Plugin (maven-compiler-plugin):
-	    Purpose: Compiles Java source code in your project.
-        Common Goals: compile, testCompile
-2. Maven Surefire Plugin (maven-surefire-plugin):
-        Purpose: Executes unit tests in your project.
-        Common Goals: test
-3. Maven Failsafe Plugin (maven-failsafe-plugin):
-        Purpose: Executes integration tests in your project.
-        Common Goals: integration-test, verify
+<u>"Maven" is really just a core framework for a collection of Maven Plugins</u>. In other words, <u>plugins are where much of the real action is performed, plugins are used to: create jar files, create war files, compile code, unit test code, create project documentation, and on and on.</u> Almost any action that you can think of performing on a project is implemented as a Maven plugin.
 
+Here are some commonly used Maven plugins:
+
+- **maven-compiler-plugin**: Compiles Java source code(编译项目的源代码). It's responsible for invoking the Java compiler during the compile phase.
+- maven-surefire-plugin: Executes unit tests and generates test reports. It's often associated with the test phase.
+- maven-jar-plugin: Builds a JAR file from the current project. It's tied to the package phase.
+- maven-war-plugin: Like the JAR plugin but for building WAR files for web applications.
+- **maven-clean-plugin**: Cleans up the target/ directory used for the build. Typically tied to the clean phase.
+- **maven-install-plugin**: Installs the project's artifact into the local repository. This is usually done during the install phase.
+- maven-deploy-plugin: Deploys the project's artifact to a remote repository. It's tied to the deploy phase.
+- maven-failsafe-plugin: Designed for integration tests. It ensures that even if there are failures, the post-integration-test phase will still be executed to clean up resources.
+- maven-dependency-plugin: Provides operations on dependencies like copying, unpacking, analyzing, etc. maven-release-plugin: Manages the release of a project including tagging and version management.
+- maven-site-plugin: Generates a site for the project, which can include documentation generated from the code as well as other documentation.
+- maven-assembly-plugin: Used to aggregate multiple artifacts together into a single distributable archive.
 
 
 ## 13. In Repo/MavenProject directory, create a maven Module using Intellij, named it as belows:
 1.  groupID: com.chuwa.learn
 2.  artifactID: java-core
 
-	![the picture to show how to make a maven project by IntelliJ IDEA](/Users/kechen/Desktop/work/Chuwa0910/ShortQuestions/Q12.png)
+see coding file : MavenProject
 
 
 ## 14.  Do Code Review: Go over the PRs in your repo, tried to leave some useful or useful comments in other 
 students' PR, please don't merge it.
 
+done
 
 
 
