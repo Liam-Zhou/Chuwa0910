@@ -49,12 +49,11 @@ section links: can link directly to a section in a rendered file by hovering ove
 relative links: is a link that is relative to the current file
 
 如果是同一个文件夹下面的话，就不用写全部的路径。
-
-Here are some examples for using relative links to display an image：
-![relative links](https://myoctocat.com/assets/images/base-octocat.svg)
+  
+![relative links](images/hw1/relative%20links.png)
 
 ## Images：
-先把图片上传到git仓库，复制仓库里面图片的链接
+先把图片上传到git仓库，然后找到图片所对应的路径/图片的网址链接
 
 ![tomcat](https://myoctocat.com/assets/images/base-octocat.svg)
 
