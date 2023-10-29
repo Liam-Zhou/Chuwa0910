@@ -106,6 +106,7 @@ The @RequestBody annotation tells Spring to deserialize the request body into an
          public List<Product> getAllProducts() {
          // Return a list of products
          }
+9. @ControllerAdvice: Class Level, >make this class be a bean
 
 9. @RequestParam:
 **Services**
@@ -135,3 +136,78 @@ The @RequestBody annotation tells Spring to deserialize the request body into an
             }
         }
 3. @ResponseStatus(value = HttpStatus.NotFound):
+
+**JPQL**
+1. @PersistenceContext: It is used to manage entity objects and perform database operations. 
+The entity manager is a core component of JPA that manages entity objects and their persistence in the database. 
+It provides methods for querying, persisting, updating, and removing entities.
+
+            @PersistenceContext
+            private EntityManager entityManager;
+2. @NamedQuery: This annotation is used to define a named query. A named query is a static query with a predefined unchangeable query string.
+
+            @Entity
+            @NamedQuery(
+               name = "findPersonByName",
+               query = "SELECT p FROM Person p WHERE p.name = :name"
+            )
+            public class Person {
+            // ...
+            }
+3. @NamedQueries: This annotation is used to define multiple named queries. It is used to group multiple @NamedQuery annotations.
+            
+            @Entity
+            @NamedQueries({
+            @NamedQuery(
+            name = "findPersonByName",
+            query = "SELECT p FROM Person p WHERE p.name = :name"
+            ),
+            @NamedQuery(
+            name = "findPersonByAge",
+            query = "SELECT p FROM Person p WHERE p.age = :age"
+            )
+            })
+            public class Person {
+            // ...
+            }
+4. @Query: This annotation is used to define a query. Unlike @NamedQuery, the query string is not static and can be changed at runtime.
+               
+               public interface UserRepository extends JpaRepository<User, Long> {
+               @Query("SELECT u FROM User u WHERE u.username = ?1")
+               List<User> findByUsername(String username);
+               }
+               //In this example, the @Query annotation is used to define a custom JPQL query for finding users by their username.
+5. @Query: It also can define a native SQL query. SQL语句中的变量以":"开头`.
+               
+         @Query("select p from Post p where p.id = :key or p.title =:title")
+
+**Exception**
+1. @ControllerAdvice: Class Level, >make this class be a bean
+2. @ExceptionHandler: Method Level, >handle exception
+
+        @ControllerAdvice
+        public class GlobalExceptionHandler {
+            @ExceptionHandler(NotFoundException.class)
+            @ResponseStatus(HttpStatus.NOT_FOUND)
+            public void handleNotFound() {
+                // Nothing to do
+            }
+        }
+
+
+**Bean**
+@Service
+@Controller
+@RestController
+@Component
+@Configuration
+@Repository
+@ControllerAdvice
+@Bean
+
+**Security**
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity
+@PreAuthorize("hasRole('ROLE_ADMIN')")
+@EnableRedisHttpSession
+
