@@ -64,9 +64,12 @@
 
 - Used By Controller:
 
-  - `@RestController`: Declare a REST controller, on top of the Controller Class.
+  - `@RestController`: Declare a REST controller, on top of the Controller Class. `@Controller` + `@ResponseBody`
   - `@RequestMapping`: Declare a REST request path, on top of the Controller Class
-  - `@PostMapping`: Declare a Post API, on top of the post method
+  - `@PostMapping`: (Create)Declare a Post API, on top of the post method
+  - `@PutMapping`: U
+  - `@GetMapping`: G
+  - `@DeleteMapping`: D
   - `@RequestBody`: Decalre a request body data, in front of the input variable of post method
 
   ```
