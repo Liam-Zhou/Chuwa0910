@@ -108,3 +108,12 @@ They are meta annotations that are themselves annotated with @SchemaMapping and 
 
 ### @Argument
 For access to a named field argument bound to a higher-level, typed Object.
+
+### @PreAuthorize("hasRole('ADMIN')")
+Used in Spring Security to specify access control rules for methods in a Spring application. 
+
+### @EnableRedisHttpSession
+Used in Spring applications to enable and configure Spring Session to store session data in Redis, a popular in-memory data store. Spring Session is an abstraction layer that allows you to manage and store session data outside of the application server's built-in session management.
+
+### @EnableGlobalMethodSecurity
+Used in a Spring Security configuration class to enable method-level security in a Spring application.
