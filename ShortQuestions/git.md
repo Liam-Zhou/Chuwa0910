@@ -306,10 +306,6 @@ revert 之后就可以把你的更改推送到远程仓库与别人分享啦。(
 - 实际我们只要让 Git 复制解决问题的那一个提交记录就可以了。跟之前我们在“整理提交记录”中学到的一样，我们可以使用:(We need to tell git to copy only one of the commits over. This is just like the levels earlier on moving work around -- we can use the same commands:)`git rebase -i 或者git cherry-pick` 来达到目的
 
 ### 提交的技巧 #1
-接下来这种情况也是很常见的：你之前在 newImage 分支上进行了一次提交，然后又基于它创建了 caption 分支，然后又提交了一次。
-
-此时你想对某个以前的提交记录进行一些小小的调整。比如设计师想修改一下 newImage 中图片的分辨率，尽管那个提交记录并不是最新的了。
-
 
 ## 提交的技巧 #2
 
