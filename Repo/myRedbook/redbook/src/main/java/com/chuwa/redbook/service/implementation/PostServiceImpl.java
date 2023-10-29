@@ -7,6 +7,7 @@ import com.chuwa.redbook.entity.Post;
 import com.chuwa.redbook.payload.PostDTO;
 import com.chuwa.redbook.payload.PostResponse;
 import com.chuwa.redbook.service.PostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -18,44 +19,48 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
 
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
+    private final ModelMapper modelMapper;
 
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper) {
         this.postRepository = postRepository;
+        this.modelMapper = modelMapper;
     }
 
-    private PostDTO mapPostEntityToDTO(Post post){
-        PostDTO response = new PostDTO();
-
-        response.setId(post.getId());
-        response.setTitle(post.getTitle());
-        response.setContent(post.getContent());
-        response.setDescription(post.getDescription());
-
-        return response;
-    }
+//    private PostDTO mapPostEntityToDTO(Post post){
+//        PostDTO response = new PostDTO();
+//
+//        response.setId(post.getId());
+//        response.setTitle(post.getTitle());
+//        response.setContent(post.getContent());
+//        response.setDescription(post.getDescription());
+//
+//        return response;
+//    }
 
     @Override
     public PostDTO createPost(PostDTO postDTO) {
-        Post postToBeSaved = new Post();
-        postToBeSaved.setTitle(postDTO.getTitle());
-        postToBeSaved.setContent(postDTO.getContent());
-        postToBeSaved.setDescription(postDTO.getDescription());
-
+//        Post postToBeSaved = new Post();
+//        postToBeSaved.setTitle(postDTO.getTitle());
+//        postToBeSaved.setContent(postDTO.getContent());
+//        postToBeSaved.setDescription(postDTO.getDescription());
+//        Post savedPost = this.postRepository.save(postToBeSaved);
+//        return mapPostEntityToDTO(savedPost);
+        Post postToBeSaved = modelMapper.map(postDTO, Post.class);
         Post savedPost = this.postRepository.save(postToBeSaved);
-
-        return mapPostEntityToDTO(savedPost);
+        return modelMapper.map(savedPost, PostDTO.class);
     }
 
     @Override
     public List<PostDTO> getAllPosts() {
         List<Post> posts = postRepository.findAll();
 
-        return posts.stream().map(this::mapPostEntityToDTO).toList();
+//        return posts.stream().map(this::mapPostEntityToDTO).toList();
+        return posts.stream().map(post -> modelMapper.map(post, PostDTO.class)).toList();
     }
 
     @Override
-    public PostResponse getAllPost(int pageNo, int pageSize, String sortBy, String sortDir) {
+    public PostResponse getAllPosts(int pageNo, int pageSize, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
                 Sort.by(sortBy).ascending() :
                 Sort.by(sortBy).descending();
@@ -63,7 +68,7 @@ public class PostServiceImpl implements PostService {
         Page<Post> pagePosts = postRepository.findAll(pageRequest);
 
         List<Post> posts = pagePosts.getContent();
-        List<PostDTO> postDTOs = posts.stream().map(this::mapPostEntityToDTO).toList();
+        List<PostDTO> postDTOs = posts.stream().map(post -> modelMapper.map(post, PostDTO.class)).toList();
 
         PostResponse postResponse = new PostResponse();
         postResponse.setContent(postDTOs);
@@ -79,7 +84,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO getPostById(long id) {
         Post post = postRepository.findById(id).orElseThrow(()-> new ResourcesNotFoundException("Post", "id", id));
 
-        return mapPostEntityToDTO(post);
+        return modelMapper.map(post, PostDTO.class);
     }
 
     @Override
@@ -91,12 +96,12 @@ public class PostServiceImpl implements PostService {
         post.setContent(postDTO.getContent());
 
         Post updatedPost = postRepository.save(post);
-        return mapPostEntityToDTO(updatedPost);
+        return modelMapper.map(updatedPost, PostDTO.class);
     }
 
     @Override
     public void deletePostById(long id) {
-        Post postToBeDelete = postRepository.findById(id).orElseThrow( ()-> new ResourcesNotFoundException("Post", "id", id));
+        postRepository.findById(id).orElseThrow( ()-> new ResourcesNotFoundException("Post", "id", id));
         postRepository.deleteById(id);
     }
 }

@@ -1,11 +1,10 @@
 package com.chuwa.redbook.service;
 
 import com.chuwa.redbook.payload.CommentDTO;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
-@Service
 public interface CommentService {
     CommentDTO createComment(long postId, CommentDTO commentDto);
 

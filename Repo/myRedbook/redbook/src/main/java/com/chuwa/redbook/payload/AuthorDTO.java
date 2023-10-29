@@ -1,9 +1,14 @@
 package com.chuwa.redbook.payload;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class AuthorDTO {
     private Long id;
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
+    @NotEmpty
     private String sex;
 
     public AuthorDTO() {

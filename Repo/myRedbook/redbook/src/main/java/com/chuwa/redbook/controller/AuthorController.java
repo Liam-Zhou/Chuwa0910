@@ -2,6 +2,7 @@ package com.chuwa.redbook.controller;
 
 import com.chuwa.redbook.payload.AuthorDTO;
 import com.chuwa.redbook.service.AuthorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class AuthorController {
     }
 
     @PostMapping
-    public ResponseEntity<AuthorDTO> createAuthor(@RequestBody AuthorDTO authorDTO){
+    public ResponseEntity<AuthorDTO> createAuthor(@Valid @RequestBody AuthorDTO authorDTO){
         AuthorDTO response = authorService.createAuthor(authorDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -31,7 +32,7 @@ public class AuthorController {
         return authorService.getAuthorById(id);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<AuthorDTO> updateAuthorById(@PathVariable(name="id") long id, @RequestBody AuthorDTO authorDTO){
+    public ResponseEntity<AuthorDTO> updateAuthorById(@PathVariable(name="id") long id, @Valid @RequestBody AuthorDTO authorDTO){
         AuthorDTO response = authorService.updateAuthor(authorDTO,id);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
