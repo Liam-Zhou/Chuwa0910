@@ -22,4 +22,7 @@ After throwing advice: runs if a method exists by throwing an exception.
 After(Finally) advice: runs after the join point, regardless of how the join point exits.
 Around advice: perform custom behavior both before and after method invocation. Also responsible for choosing whether to procced to the join point.
 
-### 10. 
+### 10. Spring batch
+Spring batch is a framework used for processing large volumes of data.
+We can use it for Data migration, like from one system to another, possibly transforming or processing it along the way. 
+Or Data Processing, file processing, data backup.
