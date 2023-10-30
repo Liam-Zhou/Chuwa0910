@@ -1,21 +1,5 @@
 helper: https://zhuanlan.zhihu.com/p/137507309
 
-**Annotations Used by Entity (JPA/Hibernate):**
-
-- `@Entity` 表示数据库的一个table, 表明这是一个实体类。一般用于jpa这两个注解一般一块使用，但是如果表名和实体类名相同的话，@Table可以省略
-- `@Table` table的details
-- `@Id` primary key in a table 表示该属性为主键。
-- `@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = “repair_seq”)` 和`@Id`一起使用，注明primary key是怎么生成的,name为sequence的名称，以便使用，sequenceName为数据库的sequence名称，两个名称可以一致。
-- `@Column`: database column
-- `@OneToOne`：对应hibernate配置文件中的一对一。
-- `@OneToMany`：对应hibernate配置文件中的一对多.
-- `@ManyToOne`：对应hibernate配置文件中的多对一。
-- `@Transient`：表示该属性并非一个到数据库表的字段的映射,ORM框架将忽略该属性。如果一个属性并非数据库表的字段映射,就务必将其标示为@Transient,否则,ORM框架默认其注解为@Basic。@Basic(fetch=FetchType.LAZY)：标记可以指定实体属性的加载方式
-- `@JsonIgnore`：作用是json序列化时将Java bean中的一些属性忽略掉,序列化和反序列化都受影响。
-- `@JoinColumn（name=”loginId”）`:一对一：本表中指向另一个表的外键。一对多：另一个表指向本表的外键。
-- `@MappedSuperClass`: 用在确定是父类的entity上。父类的属性子类可以继承
-- `@NoRepositoryBean`:一般用作父类的repository，有这个注解，spring不会去实例化该repository。
-
 **Annotations Used by Controller (Spring MVC):**
 
 - `@Controller` Controller层
@@ -39,11 +23,310 @@ helper: https://zhuanlan.zhihu.com/p/137507309
 - `@ResponseBody` : 支持将返回值放在response内，而不是一个页面，通常用户返回json数据（返回值旁或方法上）
 - `@RequestBody`: 允许request的参数在request体中，而不是在直接连接在地址后面。（放在参数前）
 
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
 **Global Exception Handler Annotations:**
 - `@ExceptionHandler`:（Exception.class）：用在方法上面表示遇到这个异常就执行以下方法, 用于全局处理控制器里的异常.
 - `@InitBinder`: 用来设置WebDataBinder，WebDataBinder用来自动绑定前台请求参数到Model中。
 - `@ModelAttribute`: 本来的作用是绑定键值对到Model里，在@ControllerAdvice中是让全局的@RequestMapping都能获得在此处设置的键值对。
 
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+## Spring Data
+
+### annotations:
+**Annotations Used by Entity (JPA/Hibernate):**
+
+1. `@Repository`: 表示为数据层
+
+2.  `@Entity`: 
+    - Applied to a Java class to mark it as a JPA entity, representing a table in the database.
+    - 表示数据库的一个table, 表明这是一个实体类。一般用于jpa这两个注解一块使用，但是如果表名和实体类名相同的话，@Table可以省略
+3. `@Table`:
+    - specify the details of the database table to which the entity is mapped
+    - table的details, specifies the table name associated with an entity class.
+4.  `@Id` :
+    - specify the primary key of an entity. It marks a field as the unique identifier of the entity.
+    - primary key in a table 表示该属性为主键。
+
+5. `@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = “repair_seq”)` :
+    - specify how the primary key value is generated. It is often used in conjunction with @Id. Options include AUTO, IDENTITY, SEQUENCE, and TABLE.
+    - 和`@Id`一起使用，注明primary key是怎么生成的, name为sequence的名称，以便使用，sequenceName为数据库的sequence名称，两个名称可以一致。
+
+
+6. `@Column` database column
+   - specify the mapping of a field to a database column. It allows you to customize column properties like name, length, and whether it's nullable.
+   - 
+
+7. `@OneToOne`：对应hibernate配置文件中的一对一。
+
+8. `@OneToMany` and `@ManyToOne`：
+    - specify one-to-many and many-to-one relationships between entities.
+    - 对应hibernate配置文件中的一对多和多对一.
+
+9. `@ManyToMany`: 
+    - specify a many-to-many relationship between entities.
+    - 对应hibernate配置文件中的多对多。
+
+10. `@Transient`：
+    - mark a field as not persistable in the database. It's used for non-persistent fields.
+    - 表示属性并非数据库表字段的映射,ORM框架将忽略该属性
+
+11. `@JsonIgnore`：作用是json序列化时将Java bean中的一些属性忽略掉,序列化和反序列化都受影响。
+
+12. `@JoinColumn（name=”loginId”）`:
+    - specify the column that is used for joining in a relationship.
+    - 一对一：本表中指向另一个表的外键。一对多：另一个表指向本表的外键。
+
+13. `@JoinTable`:
+    - define the join table for a many-to-many relationship
+    - 
+
+14. `@NoRepositoryBean`:
+    -  父类的repository 
+    - 一般用作父类的repository，有这个注解，spring不会去实例化该repository。有时我们想要创建存储库接口，其唯一目标是为子存储库提供通用方法。也就是说，使用了该注解的接口不会被单独创建实例，只会作为其他接口的父接口而被使用。这个公共接口就需要这个注解@NoRepositoryBean来标识。
+
+```java
+// 如果我们想在所有存储库中使用Optional findById（ID id） 方法，我们可以创建一个基本存储库：
+@NoRepositoryBean
+interface MyUtilityRepository<T, ID extends Serializable> extends CrudRepository<T, ID> {
+       Optional<T> findById(ID id);
+}
+// 此注解不会影响子接口; 因此Spring将为以下子存储库接口创建一个bean：
+@Repository
+interface PersonRepository extends MyUtilityRepository<Person, Long> {}
+```
+
+```java
+import javax.persistence.*;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.repository.NoRepositoryBean;
+
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "username", length = 50, nullable = false)
+    private String username;
+
+    @Column(name = "email", length = 100, nullable = false)
+    private String email;
+
+    @Transient
+    private String confirmEmail;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserProfile userProfile;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+        name = "user_roles",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles;
+
+    // Getters and setters, other methods
+}
+```
+```java
+@Entity
+@Table(name = "user_profiles")
+public class UserProfile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "full_name", length = 100)
+    private String fullName;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    // Getters and setters, other methods
+}
+```
+
+```java
+@Entity
+@Table(name = "orders")
+public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "order_date", nullable = false)
+    private LocalDateTime orderDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToMany
+    @JoinTable(
+        name = "order_products",
+        joinColumns = @JoinColumn(name = "order_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products;
+
+    // Getters and setters, other methods
+}
+```
+```java
+@Entity
+@Table(name = "products")
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name", length = 100, nullable = false)
+    private String name;
+
+    @Column(name = "price", nullable = false)
+    private double price;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Order> orders;
+
+    // Getters and setters, other methods
+}
+```
+```java
+@Entity
+@Table(name = "roles")
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "role_name", length = 50, nullable = false)
+    private String roleName;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
+
+    // Getters and setters, other methods
+}
+```
+```java
+@NoRepositoryBean
+public interface MyBaseRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
+    // Custom repository methods can be defined here
+}
+```
+
+
+**Annotations Used by JPQL:**
+1.  `@NamedQuery` : Used to define a named query at the entity level for JPA entities.
+2.  `@Query` : 
+    - Allows you to define custom queries for a Spring Data repository using JPQL (Java Persistence Query Language) or native SQL.
+    - 可以为存储库方法提供JPQL实现
+```java
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
+@NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "role")
+    private String role;
+
+    // Getters and setters
+
+    // Constructors
+
+    // Other fields and methods
+}
+```
+```java
+/*
+can use the named query "User.findByRole" to retrieve users by their roles using the EntityManager. Here's an example of how you might use this named query in your Java code:
+
+In this example, the named query "User.findByRole" is defined to select users based on their role. The @NamedQuery annotation associates this query with the User entity. The createNamedQuery method in the repository is used to execute the query and retrieve the list of users with the specified role.
+*/
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+
+public class UserRepository {
+
+    private EntityManager entityManager;
+
+    public UserRepository() {
+        entityManager = Persistence.createEntityManagerFactory("YourPersistenceUnit").createEntityManager();
+    }
+
+    public List<User> findUsersByRole(String role) {
+        return entityManager.createNamedQuery("User.findByRole", User.class)
+                .setParameter("role", role)
+                .getResultList();
+    }
+
+    // Other repository methods
+}
+```
+
+**Annotations Used by MongoDB:**
+1. `@Document`: Marks a class as a document for Spring Data MongoDB.
+2. `@Field`: Customizes the mapping of a field in a Spring Data MongoDB document.
+
+**Annotations Used by Redis:**
+1. `@NoSqlHash`: Specifies the name of the hash key for a Spring Data Redis entity.
+
+**Annotations Used by Transaction:**
+1. `@Transactional`: 配置方法的事务行为，保持原子性
+2. `@EnableTransactionManagement` 开启注解式事务的支持
+
+```java
+/*
+Let's assume you have a Spring application with a service class that performs database operations. You want to use Spring's transaction management annotations to ensure that these operations are executed within a transaction.
+
+In this example:
+
+The @Service annotation marks the UserService class as a Spring service component.
+The @Transactional annotation is applied to the createUser method. This annotation indicates that the method should be executed within a transaction. If the method completes without errors, the transaction is committed, and changes are persisted to the database. If an exception is thrown, the transaction is rolled back, ensuring data consistency.
+The UserRepository is assumed to be a Spring Data JPA repository or a similar data access component for managing user data.
+By using @Transactional, you delegate the management of transactions to Spring, which will automatically begin, commit, or roll back transactions based on the method's execution. This ensures that the createUser method either saves the user and commits the transaction or rolls back the transaction if any errors occur during the process.
+*/
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Transactional
+    public User createUser(String username, String email) {
+        User user = new User(username, email);
+        return userRepository.save(user);
+    }
+}
+```
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
 ## Spring Security:
 
 ### annotations:
@@ -213,91 +496,13 @@ helper: https://zhuanlan.zhihu.com/p/137507309
 - `@EnableConfigurationProperties` 开启对@ConfigurationProperties注解配置Bean的支持
 - `@EnableJpaRepositories` 开启对SpringData JPA Repository的支持
 - `@EnableTransactionManagement` 开启注解式事务的支持
-- `@EnableTransactionManagement` 开启注解式事务的支持
 - `@EnableCaching` 开启注解式的缓存支持
 
 
 
 
-**Annotations Used by Entity (JPA/Hibernate):**
 
-1. `@Entity` 表示数据库的一个table
-   - Usage: Applied to a Java class to mark it as a JPA entity, representing a table in the database.
-   - Explanation: This annotation specifies that the class is an entity and should be mapped to a database table.
 
-2. `@Table` table的details
-   - Usage: Applied to an entity class to specify the details of the database table it maps to.
-   - Explanation: Allows you to customize table name, schema, indexes, etc.
-
-```
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "student")
-public class Student {
-
-    @Id
-    private Long id;
-    private String firstName;
-    private String lastName;
-    
-    // Getters and setters
-}
-```
-
-3. `@Id` primary key in a table
-   - Usage: Applied to a field in an entity class to denote it as the primary key of the table.
-   - Explanation: Marks a field as the primary identifier for database operations.
-
-4. `@GeneratedValue` 和`@Id`一起使用，注明primary key是怎么生成的
-   - Usage: Used in conjunction with `@Id` to specify how primary key values are generated.
-   - Explanation: Options include AUTO, IDENTITY, SEQUENCE, and TABLE.
-
-```
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private double price;
-    
-    // Getters and setters
-}
-```
-
-5. `@Column` database column
-   - Usage: Applied to a field to specify the mapping details of that field to a database column.
-   - Explanation: Allows customization of column name, type, constraints, and more.
-
-```
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
-public class Book {
-
-    @Id
-    private Long id;
-    
-    @Column(name = "book_title", length = 100)
-    private String title;
-    
-    @Column(nullable = false)
-    private String author;
-    
-    // Getters and setters
-}
-```
 
 **Annotations Used by Controller (Spring MVC):**
 
