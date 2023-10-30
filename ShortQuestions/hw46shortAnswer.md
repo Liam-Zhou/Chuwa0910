@@ -26,3 +26,50 @@ Around advice: perform custom behavior both before and after method invocation. 
 Spring batch is a framework used for processing large volumes of data.
 We can use it for Data migration, like from one system to another, possibly transforming or processing it along the way. 
 Or Data Processing, file processing, data backup.
+
+### 11. How does spring batch work?
+Spring Batch consists of several parts;
+job: Batch process defined by to complete unit of work.
+Step: independent part of a job focuses on a specific task(reading data, processing data, writing data.) 
+ItemReader, ItemProcessor, ItemWriter: Provides data to be processed one at a time, provides business logic of each item, and writes the processed data to a specified destination.
+And finally we have a JobRepository to store the persisting job status, statistics and step data.
+
+### 12. How to schedule a spring batch job.
+Use the @EnableScheduling annotations to enable scheduleing. Then, create a scheduled task using @Scheduled.
+You will use the cron expression to schedule the duration of the batch. This will trigger the execution of the Spring Batch job. And then you start running the applications.
+
+### 13. cron expression
+cron expression is used to schedule time-based job. It's a 6 field separated by space and contains information about 'seconds', 'minutes', 'hours', 'date'. For example, "0 0 8 ? * MON-FRI" means evey weekday at 8:00.
+
+### 14. Spring task
+Spring task provides a way to execute tasks(pieces of code) at specific intervals or at scheduled times. 
+It's often used in running background jobs that execute periodically, like database cleanup, sending emails, generating reports.
+
+### 15. How to use spring task.
+examples: 
+fixed rate scheduling: 
+```java
+@EnableScheduling
+@Component
+public class MyScheduledTasks {
+  
+    @Scheduled(fixedRate = 5000) // 5 seconds
+    public void runTask() {
+        System.out.println("Task is running at: " + new Date());
+    }
+}
+
+```
+Cron Expression Scheduling:
+```java
+@EnableScheduling
+@Component
+public class MyScheduledTasks {
+
+    @Scheduled(cron = "0 0 * * * ?") // every hour
+    public void runTask() {
+        System.out.println("Task is running at: " + new Date());
+    }
+}
+
+```
