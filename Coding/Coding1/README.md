@@ -6,7 +6,7 @@ This implementation we will be dividing in 3 parts:
 ### Simulate the Parking Lot design:
 
 We will be simulating the scenario — A vehicle to be parked can be either a two-wheeler or a four-wheeler.
-![Simulate the Parking Lot design](images/hw2/Simulate%20the%20Parking%20Lot%20design.png)
+![Simulate the Parking Lot design]()
 
 When the vehicle is to be parked, the owner will be provided a ticket. If there are no parking slots available, then a parking full exception will be thrown. When the vehicle is to be unparked, the owner must provide the ticket.
 
