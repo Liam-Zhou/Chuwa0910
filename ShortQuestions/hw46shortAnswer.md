@@ -73,3 +73,25 @@ public class MyScheduledTasks {
 }
 
 ```
+
+### 16 filters:
+Filters are standard part of Java servlets to handle responds to http requests. It's used in cross-cutting concerns such as logging, security, and input validation. Multiple filters can be trained together, each of them can either pass the request and response to the next filter. 
+Example: 
+```java
+@Component
+public class MyFilter implements Filter {
+  
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        // Pre-processing logic
+        System.out.println("Before processing the request");
+
+        chain.doFilter(request, response);
+
+        // Post-processing logic
+        System.out.println("After processing the request");
+    }
+}
+
+```
