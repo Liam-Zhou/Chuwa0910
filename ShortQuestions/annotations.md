@@ -166,3 +166,13 @@ returned result as well.
 - Run around the method execution, combine all three advices above.
 
 `Object result = joinPoint.proceed()` -- to invoke proxy methods
+
+### Aonntations Used by Spring Tasks(Cron)
+@EnableScheduling
+@Schedule
+```java
+@Schedule(initialDelay = 1000, fixedRate = 1000)
+
+@Schedule(cron = "* * * * * *")
+```
+
