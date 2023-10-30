@@ -478,6 +478,158 @@ public class UserService {
    }
    ```
 
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+## Spring AOP:
+
+### annotations:
+1. `@Aspect`：
+    - indicate this is a aop class to define all aop self methods
+    - 表明时一个aop class
+    - 切面是pointcut和advice的集合，一般单独作为一个类。Pointcut和Advice共同定义了关于切面的全部内容，它是什么时候，在何时和何处完成功能。
+
+
+2. `@PointCut`：
+    - expression to find all main application methods to insert advice - 集合/群体
+    - 目标对象中实际被增强的方法。这是一组一个或多个切入点，在切点应该执行advice。
+
+3. `@Advice`：
+    - before/after/around/afterThrowing - When to execute aop methods when the application pointcut is found.
+    - 增强部分的代码逻辑
+
+4. `@Component` 
+    - This annotation mark the beans as Spring’s managed components
+
+![aop]()
+
+5. `@Before`: 
+    - Run before the method execution
+    - 在方法执行之前执行advice
+6. `@After`： 
+    - Run after the method returned a result
+    - 在方法执行之后执行advice（不管目标方法是否有异常。最终都会执行）
+7. `@Around`： 
+    - Run around the method execution, combine all three advices above
+    - 在方法执行的前后执行advice，目标方法异常时，环绕后方法不再执行
+
+8. `@After-returning`：
+    - Run after the method returned a result, intercept the returned result as well
+    - 在方法执行之后执行advice，目标方法异常时，不再执行
+    - returning = "result": When a method that is intercepted by the advice annotated with @AfterReturning returns a result, you can capture that result in a parameter named result.
+9. `@After-throwing`： 
+    - Run after the method throws an exception
+    - 在方法抛出异常后执行advice
+    - throwing = "exception": When a method that is intercepted by the advice annotated with @AfterThrowing throws an exception, you can capture that exception in a parameter named exception.
+
+`@Introduction`：
+    - 引用允许我们向现有的类添加新的方法或者属性
+
+`@Weaving`：
+    - 将advice和pointcut组合动态组合的过程
+    
+`@JointPoint`：
+    - 目标对象中可以被增强的方法
+
+
+### examples:
+1. **Create a Service Class**:
+
+```java
+public class MyService {
+    public void doSomething() {
+        System.out.println("Doing something...");
+    }
+
+    public void doSomethingElse() {
+        System.out.println("Doing something else...");
+        throw new RuntimeException("An error occurred.");
+    }
+}
+```
+
+2. **Create an Aspect Class**:
+
+```java
+import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class MyAspect {
+
+    // define a Pointcut named serviceMethods, which matches all methods in the MyService class.
+    @Pointcut("execution(* com.example.MyService.*(..))")    
+    public void serviceMethods() {}
+
+    // runs before the methods matched by the serviceMethods pointcut
+    @Before("serviceMethods()")
+    public void beforeServiceMethods() {
+        System.out.println("Before executing service methods.");
+    }
+
+    @After("serviceMethods()")
+    public void afterServiceMethods() {
+        System.out.println("After executing service methods.");
+    }
+
+    @Around("serviceMethods()")
+    public Object aroundServiceMethods(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("Before executing service methods with @Around.");
+        Object result = joinPoint.proceed(); // Proceed with the original method.
+        System.out.println("After executing service methods with @Around.");
+        return result;
+    }
+
+    @AfterReturning(pointcut = "serviceMethods()", returning = "result")
+    public void afterReturningServiceMethods(Object result) {
+        System.out.println("After returning from service methods with result: " + result);
+    }
+
+    @AfterThrowing(pointcut = "serviceMethods()", throwing = "exception")
+    public void afterThrowingServiceMethods(Exception exception) {
+        System.out.println("Exception occurred in service methods: " + exception.getMessage());
+    }
+}
+```
+Now, when you call methods in the `MyService` class, these aspect methods will be executed before and after the target methods.
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+## Spring Batch
+1. `@EnableBatchProcessing`: 支持所有所需spring batch特性。它还提供了设置批处理job的基本配置。
+2. `@EnableScheduling`: Make sure that scheduling is enabled in your Spring application
+3. `@Scheduled`:  
+    - @Scheduled(cron = "0 0 1 * * ?") 
+    - Ensure that the cron expression in the @Scheduled annotation matches your desired schedule. 
+
+```java
+@SpringBootApplication
+@EnableScheduling
+public class YourApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(YourApplication.class, args);
+    }
+}
+
+@Component
+public class BatchJobScheduler {
+    @Autowired
+    private JobLauncher jobLauncher;
+
+    @Autowired
+    private Job myBatchJob;
+
+    @Scheduled(cron = "0 0 1 * * ?") // Cron expression for daily execution at 1:00 AM
+    public void runBatchJob() throws Exception {
+        JobParameters jobParameters = new JobParametersBuilder()
+            .addString("jobID", String.valueOf(System.currentTimeMillis()))
+            .toJobParameters();
+
+        jobLauncher.run(myBatchJob, jobParameters);
+    }
+}
+```
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
 
 **General Purpose Annotations:**
 
@@ -497,6 +649,8 @@ public class UserService {
 - `@EnableJpaRepositories` 开启对SpringData JPA Repository的支持
 - `@EnableTransactionManagement` 开启注解式事务的支持
 - `@EnableCaching` 开启注解式的缓存支持
+
+
 
 
 
