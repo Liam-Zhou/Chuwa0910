@@ -6,10 +6,11 @@ public class Slot {
     private boolean isEmpty;
     private Vehicle parkVehicle;  //停入车的详细信息
 
+
     // constructor
-    public Slot(int slotNumber, boolean isEmpty) {
+    public Slot(int slotNumber) {  //因为ParkingLot的initializeParkingSlots方法用到的参数只有slotNumber，isEmpty默认为true
         this.slotNumber = slotNumber;
-        this.isEmpty = true;  // set the default is true
+        isEmpty = true;
     }
 
     //getter and setter

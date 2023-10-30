@@ -270,66 +270,10 @@ System Design — Parking Lot Design Interview Question Using Java：
 
 https://medium.com/geekculture/system-design-parking-lot-design-interview-question-using-java-3d1dea4f6a2
 
-This implementation we will be dividing in 3 parts: 
-- Discuss how we will be simulating the elevator design
-- Parking Design Code — Iteration-1 — Park Vehicle
-- Parking Design Code — Iteration-2 — Unpark Vehicle
+see the Coding file: coding1 and read README-parkingLot.md in it for more details
 
-**Simulate the Parking Lot design:**
-
-We will be simulating the scenario — A vehicle to be parked can be either a two-wheeler or a four-wheeler.
-![Simulate the Parking Lot design]()
-
-When the vehicle is to be parked, the owner will be provided a ticket. If there are no parking slots available, then a parking full exception will be thrown. When the vehicle is to be unparked, the owner must provide the ticket.
-
-The parking charges will depend on:
-- If it is a weekend or a weekday
-- If the vehicle is a two-wheeler or a four-wheeler
-
-**Parking Design Code — Iteration-1 — Park Vehicle:**
-
-**module: Classes**
-
-1. Enum VehicleSize — This enum will have two values TWO WHEELER and FOUR WHEELER.
-    ![Enum VehicleSize]()
-2. Class Vehicle — The vehicle to be parked.
-    - It has the vehicle number and the type of vehicle i.e. two-wheeler or four-wheeler.
-    ![Class Vehicle]()
-3. Class Slot — This class represents the space in the parking lot which will be used to park the vehicle. 
-
-    1. A Parking lot will have a finite number of parking slots. This number will be initialized. 
-
-    2. The parking lot will have two types of slots:
-        - Two Wheeler Parking Slots
-        - Four Wheeler Parking Slots
-    
-    3. Each slot will be having a unique slot number.
-    ![Class Slot]()
-
-    4. 2 methods:
-        - vacateSlot()
-        - occupySlot(Vehicle parkVehicle)
-
-4. Class Ticket — Once the vehicle has been parked, the owner will be provided with the Ticket. 
-    - It will have the slotNumber, vehicle number, time at which the vehicle has been parked and the vehicle size.
-    ![Class Ticket]()
-
-**exception**
-
-1. Class ParkingFullException - creating a custom exception named ParkingFullException.
-    ![exception]()
-
-**service: Interfaces**
-
-1. Interface Parking - an interface named Parking which will have park method
-    ![Interface Parking]()
-
-    implementing the above interface to write the logic for parking the vehicle and returning the ticket. This class will be a singleton class.
-    ![implementing the interface]()
-
-
-### Code:
-see the Coding file: coding1
+test park and unpark:
+![test park and unpark]()
 
 ## 16. What are Queue interface implementations and what are the differences and when to use what? 
    In Java, the Queue interface represents a collection of elements that <u>follows the First-In-First-Out (FIFO) order</u>. 
