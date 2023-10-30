@@ -84,18 +84,20 @@ public class ParkingLot implements Parking{
 
 
     @Override
-    public int unPark(Ticket ticket, ParkingChargeStrategy parkingCostStrategy) throws InvalidVehicleNumberException {
+    public int unPark(Ticket ticket, ParkingChargeStrategy parkingChargeStrategy) throws InvalidVehicleNumberException {
         int costByHours = 0;
         Slot slot;
-        try {
+        try { //根据ticket上的VehicleNumber获得停的slot的信息
             if (ticket.getVehicleSize().equals(VehicleSize.FOURWHEELER)) {
                 slot = getFourWheelerSlotByVehicleNumber(ticket.getVehicleNumber());
             } else {
                 slot = getTwoWheelerSlotByVehicleNumber(ticket.getVehicleNumber());
             }
-            slot.vacateSlot();
+            slot.vacateSlot();  //释放slot
+
+            //得到停车时间并且计算停车费
             int hours = getHoursParked(ticket.getDate(), new Date());
-            costByHours = parkingCostStrategy.getCharge(hours);
+            costByHours = parkingChargeStrategy.getCharge(hours);
             System.out.println(
                     "Vehicle with registration " + ticket.getVehicleNumber() + " at slot number " + slot.getSlotNumber()
                             + " was parked for " + hours + " hours and the total charge is " + costByHours);
