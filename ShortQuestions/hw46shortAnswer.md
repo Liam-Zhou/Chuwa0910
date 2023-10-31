@@ -95,3 +95,15 @@ public class MyFilter implements Filter {
 }
 
 ```
+
+### 17. Interceptors: 
+Used together with spring filter and servlet, the interceptor are the third in the handler execution chain. They can perform operations before and after a handler method is invoked. It can terminate the execution chain
+, and its used for for tasks like validation, authentication or authorization.
+
+### 18. Pre-handle and post-handle in the interceptor.
+PreHandle: called before the handler method, returning a boolean value. "true" means procedding the execution. "false" means the interceptor has dealt witht the response.
+
+PostHandle: called after the method is called and before the view is rendered, perform the same thing as PreHandle interceptor.
+
+### 19. Swagger
+Swagger is tools to design, build, test and document rest APIs. We can easily integrate swagger in springboot project. It automatically generates api documentations and has a ui to test and call the rest api. 
