@@ -49,7 +49,7 @@ section links: can link directly to a section in a rendered file by hovering ove
 relative links: is a link that is relative to the current file
 
 如果是同一个文件夹下面的话，就不用写全部的路径。
-
+  
 ![relative links](images/hw1/relative%20links.png)
 
 ## Images：

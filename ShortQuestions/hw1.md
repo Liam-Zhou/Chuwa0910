@@ -194,7 +194,6 @@ Here are some commonly used Maven plugins:
 
 see coding file : MavenProject
 
-
 ## 14.  Do Code Review: Go over the PRs in your repo, tried to leave some useful or useful comments in other 
 students' PR, please don't merge it.
 
