@@ -306,16 +306,18 @@ revert 之后就可以把你的更改推送到远程仓库与别人分享啦。(
 - 实际我们只要让 Git 复制解决问题的那一个提交记录就可以了。跟之前我们在“整理提交记录”中学到的一样，我们可以使用:(We need to tell git to copy only one of the commits over. This is just like the levels earlier on moving work around -- we can use the same commands:)`git rebase -i 或者git cherry-pick` 来达到目的
 
 ### 提交的技巧 #1
+接下来这种情况也是很常见的：你之前在 newImage 分支上进行了一次提交，然后又基于它创建了 caption 分支，然后又提交了一次。(Here's another situation that happens quite commonly. You have some changes (newImage) and another set of changes (caption) that are related, so they are stacked on top of each other in your repository (aka one after another).)
 
-## 提交的技巧 #2
+此时你想对某个以前的提交记录进行一些小小的调整。比如设计师想修改一下 newImage 中图片的分辨率，尽管那个提交记录并不是最新的了。(The tricky thing is that sometimes you need to make a small modification to an earlier commit. In this case, design wants us to change the dimensions of newImage slightly, even though that commit is way back in our history!!)
 
-## Git Tag
+- 我们可以通过下面的方法来克服困难：
 
-## Git Describe
+- 
+    - 先用 git rebase -i 将提交重新排序，然后把我们想要修改的提交记录挪到最前
+    - 然后用 git commit --amend 来进行一些小修改
+    - 接着再用 git rebase -i 来将他们调回原来的顺序
+    - 最后我们把 main 移到修改的最前端（用你自己喜欢的方法），就大功告成啦！
 
-## 多次 Rebase
+- 当然完成这个任务的方法不止上面提到的一种（我知道你在看 cherry-pick 啦），之后我们会多点关注这些技巧啦，但现在暂时只专注上面这种方法。 最后有必要说明一下目标状态中的那几个' —— 我们把这个提交移动了两次，每移动一次会产生一个 '；而 C2 上多出来的那个是我们在使用了 amend 参数提交时产生的，所以最终结果就是这样了。
 
-## 两个 parent 节点
-
-## 纠缠不清的分支
-
+- 也就是说，我在对比结果的时候只会对比提交树的结构，对于 ' 的数量上的不同，并不纳入对比范围内。只要你的 main 分支结构与目标结构相同，我就算你通过。
