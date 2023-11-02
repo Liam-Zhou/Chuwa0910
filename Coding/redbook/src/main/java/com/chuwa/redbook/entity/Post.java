@@ -5,12 +5,18 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
+/**
+ * @author b1go
+ * @date 8/22/22 6:30 PM
+ */
 @Entity
 @Table(
         name = "posts",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"title"})
+             @UniqueConstraint(columnNames = {"title"})
         }
 )
 public class Post {
@@ -27,6 +33,17 @@ public class Post {
 
     @Column(name = "content", nullable = false)
     private String content;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
 
     @CreationTimestamp
     private LocalDateTime createDateTime;
@@ -94,4 +111,15 @@ public class Post {
         this.updateDateTime = updateDateTime;
     }
 
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", content='" + content + '\'' +
+                ", createDateTime=" + createDateTime +
+                ", updateDateTime=" + updateDateTime +
+                '}';
+    }
 }
