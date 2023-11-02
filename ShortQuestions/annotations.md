@@ -197,17 +197,54 @@ It provides methods for querying, persisting, updating, and removing entities.
 
 **Bean**
 @Service
+
 @Controller
+
 @RestController
+
 @Component
+
 @Configuration
+
 @Repository
+
 @ControllerAdvice
+
 @Bean
 
 **Security**
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+
 @EnableWebSecurity
+
 @PreAuthorize("hasRole('ROLE_ADMIN')")
+
 @EnableRedisHttpSession
 
+**AOP**
+@Aspect: A standard class tagged with @Aspect annotation can be used to implement an aspect.
+
+@Before
+
+@After
+
+**Cron**
+@Scheduled: along with a cron expression to schedule the execution of a method at specific times or intervals. The cron expression in 
+SB is similar to the traditional cron syntax used in unix operating syste,. 
+
+      @Schdeule(cron = "0 0 12 * * ? ") This will run the method at 12:00PM EVERYDAY
+
+Rules: 
+   Seconds (0-59)
+
+   Minutes (0-59)
+
+   Hours (0-23)
+
+   Day of month (1-31)
+
+   Month (1-12 or JAN-DEC)
+
+   Day of week (0-7 or SUN-SAT, where both 0 and 7 represent Sunday)
+
+@Async
