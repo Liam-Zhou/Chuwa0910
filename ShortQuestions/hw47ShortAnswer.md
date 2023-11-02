@@ -37,3 +37,111 @@ verify(mockedList).size();
 assertEquals(10,size);
 ```
 Limitations: it cannot mock final classes or methods. it cannot mock private methods. We need to use PowerMockito to finish these tasks.
+
+### 8. @Mock and @InjectMocks
+@Mock is used to create a mock for a class. @InjectMocks is used to create the instance of the class under test and inject the mock objects. For example, if we have a Service and Controller dependency class: 
+```java
+public class MyService {
+    public String performAction() {
+        return "Action Performed";
+    }
+}
+
+public class MyController {
+    private MyService myService;
+
+    public MyController(MyService myService) {
+        this.myService = myService;
+    }
+
+    public String doAction() {
+        return myService.performAction();
+    }
+}
+```
+we do this: 
+```java
+@ExtendWith(MockitoExtension.class)
+public class MyControllerTest {
+
+    @Mock
+    MyService myService;
+
+    @InjectMocks
+    MyController myController;
+
+    @Test
+    public void testDoAction() {
+        when(myService.performAction()).thenReturn("Mocked Action Performed");
+
+        String result = myController.doAction();
+
+        assertEquals("Mocked Action Performed", result);
+    }
+}
+```
+
+### 9. Stubbing
+Stubbing is a technique in unit testing to replace an object with a "stub" that provides pre-determined responses.
+For example:
+```java
+    @Test
+    public void test() {
+        // Create a mock object
+        List<String> mockedList = mock(List.class);
+
+        // Stubbing: define behavior for specific method calls
+        when(mockedList.get(0)).thenReturn("first");
+        when(mockedList.get(1)).thenThrow(new RuntimeException());
+
+        // Using the stubbed methods
+        System.out.println(mockedList.get(0)); // Outputs: first
+        // mockedList.get(1); 
+
+        // Verifying interactions with the mock
+        verify(mockedList).get(0);
+    }
+```
+
+### 10. Mockito ArgumentMatchers
+Used to specify conditions for method arguments used in stubbing and verification. It set up general conditions, covering all the test cases.
+for example:  
+```java
+Mockito.When(aa.method(ArgumentMatchers.anyString()).thenReturn(
+new AA());
+```
+
+### 11. Hamcrest Matchers
+Also used for matching objects for the test class. It has a method 'assertThat' to assert variable expectations. for example:
+```java
+        String str = "Hello, World!";
+        int number = 5;
+
+        // Assertions using Hamcrest Matchers
+        assertThat(str, startsWith("Hello"));
+        assertThat(str, endsWith("World!"));
+        assertThat(str, containsString("World"));
+
+        assertThat(number, greaterThan(3));
+        assertThat(number, lessThan(10));
+
+        assertThat(number, is(5));
+        assertThat(str, is(not(emptyString())));
+```
+
+### 12. @spy vs @mock
+@Spy represents the real object, it's an actual instance of the class that can perform in its real behavior. like if you create a @Spy list, the list will have the actual size of the original list.
+but @Mock is like the fake object, it doesn't contain any real code behavior.
+
+### 13. Assertion
+in unit testing, assertion check if a condition is true. For true, the program continues to execute; if false, the error is thrown and showing that there is a problem in the code. There are many types of Assertions, including Equality for numbers, truth for boolean, nullitly for null value, etc.
+
+### 14. 
+Unit testing: testing individual components like functions.
+Integration testing: testing among multiple components, verifying the collaboration between each of them is correct.
+Regression Testing: test the program in different envirnoment.
+Performance testing: test the response time of the system under a specific workload.
+Stress testing: testing the stability and reliability of the system by simulating an environemnt with workloads or data volumes beyond normal levels.
+User Acceptance testing: test performed by the actual users to see if it meets user needs and expectations.
+
+
