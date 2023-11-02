@@ -176,3 +176,25 @@ returned result as well.
 @Schedule(cron = "* * * * * *")
 ```
 
+### Annotations used in Test
+
+@ExtendWith
+
+@Mock
+- Used to create a "fake" DAO object to mock the following processes.
+```java
+@Mock
+private OBJRepository objRepositoryMock;
+
+private OBJRepository objRepositoryMock = Mockito.mock(OBJRepository.class);
+```
+
+@Spy
+- Similar as @Mock, but no need to define all methods used in original codes.
+
+@InjectMocks
+- Inject mock and spy objects into original class.
+```java
+@InjectMocks
+private PostServiceImpl postService;
+```
