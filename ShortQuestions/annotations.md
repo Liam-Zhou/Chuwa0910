@@ -197,17 +197,71 @@ It provides methods for querying, persisting, updating, and removing entities.
 
 **Bean**
 @Service
+
 @Controller
+
 @RestController
+
 @Component
+
 @Configuration
+
 @Repository
+
 @ControllerAdvice
+
 @Bean
 
 **Security**
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+
 @EnableWebSecurity
+
 @PreAuthorize("hasRole('ROLE_ADMIN')")
+
 @EnableRedisHttpSession
 
+**AOP**
+@Aspect: A standard class tagged with @Aspect annotation can be used to implement an aspect.
+
+@Before
+
+@After
+
+**Cron**
+@Scheduled: along with a cron expression to schedule the execution of a method at specific times or intervals. The cron expression in 
+SB is similar to the traditional cron syntax used in unix operating syste,. 
+
+      @Schdeule(cron = "0 0 12 * * ? ") This will run the method at 12:00PM EVERYDAY
+
+Rules: 
+   Seconds (0-59)
+
+   Minutes (0-59)
+
+   Hours (0-23)
+
+   Day of month (1-31)
+
+   Month (1-12 or JAN-DEC)
+
+   Day of week (0-7 or SUN-SAT, where both 0 and 7 represent Sunday)
+
+@Async
+
+**Mockito**
+@Mock is used to create a mock object for a specific class or interface. It allows you to simulate the behavior of dependencies or collaborators in a unit test by providing mock implementations.
+
+@InjectMocks is used to inject the mock objects created with @Mock into the class under test. It simplifies the process of injecting mock dependencies into the target class, making it easier to perform unit testing with mocked dependencies.
+
+
+@Spy:
+1. The @Spy annotation is used to create a spy object. Spy objects are real instances of the class or interface being spied on.
+2. When you annotate a field with @Spy, it creates a real instance of the class and allows you to interact with its actual behavior. You can stub or verify method calls on a spy object, and it will execute the real method code.
+3. @Spy is typically used when you want to partially mock an object, retaining its real behavior while mocking specific methods.
+
+
+@Mock:
+1. The @Mock annotation is used to create a mock object. Mock objects are used to simulate the behavior of dependencies or collaborators in your unit tests.
+2. When you annotate a field with @Mock, it creates a new instance of the class or interface being mocked. The methods of this object are not executed; instead, they return default values (e.g., null for reference types, 0 for integers).
+3. @Mock is typically used when you want to isolate the class under test and don't want any actual behavior from the mocked object.
