@@ -2,9 +2,15 @@ package com.chuwa.redbook.payload;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 
 import java.util.Set;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class PostDTO {
     private Long id;
     @NotEmpty
@@ -18,8 +24,8 @@ public class PostDTO {
 
     private Set<CommentDTO> comments;
 
-    public PostDTO() {
-    }
+//    public PostDTO() {
+//    }
 
     public PostDTO(Long id, String title, String description, String content) {
         this.id = id;
