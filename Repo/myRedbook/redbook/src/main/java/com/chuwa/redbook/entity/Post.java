@@ -2,6 +2,7 @@ package com.chuwa.redbook.entity;
 
 
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,6 +11,11 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(
         name = "posts",
@@ -34,9 +40,9 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
 
-    public Post(){
-
-    }
+//    public Post(){
+//
+//    }
     public Post(Long id, String title, String description, String content, LocalDateTime createDateTime, LocalDateTime updateDateTime) {
         this.id = id;
         this.title = title;

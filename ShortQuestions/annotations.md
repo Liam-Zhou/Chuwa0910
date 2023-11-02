@@ -124,3 +124,14 @@
 -  `ResponseHeader` Represents a header that can be provided as part of the response.
 -  `SwaggerDefinition` Annotation that configures definition level metadata.
 -  `Tag` A definition level Tag object see https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#tag-objec
+
+## Testing
+- `@ExtendWith`: used to register and configure extensions for your JUnit tests, like `@ExtendWith(MockitoExtension.class)`.
+- `@Mock`: create mock objects for classes or interfaces.
+- `@Spy`: create mock objects for classes or interfaces.
+- `@InjectMocks`: inject mock objects (created with `@Mock`) into the class under test.
+- `@BeforeAll`: class level setup, will run only once before all testing cases.
+- `@BeforeEach`: setup for each testcase, will run before each testcases.
+- `@Test`: the body of a testcase.
+- `@AfterEach`: cleanup for each testcase, will run after each testcases.
+- `@AfterAll`: class level cleanup, will run only once after all testing cases.
