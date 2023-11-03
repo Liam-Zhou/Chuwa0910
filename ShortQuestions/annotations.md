@@ -126,3 +126,75 @@ public ResponseEntity<User> getUserById(@PathVariable Long id) {
 
 @ExceptionHandler
 - Used to customize own method to handle specific exceptions. 
+
+
+### Aonntations Used by Security
+
+@PreAuthorize("...")
+- Used to authorize which user can call APIs.
+
+@Value("")
+- Used to get varibles in properties
+```java
+@Value("${app.xxx.xxx}")
+private String xxx;
+```
+
+
+### Aonntations Used by AOP
+
+@Aspect
+- Used to clarify the class to define all aop self methods
+
+@Pointcut
+- Expression to find all main application methods to insert advice
+
+@Before 
+- Run before the method execution
+
+@After 
+- Run after the method returned a result
+
+@AfterReturning 
+- Run after the method returned a result, intercept the 
+returned result as well.
+
+@AfterThrowing 
+- Run after the method throws an exception
+
+@Around 
+- Run around the method execution, combine all three advices above.
+
+`Object result = joinPoint.proceed()` -- to invoke proxy methods
+
+### Aonntations Used by Spring Tasks(Cron)
+@EnableScheduling
+@Schedule
+```java
+@Schedule(initialDelay = 1000, fixedRate = 1000)
+
+@Schedule(cron = "* * * * * *")
+```
+
+### Annotations used in Test
+
+@ExtendWith
+
+@Mock
+- Used to create a "fake" DAO object to mock the following processes.
+```java
+@Mock
+private OBJRepository objRepositoryMock;
+
+private OBJRepository objRepositoryMock = Mockito.mock(OBJRepository.class);
+```
+
+@Spy
+- Similar as @Mock, but no need to define all methods used in original codes.
+
+@InjectMocks
+- Inject mock and spy objects into original class.
+```java
+@InjectMocks
+private PostServiceImpl postService;
+```
