@@ -106,3 +106,27 @@ Explanation: Allows you to use method-level security annotations across your app
 @RolesAllowed:
 > Usage: Applied at the class or method level to specify which roles are allowed to access them.<br>
 Explanation: Similar to @Secured, this annotation specifies role-based access control.<br>
+>
+@Test:
+> Usage: Applied to methods to denote that they are test methods.<br>
+Explanation: Marks a method as a test method to be executed by the testing framework. It indicates the method should be run as a test case.
+> 
+@Before:
+> Usage: Applied to methods to define preconditions for test methods.<br>
+Explanation: Denotes a method that will be executed before each test method, used for setup or initialization purposes.
+> 
+@After:
+> Usage: Applied to methods to define post-conditions for test methods.<br>
+Explanation: Denotes a method that will be executed after each test method, used for cleanup or teardown purposes.
+>
+@BeforeClass:
+> Usage: Applied to methods to define preconditions for all test methods in a class.<br>
+Explanation: Denotes a method that will be executed once before any of the test methods in the class.
+>
+@AfterClass:
+> Usage: Applied to methods to define post-conditions for all test methods in a class.<br>
+Explanation: Denotes a method that will be executed once after all of the test methods in the class.
+>
+@Ignore:
+> Usage: Applied to methods to temporarily exclude them from being executed as tests.<br>
+Explanation: Marks a test method as ignored, allowing it to be skipped during test execution.
