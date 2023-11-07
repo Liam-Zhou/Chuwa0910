@@ -1,6 +1,8 @@
 package com.chuwa.redbook.payload;
 
 
+import java.util.Objects;
+
 public class PostDto {
     private Long id;
     private String title;
@@ -57,5 +59,18 @@ public class PostDto {
                 ", description='" + description + '\'' +
                 ", content='" + content + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PostDto postDto = (PostDto) o;
+        return Objects.equals(id, postDto.id) && Objects.equals(title, postDto.title) && Objects.equals(description, postDto.description) && Objects.equals(content, postDto.content);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, content);
     }
 }
