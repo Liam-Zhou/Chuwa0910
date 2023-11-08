@@ -1,10 +1,10 @@
-package com.chuwa.redbookblog;
+package com.chuwa.EurekaServer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RedbookBlogApplicationTests {
+class EurekaServerApplicationTests {
 
 	@Test
 	void contextLoads() {
