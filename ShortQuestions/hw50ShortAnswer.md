@@ -18,3 +18,13 @@ Dynamic Management of services: Microservices can be frequently relocated to dif
 Client-Side vs. Server-Side Discovery: Client-Side: responsible for determing the location of the service instances and load balancing the requets.
 Server-Side Discovery: Central server responsible for tracking the service instances and directing client requests to available instances. 
 Registry-Based Discovery: Service registries used as database of services, instances, and their locations, registering themselves with a registry on startup and deregister on shutdown. For example, Eureka.
+
+### 7. Kafka
+Kafka is a design pattern based on publish/subscribe model to provide high-throughput, low-latency platform for handling real-time data feeds. Here are some of its core components: 
+Producer: publish messages to Kafka topics.
+Topic: Category or feed name messages are published. Kafka stores and categorizes messages using topics.
+Consumer: subscribe to topics and proccess the feed of published messages.
+Broker: Clusteres consist of one or more servers, each of which is called a broker. Responsible for maintaining the published data. 
+Partition: topics split into partitions to allow for data to be spread across multiple brokers for scalability. Partition could be placed on separate machine to allow multiple consumers to read from a topic in parallel.
+Offset: unique identifier of messages within a partition to denotes the position of a consumer.
+Zookeeper: For managing and coordinating Kafka brokers. Used to notify the presence of any new broker. Notify producers/consumers about the new broker.
