@@ -17,6 +17,8 @@
 13. `@Inject`: used for dependency injection in Java applications.
 14. `@Primary`: assign a primary class that should be injected of the same type.
 15. `@Qualifier`: specify which bean should be injected when there are multiple candidate beans of the same type.
+16. `@EnableSchduling`: enable task schedule
+17. `@Scheduled`: schedule a task
 
 ## used by Entity
 
@@ -91,3 +93,45 @@
 ## used by security
 1. `@PreAuthorize`: define which role can access this controller.
 2. `@EnableRedisHttpSession`: enable distributed and centralized session management using Redis.
+
+## AOP
+1. `@Aspect` - indicate this is an aop class
+2. `@Component` - This annotation mark the beans as Spring’s managed components
+3. `@Before` – Run before the method execution
+4. `@After` – Run after the method executed.
+5. `@AfterReturning` – Run after the method returned a result
+6. `@AfterThrowing` – Run after the method throws an exception
+7. `@Around` – Run around the method execution, combine `@Before` and `@After`.
+
+## Swagger
+- `Api` Marks a class as a Swagger resource.
+-   `ApiImplicitParam` Represents a single parameter in an API Operation.
+-   `ApiImplicitParams` A wrapper to allow a list of multiple `ApiImplicitParam` objects.
+-   `ApiModel` Provides additional information about Swagger models.
+-   `ApiModelProperty` Adds and manipulates data of a model property.
+-   `ApiOperation` Describes an operation or typically a HTTP method against a specific path.
+-   `ApiParam` Adds additional meta-data for operation parameters.
+-   `ApiResponse` Describes a possible response of an operation.
+-   `ApiResponses` A wrapper to allow a list of multiple `ApiResponse` objects
+-  `Authorization` Defines an authorization scheme to be used on a resource or an operation.
+-  `AuthorizationScope` Describes an OAuth2 authorization scope.
+-  `Contact` Contact metadata available within the info section of a Swagger definition - see https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#contactObject
+-  `Extension` An optionally named list of extension properties.
+-  `ExtensionProperty` A name/value property within a Swagger extension
+-  `ExternalDocs` Represents an external documentation description.
+-  `Info` High-level metadata for a Swagger definition - see https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject
+-  `License` License metadata available within the info section of a Swagger definition, see https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#licenseObject
+-  `ResponseHeader` Represents a header that can be provided as part of the response.
+-  `SwaggerDefinition` Annotation that configures definition level metadata.
+-  `Tag` A definition level Tag object see https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#tag-objec
+
+## Testing
+- `@ExtendWith`: used to register and configure extensions for your JUnit tests, like `@ExtendWith(MockitoExtension.class)`.
+- `@Mock`: create mock objects for classes or interfaces.
+- `@Spy`: create mock objects for classes or interfaces.
+- `@InjectMocks`: inject mock objects (created with `@Mock`) into the class under test.
+- `@BeforeAll`: class level setup, will run only once before all testing cases.
+- `@BeforeEach`: setup for each testcase, will run before each testcases.
+- `@Test`: the body of a testcase.
+- `@AfterEach`: cleanup for each testcase, will run after each testcases.
+- `@AfterAll`: class level cleanup, will run only once after all testing cases.
