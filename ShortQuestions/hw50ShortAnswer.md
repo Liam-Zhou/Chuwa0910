@@ -28,3 +28,23 @@ Broker: Clusteres consist of one or more servers, each of which is called a brok
 Partition: topics split into partitions to allow for data to be spread across multiple brokers for scalability. Partition could be placed on separate machine to allow multiple consumers to read from a topic in parallel.
 Offset: unique identifier of messages within a partition to denotes the position of a consumer.
 Zookeeper: For managing and coordinating Kafka brokers. Used to notify the presence of any new broker. Notify producers/consumers about the new broker.
+
+### 8. Partition in Kafka
+Data is assigned randomly to a partition unless a key is provided. Data is kept only for a limited time(default it one week). Each partition is ordered and Order is guaranteed only within a partition(not across partitions). Once the data is written to a parition, it can't be changed. Each message within a partition gets an incremental id, called offset.
+
+### 9. Zookeper in Kafka
+For managing and coordinating Kafka brokers. Used to notify the presence of any new broker. Notify producers/consumers about the new broker.
+
+### 10. No, Kafka can't work without Zookeeper
+That's because zookeeper is used to manage brokers which are fundenmental for Kafka.
+
+### 11. Leader/follower
+At anytime, only one broker can  be a leader for a given partition. Only that leader can receive and serve data for a partition. The other brokers will synchronize the data, so they are the follower, also known as in-sync replica.
+
+### 12. Replication
+In distributed system, it's very important that a failure of one server does not cuase the entire service discovery to fail. ISR(in-sync replica) are those who follow the leader and receives data from it.
+
+### 13. Consumer group
+Consumer group allows a group of machines to consume a stream of messages from one or multiple kafka topics. Each message is only delievered to one consumer in the group, kafka will parallelize processing by distributing the workload over a group of consumers.
+Each consumer is responsible for processing only one subset of the partition. Multiple consumer within the group would enabling Kafka to parallelize processing. 
+Kafka also tracks the offset of the messages, storing them in a special topic. This allows the consumer to know where they are in the stream and to resume consumption from where they left off if they fail.
