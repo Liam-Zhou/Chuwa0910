@@ -117,3 +117,18 @@ Used in Spring applications to enable and configure Spring Session to store sess
 
 ### @EnableGlobalMethodSecurity
 Used in a Spring Security configuration class to enable method-level security in a Spring application.
+
+### @EnableEurekaServer
+Typically used in a Spring Boot application to indicate that it is acting as a Eureka server. Eureka is a service registry and discovery service used in microservices architectures. By using this annotation, you configure your application to serve as a Eureka server, which other services can register with and discover.
+
+###  @RestTemplate
+Not a standard Spring annotation, but it is often used to create and configure instances of the RestTemplate class. RestTemplate is a class in Spring that simplifies making HTTP requests to other services. You would typically use @RestTemplate to configure a bean that you can then inject into your classes to make RESTful API calls.
+
+### @HystrixCommand
+Uused in conjunction with Netflix Hystrix, which is a library for adding resilience and fault tolerance to your microservices. When applied to a method, it makes that method a Hystrix command. Hystrix provides features like circuit breakers and fallback mechanisms to handle failures in microservices.
+
+### @LoadBalanced
+Used with the RestTemplate to indicate that you want to use a load-balanced version of it. When you have multiple instances of a service, and you want to distribute the load across them, you can use this annotation in conjunction with a service discovery mechanism (e.g., Eureka) to automatically load balance requests.
+
+### @EnableCircuitBreaker
+Used to enable the circuit breaker pattern in a Spring Boot application. It's a higher-level annotation that's often used when you're working with different circuit breaker implementations (e.g., Hystrix) in Spring applications. When combined with specific circuit breaker implementations (e.g., using @HystrixCommand), it helps manage the resilience of your microservices.
