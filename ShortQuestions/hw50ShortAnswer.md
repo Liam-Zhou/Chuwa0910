@@ -48,3 +48,30 @@ In distributed system, it's very important that a failure of one server does not
 Consumer group allows a group of machines to consume a stream of messages from one or multiple kafka topics. Each message is only delievered to one consumer in the group, kafka will parallelize processing by distributing the workload over a group of consumers.
 Each consumer is responsible for processing only one subset of the partition. Multiple consumer within the group would enabling Kafka to parallelize processing. 
 Kafka also tracks the offset of the messages, storing them in a special topic. This allows the consumer to know where they are in the stream and to resume consumption from where they left off if they fail.
+
+### 14. How to start Kafka service?
+1. install Kafka; Start the Kafka Environment; Run kafka with shell script. 2. Create a topic to store the events; write events into the topic; Read the evenets; Import/export data as streams of Events with Kafka connect; process events with kafka streams; terminate the kafka environment.
+
+### 15. Real world example of Apache kafka.
+课堂上1讲的电商就是个很好的例子。Kafka devides the order to three partitions, each partitions takes charge of it's own data stream processing. The zookeeper would coordinates the order of the orders and make sure the broker will process the customer who placed the order first.
+
+### 16. Partition key.
+The partition key in Kafka determines when a message is produced, which partition will it be sent to. A good ordering design of Partition key should be maintaining the good messaging order and load&banalcne.
+
+### 17. Purpose of Partitions in Kafka.
+1: Spreading data into groups of machine is helpful for parallel processing and enhance performance; Producers can write to multiple partitions simultaneously, and consumers can read from multiple partitions in parallel. It also enhance scalability because you can just add more partitions. 
+2: 保证安全：if one server fail, the other sever will back it up. 
+
+### 18. Difference between Rabbitmq and Kafka.
+
+### 19. Kafka Guarantees.
+Messages are appended to a topic-partition in the order they are sent.
+Consumers read messages in the order stored in a topic-partition.
+With a replication factor of N, producers and consumers can tolerate up to N-I brokers being down.
+As long as the number of partitions remains constant for a topic(no new partitions), the same key will alwasy go to the same partition.
+
+### 20. Unbalanced cluster.
+Unbalanced cluster is the uneven partition disbribution across brokers. To solve it, we can do these: 1. Regularly monitor the workload distribution across the brokers. 2. reasign partitions to brokers. 3. Consumer group management to evenly distribute the workloads.
+
+### 25. Offset.
+unique identifier of messages within a partition to denotes the position of a consumer.
