@@ -1,0 +1,14 @@
+type Query{
+    postById(id: ID): Post
+}
+
+type Mutation{   # "!" -->required
+    createPost(title:String!, description:String!, content:String!): Post
+}
+
+type Post{
+    id:ID
+    title: String
+    description: String
+    content: String
+}
