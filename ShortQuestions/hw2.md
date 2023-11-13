@@ -1,4 +1,4 @@
-# HW2- Ke Chen
+# HW2- Ke Chen - Java&oop
 
 ## 1. Write up Example code to demonstrate the three foundmental concepts of OOP.(reference Code Demo repo as example))
 1. Encapsulation;
@@ -425,4 +425,3 @@ In Java, the Queue interface represents a collection of elements that <u>follows
 
 5. BlockingQueue Implementations (e.g., LinkedBlockingQueue, ArrayBlockingQueue):
     - Use LinkedBlockingQueue or ArrayBlockingQueue when implementing producer-consumer scenarios in multi-threaded applications, and you need to control the capacity of the queue.
-s

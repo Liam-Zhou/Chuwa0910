@@ -37,6 +37,8 @@ Ke Chen3
 ## Supported color models:
 The background color is `#0969DAs` for light mode and `#000000` for dark mode.
 
+$\color{#0000FF}{find file in coding: Creadit Card} $
+
 ## Links:
 This is a github link from [Ke Chen](https://github.com/kechen11257)
 
@@ -49,7 +51,7 @@ section links: can link directly to a section in a rendered file by hovering ove
 relative links: is a link that is relative to the current file
 
 如果是同一个文件夹下面的话，就不用写全部的路径。
-  
+
 ![relative links](images/hw1/relative%20links.png)
 
 ## Images：
