@@ -1,235 +1,405 @@
-**Annotations Used by Entity (JPA/Hibernate):**
+### Annotations Used by Entity (JPA/Hibernate):
 
-1. `@Entity` 表示数据库的一个table
-   - Usage: Applied to a Java class to mark it as a JPA entity, representing a table in the database.
-   - Explanation: This annotation specifies that the class is an entity and should be mapped to a database table.
+- `@Repository`: 表示为数据层
 
-2. `@Table` table的details
-   - Usage: Applied to an entity class to specify the details of the database table it maps to.
-   - Explanation: Allows you to customize table name, schema, indexes, etc.
+- `@Entity`:
+    - Indicates that the class is a JPA entity, representing a table in the database.
+    - 表示数据库的一个table, 表明这是一个实体类。一般用于jpa这两个注解一块使用，但是如果表名和实体类名相同的话，@Table可以省略
+- `@Table`: 
+    - specify the details of the database table to which the entity is mapped
+    - table的details, specifies the table name associated with an entity class.
+- `@Id` :
+    - specify the primary key of an entity. It marks a field as the unique identifier of the entity.
+    - primary key in a table 表示该属性为主键。
 
-```
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+- `@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = “repair_seq”)` :
+    - specify how the primary key value is generated. It is often used in conjunction with @Id.
+    -  Options include:
+        - AUTO: 根据底层数据库的支持情况自动选择适合的主键生成策略。通常情况下，它会根据数据库自动增长（例如 MySQL 的 AUTO_INCREMENT）或序列（例如 Oracle 的序列）来选择合适的策略。
+        - IDENTITY: 依赖于底层数据库的自动增长机制（比如 MySQL 中的 AUTO_INCREMENT)
+        - SEQUENCE: 使用数据库中的序列来生成主键值（比如 Oracle 中的序列）。它从预定义的序列获取下一个值作为主键
+        - TABLE: 使用一个特定的数据库表来存储下一个可用的主键值。它通过在表中存储和维护键值对的方式生成主键。
+    - 和`@Id`一起使用，注明primary key是怎么生成的。
 
-@Entity
-@Table(name = "student")
-public class Student {
+- `@Column`
+    - Provides column-level mapping settings for an entity attribute.
+    - name: Specifies the name of the column in the database table.
+    - nullable: Indicates whether the column allows null values (false means it's not nullable).
+    - length: Defines the maximum length of the column.
 
-    @Id
-    private Long id;
-    private String firstName;
-    private String lastName;
-    
-    // Getters and setters
-}
-```
+- `@CreationTimeStamp`
+    - automatically populating it with the current timestamp when a new entity instance is persisted.
+    - 记录对象的创建时间戳，以便跟踪对象的创建日期和时间。
 
-3. `@Id` primary key in a table
-   - Usage: Applied to a field in an entity class to denote it as the primary key of the table.
-   - Explanation: Marks a field as the primary identifier for database operations.
+- `@UpdateTimestamp`
+    - 记录对象的最后一次更新时间戳，以便跟踪对象的最后修改日期和时间
 
-4. `@GeneratedValue` 和`@Id`一起使用，注明primary key是怎么生成的
-   - Usage: Used in conjunction with `@Id` to specify how primary key values are generated.
-   - Explanation: Options include AUTO, IDENTITY, SEQUENCE, and TABLE.
+- `@JsonProperty`
+    - 它表示在 JSON 序列化和反序列化过程中，该字段将使用指定的名称：name
+    - 如果是@jsonProperty("full name"),那么在 JSON 中将其表示为不同的名称： full_name
 
-```
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+    ```java
+    import javax.persistence.*;
+    import java.time.LocalDateTime;
 
-@Entity
-public class Product {
+    @Entity
+    @Table(name = "users")
+    public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private double price;
-    
-    // Getters and setters
-}
-```
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-5. `@Column` database column
-   - Usage: Applied to a field to specify the mapping details of that field to a database column.
-   - Explanation: Allows customization of column name, type, constraints, and more.
+        @jsonProperty("full name")
+        @Column(name = "full_name", nullable = false, length = 100)
+        private String fullName;
 
-```
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+        @Column(name = "email", unique = true, nullable = false, length = 100)
+        private String email;
 
-@Entity
-public class Book {
+        @CreationTimestamp
+        @Column(name = "created_at")
+        private LocalDateTime createdAt;
 
-    @Id
-    private Long id;
-    
-    @Column(name = "book_title", length = 100)
-    private String title;
-    
-    @Column(nullable = false)
-    private String author;
-    
-    // Getters and setters
-}
-```
+        @UpdateTimestamp
+        private LocalDateTime updateDateTime;
 
-**Annotations Used by Controller (Spring MVC):**
+        // Getters and setters
+        // Constructors, etc.
 
-1. `@Controller` Controller层
-   - Usage: Applied to a class to designate it as a Spring MVC controller.
-   - Explanation: Marks a class as a controller, allowing it to handle HTTP requests.
-
-2. `@RequestMapping` 
-   - Usage: Applied to a method to specify the URL pattern that triggers that method.
-   - Explanation: Maps a method to a specific HTTP request path.
-
-```
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-@Controller
-@RequestMapping("/example")
-public class ExampleController {
-
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String helloWorld() {
-        return "hello";
+        // Other entity properties, methods, etc.
     }
-}
-```
+    ```
 
-3. `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`
-   - Usage: Applied to methods to specify HTTP request methods (GET, POST, PUT, DELETE) for request mapping.
-   - Explanation: Helps define which HTTP methods should trigger specific controller methods.
+- `@OneToOne`：
+    - specify one-to-many and one-to-one relationships between entities.
+    - 描述实体之间的关系，其中一个实体对象可以与另一个实体对象建立一对一的关系。
 
-```
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+- `@OneToMany` and `@ManyToOne`：
+    - specify one-to-many and many-to-one relationships between entities.
+    - 描述实体之间的关系，其中一个实体对象可以与另一个实体对象建立一对多/多对一的关系。
+    - @ManyToOne(fetch = FetchType.LAZY)：指定加载关联实体的方式。
+    - 在加载实体时不会立即加载关联的实体数据，而是在访问关联属性时才会触发加载，这种方式也被称为延迟加载。
 
-@Controller
-public class HomeController {
+- `@ManyToMany`:
+    - specify a many-to-many relationship between entities.
+    - 描述实体之间的关系，其中一个实体对象可以与另一个实体对象建立多对多的关系。
 
-    @GetMapping("/")
-    public String home() {
-        return "index";
+- `@JoinColumn`:
+    - specify the column that is used for joining in a relationship.
+    - 充当了外键的角色，指示了实体之间的关联关系。
+    - 一对一：本表中指向另一个表的外键。一对多/多对一：另一个表指向本表的外键。
+
+- `@JoinTable`:
+    - define the join table for a many-to-many relationship
+
+
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+
+### Annotations Used by GraphQL:
+
+- `@QueryMapping`:  相当于restful api里面的@GetMapping
+
+- `@MutationMapping`:  相当于restful api里面的@PostMapping
+
+- `@Argument`:  相当于restful api里面的@PathVariable
+
+```java
+    @Controller
+    public class PostGraphQLController {
+        private final PostService postService;
+
+        public PostGraphQLController(PostService postService) {
+            this.postService = postService;
+        }
+
+        /*
+        @GetMapping("/{id}")
+        public ResponseEntity<PostDto> getPostById(@PathVariable(name = "id") long id){
+            return ResponseEntity.ok(postService.getPostById(id));
+        }
+        */
+        @QueryMapping
+        public PostDto getPostById(@Argument Long id){
+            return postService.getPostById(id);
+        }
+
+        /*
+        @PostMapping("/posts")
+        public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
+            PostDto postResponse = postService.createPost(postDto);
+            return new ResponseEntity<>(postResponse, HttpStatus.CREATED);
+        }
+        */
+        @MutationMapping
+        public PostDto createPost(@Argument String title, @Argument String description, @Argument String content){
+            PostDto postDto = new PostDto();
+
+            postDto.setTitle(title);
+            postDto.setDescription(description);
+            postDto.setContent(content);
+
+            return postService.createPost(postDto);
+        }
     }
-}
 ```
 
-4. `@RequestParam`
-   - Usage: Applied to method parameters to bind HTTP request parameters to method arguments.
-   - Explanation: Allows extracting data from the query string or form data.
 
-```
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
-public class SearchController {
 
-    @GetMapping("/search")
-    public String search(@RequestParam("query") String query) {
-        // Process the query parameter
-        return "search_results";
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+
+## Annotations Used by Controller:
+
+- `@Controller` Controller层
+    - mark a class as a Spring MVC controller. It works together with Spring's DispatcherServlet to handle incoming HTTP requests.
+    - 表明一个class是controller组件，处理http请求
+    ```java
+    import org.springframework.stereotype.Controller;
+    import org.springframework.web.bind.annotation.RequestMapping;
+
+    @Controller
+    public class MyController {
+        // Controller methods
     }
-}
-```
 
-5. `@PathVariable`  从URI抓取元素
-   - Usage: Applied to method parameters to extract values from the URI path.
-   - Explanation: Useful for capturing dynamic parts of the URL.
+- `@RestController`: 
+    - combines @Controller and @ResponseBody, 
+    - It's specifically used for creating RESTful web services where the response directly represents the data instead of a view.
+    - @Controller注解通常用于标识控制器类，它告诉Spring该类是一个控制器，可以处理HTTP请求并返回视图。而@ResponseBody注解用于将方法的返回值直接作为HTTP响应的主体（Body）发送给客户端。
+
+    ```java
+    import org.springframework.web.bind.annotation.RestController;
+    import org.springframework.web.bind.annotation.GetMapping;
+
+    @RestController
+    public class MyRestController {
+        @GetMapping("/hello")
+        public String hello() {
+            return "Hello, World!";
+        }
+    }
+    ```
+    
+- `@RequestMapping` :
+    - This annotation maps HTTP requests to handler methods within a controller class. 
+    - It can be used at the class level or at the method level to specify the request URL and HTTP methods that the method can handle.
+    - 映射HTTP请求的路径和HTTP请求方法到相应的处理方法。
+    - @RequestMapping(“/path”)表示该控制器处理所有“/path”的URL请求。RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。
+    - 该注解有六个属性：
+        - `params`:指定request中必须包含某些参数值是，才让该方法处理。
+        - `headers`:指定request中必须包含某些指定的header值，才能让该方法处理请求。
+        - `value`:指定请求的实际地址，指定的地址可以是URI Template 模式
+        - `method`:指定请求的method类型， GET、POST、PUT、DELETE等
+        - `consumes`:指定处理请求的提交内容类型（Content-Type），如application/json,text/html;
+        - `produces`:指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回
+
+    ```java
+    @Controller
+    @RequestMapping("/example")
+    public class ExampleController {
+
+        @RequestMapping(value = "/hello", method = RequestMethod.GET)
+        public String helloWorld() {
+            return "hello";
+        }
+    }
+    ```
+
+- `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`
+    - These annotations are specialized versions of @RequestMapping used for specific HTTP request methods (GET, POST, PUT, DELETE) respectively. They are shortcuts to specify the request method and URL.
+    - 分别对应HTTP的GET、POST、PUT和DELETE请求。
+
+    ```java
+    @RestController
+    @RequestMapping("/api")
+    public class MyAPIController {
+        @GetMapping("/data")
+        public String getData() {
+            return "Some data";
+        }
+    
+    @PostMapping("/data")
+    public String createData(@RequestBody String data) {
+        // Process data
+        return "Data created: " + data;
+    }
+    
+    // Other methods for PUT and DELETE
+    }
+    ```
+
+- `@RequestBody`: 
+    - It binds the HTTP request body to a method parameter in a controller method. 
+    - is used mainly for saving objects
+    - It's used to extract data from the request body, especially in POST and PUT requests.
+    - 接收HTTP请求的请求体作为方法参数
+
+    ```java
+    @PostMapping("/posts")
+    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
+        PostDto postResponse = postService.createPost(postDto);
+        // 将创建的帖子的 PostDto 对象封装在 ResponseEntity 中并返回。
+        // 同时，使用 HTTP 状态码 HttpStatus.CREATED 表示请求成功创建了一个资源。
+        return new ResponseEntity<PostDto>(postResponse, HttpStatus.CREATED);
+    }
+    ```
+
+- `@ResponseBody` : 
+    - It's used in conjunction with @Controller to indicate that the return value of a method should be directly written to the HTTP response body (used for RESTful APIs).
+    - 将方法返回的对象直接作为HTTP响应的主体内容。
+
+    ```java
+    @RestController
+    @RequestMapping("/example")
+    public class MyController {
+        @GetMapping("/hello")
+        @ResponseBody
+        public String hello() {
+            return "Hello, World!";
+        }
+    }
+    ```
+
+- `@PathVariable`:
+    - extract values from the URI (e.g., /users/{id}) and bind them to method parameters in the controller handler method.
+    - is used mainly for getting individual objects
+    - 将URL中的占位符绑定到处理方法的参数上。
+
+    ```java
+    @RestController
+    @RequestMapping("/users")
+    public class UserController {
+    @GetMapping("/{id}")
+        public String getUserById(@PathVariable Long id) {
+        // Retrieve user with the given ID
+            return "User ID: " + id;
+        }
+    }
+    ```
+
+- `@RequestParam`：
+    - Used to extract query parameters from the request URL and bind them to method parameters in the controller handler method.
+    - is used mainly for filtering purposes
+    - 将 HTTP 请求中的查询参数（Query Parameters）与控制器方法的参数进行绑定。
+
+    ```java
+    @GetMapping
+    public PostResponse getAllPosts(
+            @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) int pageSize,
+            @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIR, required = false) String sortDir
+    ){
+                return postService.getAllPost(pageNo,pageSize,sortBy,sortDir);
+    }
+    ```
+
+- `@RequestHeader`: 
+    - This annotation binds a method parameter to a header value in the HTTP request.
+    - 将HTTP请求头部信息绑定到处理方法的参数上。
+
+    ```java
+    @RestController
+    @RequestMapping("/headers")
+    public class HeaderController {
+        @GetMapping("/info")
+        public String getUserAgent(@RequestHeader("User-Agent") String userAgent) {
+            // Fetch and return user-agent header information
+            return "User-Agent: " + userAgent;
+        }
+    }
+    ```
+
+
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+### Annotations Used by Exception
+- `@ResponseStatus`:
+    - 用于指示当抛出此异常时返回的 HTTP 状态码
+    ```
+    @ResponseStatus(value = HttpStatus.NOT_FOUND) .  //抛出404异常
+        public class ResourceNotFoundException extends RuntimeException{...}
+    ```
+
+
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
 
 **General Purpose Annotations:**
 
-1. `@Autowired` 自动注入
+- `@Autowired` 自动注入
    - Usage: Used for automatic injection of dependencies.
    - Explanation: Automatically wires (injects) a bean into another bean.
-```
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class MyService {
+    ```java
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
 
-    private final MyRepository repository;
+    @Service
+    public class MyService {
 
-    @Autowired
-    public MyService(MyRepository repository) {
-        this.repository = repository;
-    }
+        private final MyRepository repository;
+
+        @Autowired
+        public MyService(MyRepository repository) {
+            this.repository = repository;
+        }
     
-    // Service methods
-}
-```
+        // Service methods
+    }
+    ```
 
-2. `@Service`, `@Repository`, `@Component` 标明是哪一层
+- `@Service`, `@Repository`, `@Component` 标明是哪一层
    - Usage: Applied to classes to designate them as Spring-managed components.
    - Explanation: Used for component scanning and automatic bean creation.
 
-3. `@Configuration` 设置层
+- `@Configuration` 设置层
    - Usage: Applied to a class to indicate that it contains bean configuration.
    - Explanation: Defines a class as a source of bean definitions in JavaConfig.
 
-4. `@Bean` 设置为bean（object）
+- `@Bean` 设置为bean（object）
    - Usage: Applied to a method within a `@Configuration` class to define a Spring bean.
    - Explanation: Specifies that a method produces a bean to be managed by the Spring container.
 
-```
-```
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-public class MyConfig {
-
-    @Bean
-    public MyBean myBean() {
-        return new MyBean();
-    }
-}
-```
-
-5. `@Value` 
+- `@Value` 
    - Usage: Applied to a field or method parameter to inject a value from properties or configuration files.
    - Explanation: Allows injection of external configuration values.
 
-```
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+    ```java
+    import org.springframework.beans.factory.annotation.Value;
+    import org.springframework.stereotype.Component;
 
-@Component
-public class MyComponent {
+    @Component
+    public class MyComponent {
 
-    @Value("${app.api.key}")
-    private String apiKey;
+        @Value("${app.api.key}")
+        private String apiKey;
     
-    // Getter and setter
-}
-```
+        // Getter and setter
+    }
+    ```
 
-6. `@Conditional`
+- `@Conditional`
    - Usage: Applied to a component or configuration class to conditionally enable or disable it.
    - Explanation: Provides conditional bean registration based on specified conditions.
    
-```
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
+    ```java
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Conditional;
+    import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class MyConfig {
+    @Configuration
+    public class MyConfig {
 
-    @Bean
-    @Conditional(MyCondition.class)
-    public MyBean myBean() {
-        return new MyBean();
+        @Bean
+        @Conditional(MyCondition.class)
+        public MyBean myBean() {
+            return new MyBean();
+        }
     }
-}
-```
+    ```

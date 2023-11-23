@@ -1,139 +1,63 @@
-# hw9 - Ke Chen
+# hw9 - Ke Chen - springboot-RUD
 
 ## 1. List all of the new annotations to your annotaitons.md and explain its role.
 
-see files: annotations.md
+find in files ShortQuestions: annotations.md
+
+
+
 
 ## 2.  how do you do the debug? 主要要答：log
-Debugging by checking logs is a common and effective method for identifying and resolving issues in your code. Here are the steps to debug using log messages:
 
-1. **Add Log Statements**:
-   - Insert log statements at relevant points in your code where you suspect there may be issues. Common logging libraries in Java include Log4j, Logback, and java.util.logging.
+**1. `Logging`:** Use logging frameworks(Log4j or Logback) to add informative log messages at different levels.
 
-   ```java
-   import org.slf4j.Logger;
-   import org.slf4j.LoggerFactory;
+**2. `IDEs`:** Utilize breakpoints, watches, and console output in IDEs for interactive debugging.
 
-   public class MyService {
-       private static final Logger logger = LoggerFactory.getLogger(MyService.class);
+**3. `Exception Handling`:** Implement try-catch blocks to handle exceptions and log details.
 
-       public void doSomething() {
-           logger.debug("Entering doSomething() method");
-           // Your code logic here
-           logger.debug("Exiting doSomething() method");
-       }
-   }
-   ```
+**4. `Unit/Integration Testing`:** Writing unit tests and integration test can help to identify the issues.
 
-2. **Configure Logging**:
-   - Make sure your logging framework is properly configured. You can configure log levels (e.g., debug, info, error), log file destinations, and log format as per your requirements.
+**4. `Debugging Tools`:** Explore command-line debugging tools like jdb and bundled JDK tools.
 
-3. **Reproduce the Issue**:
-   - Execute the part of your application where you suspect the issue is occurring, causing the log statements to be generated.
+**5. `Collaboration`:** Involve team members for code reviews and pair debugging.
 
-4. **Review Log Output**:
-   - Examine the log output, paying attention to the log levels you've used (e.g., debug, info, error).
-   - Look for any error messages, unexpected behavior, or other clues that might help you identify the issue.
 
-5. **Use Log Levels**:
-   - Different log levels serve different purposes. Use them wisely:
-     - `DEBUG`: For detailed debugging information that is generally not present in production.
-     - `INFO`: For general informational messages about the application's state.
-     - `WARN`: For non-fatal issues or unusual but recoverable situations.
-     - `ERROR`: For errors or exceptional situations that require attention.
-     - `TRACE` (if available): For even more detailed debugging information.
-
-6. **Add Contextual Information**:
-   - Include relevant contextual information in your log messages, such as variable values, method names, and timestamps. This can help you understand the flow of your application.
-
-   ```java
-   logger.debug("Processing user with ID {}: {}", userId, user.getName());
-   ```
-
-7. **Iterate and Refine**:
-   - If the initial log messages don't provide enough information to identify the issue, add more log statements and continue to reproduce the problem.
-   - Analyze the log output, and refine your understanding of the problem as you go along.
-
-8. **Disable or Remove Debug Logs**:
-   - Once you've identified and fixed the issue, remember to disable or remove unnecessary debug log statements to avoid cluttering your logs in production.
-
-Debugging by checking logs is a valuable technique because it provides a history of what happened in your application, making it easier to trace the sequence of events leading up to a problem. Effective log messages can save you significant time when troubleshooting issues, especially in production environments where traditional debugging methods may not be feasible.
 
 
 ## 3.  What is DTO, VO, Payload, DO, model?
-different acronyms and patterns are used to represent data objects. 
 
-1. **DTO (Data Transfer Object)**:
-   - DTOs are objects used to <u>transfer data between different layers or parts of an application</u>, such as between the client and server in a distributed system.  传输data
-   
-   - They typically <u>contain only the data</u> needed for a specific operation or request, omitting any behavior or logic. 只包含data，去掉任何的bebavior或者是logic
+- `DTO` is used for data transfer between different layers or systems.
+- `VO` is used to represent immutable values.
+- `Payload` is the actual data being sent.
+- `DO` or Entity represents domain-specific business objects.
+- `Model` is a broader term referring to various objects or structures used to manage data within an application.
 
-   - DTOs are often used to minimize the amount of data transferred over the network or to encapsulate data retrieved from a database before sending it to a client.
 
-2. **VO (Value Object)**:
-   - Value Objects are objects that represent a descriptive aspect of the domain(域的描述性方面) with no conceptual identity.
 
-   - They are immutable, meaning their value does not change once set.
-
-   - VOs are often used to model concepts that have no identity of their own, such as date ranges, colors, or points in a coordinate system.
-
-3. **Payload**:
-   - A payload generally refers to the data portion of a message or packet transmitted over a network or passed between software components.
-
-   - In the context of web services, APIs, or messaging systems, <u>the payload is the actual data being sent</u>, distinct from any metadata or headers. 传输DTO
-   
-   - Payloads can take various forms, such as JSON objects, XML documents, or binary data, depending on the communication protocol.
-   
-   - 在项目里面，payload文件夹下存储object的DTO
-
-4. **DO (Domain Object)**:
-   - Domain Objects represent the core business entities and concepts in an application's domain.
-   
-   - They encapsulate both data and behavior related to a specific domain entity.
-   
-   - DOs are typically designed to reflect the real-world entities and relationships within the application's problem domain.
-
-5. **Model**:
-   - "Model" is a broad term and can have different meanings depending on the context of its usage.
-   
-   - In the Model-View-Controller (MVC) architectural pattern, the "Model" represents the application's data and business logic.
-   
-   - In the context of data modeling and database design, a "Model" refers to the structure and schema of data, often represented using entity-relationship diagrams or database tables.
-   
-   - In machine learning and data science, a "Model" refers to a trained algorithm or mathematical representation used for predictions or data analysis.
 
 ## 4.  What is @JsonProperty("description_yyds") ?
-`@JsonProperty()` is a Java annotation used in the context of Java <u>Object-JSON mapping</u>. 
+`@JsonProperty()` is a Jackson annotation used in Java to <u>specify the mapping between JSON property names and Java object fields during serialization and deserialization.</u> 在jason序列化和反序列化的过程中用括号里面的value替换field的值。
 
-It's typically used in libraries like Jackson, which is commonly used for JSON serialization and deserialization in Java applications.
+```java
+    @Entity
+    @Table(name = "comments")
+    public class Comment {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private long id;
 
-Here's what it does:
+        //在json序列化和反序列化的过程中，把object field：name替换成json property name。
+        @JsonProperty("name")
+        private String name;
+        private String email;
+        private String body;
+    }
+```
 
-1. **Mapping JSON Property Names**: In Java, you often have classes that represent objects, and you want to serialize (convert to JSON) or deserialize (convert from JSON) these objects. 
 
-JSON property names might not always match the Java field or property names exactly. The `@JsonProperty` annotation allows you to specify the mapping between Java object properties and JSON object properties.
 
-2. **Example**:
-   
-   Let's say you have a Java class like this:
 
-   ```java
-   public class MyObject {
-       @JsonProperty("description_yyds")
-       private String description;
-       
-       // Getter and Setter methods for 'description'...
-   }
-   ```
-
-   In this example, the `@JsonProperty("description_yyds")` annotation is used to indicate that the Java field `description` should be serialized as `"description_yyds"` when converting an instance of `MyObject` to JSON and deserialized from `"description_yyds"` when converting JSON to a `MyObject` instance.
-
-3. **Usage**:
-
-   - Serialization: When you convert a `MyObject` instance to JSON, the resulting JSON will have a property named `"description_yyds"`.
-   - Deserialization: When you read JSON data with a property named `"description_yyds"` and try to convert it to a `MyObject` instance, the value from `"description_yyds"` in JSON will be mapped to the `description` field in the Java object.
-
-## 5.  do you know what is jackson?
+## 5. do you know what is jackson?
 ```
      <dependency> 
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -143,138 +67,81 @@ JSON property names might not always match the Java field or property names exac
     </dependency>
 ```
 
-Jackson is <u>a popular and widely used open-source Java library for JSON (JavaScript Object Notation) serialization and deserialization</u>. It provides a set of high-performance APIs to <u>work with JSON data in Java applications</u>. Jackson is commonly used in Java applications, including web services, RESTful APIs, and data exchange between different systems, to handle JSON data.
+Jackson is <u>a Java library for JSON (JavaScript Object Notation) serialization and deserialization</u>. 
 
-Key features and components of Jackson include:
+It <u>provides a set of high-performance APIs to work with JSON data in Java applications</u>. 
 
-1. **Streaming API (JsonParser and JsonGenerator)**: Jackson provides low-level streaming APIs that allow you to read and write JSON data efficiently. This is useful for processing large JSON documents or handling data in a memory-efficient way.
+Jackson is commonly used in Java applications, including web services, RESTful APIs, and data exchange between different systems, to handle JSON data.
 
-2. **Data Binding (ObjectMapper)**: Jackson's data binding API enables the conversion of JSON data into Java objects (deserialization) and Java objects into JSON data (serialization). The central class for this purpose is `ObjectMapper`.
 
-3. **Annotations**: Jackson supports a variety of annotations that allow you to customize how Java objects are serialized and deserialized. For example, you can use `@JsonProperty` (as mentioned in a previous response) to specify JSON property names.
 
-4. **Support for Polymorphism**: Jackson supports polymorphic types and can serialize and deserialize Java objects with inheritance hierarchies and complex type structures.
 
-5. **Tree Model (JsonNode)**: Jackson provides a tree model that allows you to work with JSON data as a tree structure, making it easy to navigate and manipulate JSON data.
+## 6.  What is spring-boot-stater? what dependecies in the below starter? do you know any starters?
 
-6. **Support for Custom Serialization/Deserialization**: You can implement custom serializers and deserializers to handle complex or custom data transformations during JSON conversion.
-
-7. **Support for Date/Time Handling**: Jackson includes support for handling date and time formats, making it easier to work with date and time data in JSON.
-
-8. **Modularity**: Jackson is highly modular, allowing you to include only the components you need in your project, which helps keep the library lightweight.
-
-9. **Wide Adoption**: Jackson is used in many Java frameworks and libraries for handling JSON data, making it a de facto standard in the Java ecosystem.
-
-## 6.  What is spring-boot-stater? 
-    a. what dependecies in the below starter? do you know any starters?
 ```
     <dependency>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-
-        web</artifactId>
+        <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 ```
 
-`spring-boot-starter` is not a specific starter itself but rather <u>a naming convention used for various Spring Boot starters(用于各种spring-boot启动程序的命名约定)</u>. 
+**What is spring-boot-stater?**
 
-In the context of Spring Framework and Spring Boot, a "starter" is a pre-configured set of dependencies that simplifies the process of adding specific functionality or features to your Spring Boot application. “start”是一组预先配置的依赖项，它简化了向Spring Boot应用程序添加特定功能或特性的过程。
+spring-boot-starter is not a specific starter itself but rather <u>a naming convention used for various Spring Boot starters(用于各种spring-boot启动程序的命名约定)</u>. 
 
-These starters are bundled as Maven or Gradle dependencies and contain the necessary libraries, configuration files, and boilerplate code to quickly get you started with a particular aspect of your application. 
+spring-boot-starter <u>simplifies the inclusion of common dependencies by providing pre-configured sets of libraries tailored for specific functionalities in Spring Boot applications.</u>
 
-Spring Boot provides a variety of starters for different purposes, and each starter has a name that reflects its purpose or functionality. Some common examples of Spring Boot starters include:
+**what dependecies in the below starter?**
 
-1. **spring-boot-starter-web**: This starter includes everything you need <u>to build a web application</u> using Spring Boot. It includes Spring MVC, embedded Tomcat, and other dependencies for web development.
+The `spring-boot-starter-web` dependency is <u>a starter for building web applications with Spring Boot.</u> 
 
-2. **spring-boot-starter-data-jpa**: If you want to work with Java Persistence API (JPA) for <u>database access</u>, this starter provides the necessary dependencies for data access, including Hibernate as the default JPA implementation.
+It includes the necessary dependencies for setting up a basic web application using Spring MVC, including the embedded Tomcat server, Spring Web, and other components required for handling web-related tasks.
 
-3. **spring-boot-starter-security**: This starter is used for <u>adding security features to your application, including authentication and authorization</u>.
+**do you know any starters?**
 
-4. **spring-boot-starter-actuator**: It includes <u>monitoring and management features for your application, such as health checks, metrics, and more</u>.
+Some other starters provided by Spring Boot include:
 
-5. **spring-boot-starter-test**: This starter is used for <u>writing unit and integration tests</u> for your Spring Boot application. It includes testing libraries like JUnit and Spring Test.
-
-6. **spring-boot-starter-data-mongodb**: If you want to <u>work with MongoDB as your database</u>, this starter provides the necessary dependencies for MongoDB integration.
-
-7. **spring-boot-starter-mail**: This starter <u>simplifies the configuration of sending emails in your application</u>.
-
-8. **spring-boot-starter-amqp**: It includes dependencies for <u>working with Advanced Message Queuing Protocol (AMQP) using libraries like RabbitMQ</u>.
-
-When you include one of these starters as a dependency in your Spring Boot project, Spring Boot automatically configures the necessary components, beans, and settings to enable the corresponding functionality. This makes it easier to get started with specific features without having to manually configure everything from scratch.
-
-## 7 Do you know  @RequestMapping(value = "/users", method = RequestMethod.POST) ? could you list CRUD by this style?
-The `@RequestMapping` annotation in Spring (or Spring Boot) is used to <u>map HTTP requests to specific controller methods</u> in a Spring MVC application. It is commonly used for building RESTful APIs where you define the HTTP method and the URL path that the method should respond to. You can use this style to implement CRUD (Create, Read, Update, Delete) operations in your Spring application.
-
-Here's an example of how you can use `@RequestMapping` to implement CRUD operations:
-
-```java
-@Controller
-// `@RequestMapping("/users")` at the class level specifies that all methods within this controller will handle requests under the "/users" URL path.    
-@RequestMapping("/users")
-public class UserController {
+- `spring-boot-starter-data-jpa`: Starter for using Spring Data JPA with Hibernate for database access.
+- `spring-boot-starter-security`: Starter for securing your application with Spring Security.
+- `spring-boot-starter-test`: Starter for writing unit tests in Spring Boot applications.
+- `spring-boot-starter-thymeleaf`: Starter for using Thymeleaf as a template engine in web applications.
+- `spring-boot-starter-actuator`: Starter for using Spring Boot Actuator for monitoring and managing your application.
 
 
-    // Create (POST)
-    // `@RequestMapping(value = "", method = RequestMethod.POST)` maps the `createUser` method to handle POST requests to "/users". 
-    // It creates a new user.
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        // Logic to create a new user
-        // Typically involves saving the user to a database
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
-    }
 
-    // Read (GET by ID)
-    // `@RequestMapping(value = "/{userId}", method = RequestMethod.GET)` maps the `getUser` method to handle GET requests to "/users/{userId}". 
-    // It retrieves a user by ID.
+## 7 Do you know @RequestMapping(value = "/users", method = RequestMethod.POST) ? could you list CRUD by this style?
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public ResponseEntity<User> getUser(@PathVariable long userId) {
-        // Logic to retrieve a user by ID
-        // Typically involves querying the database
-        User user = userService.getUserById(userId);
-        if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+**Do you know  @RequestMapping(value = "/users", method = RequestMethod.POST) ?**
 
-    // Update (PUT)
-    // `@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)` maps the `updateUser` method to handle PUT requests to "/users/{userId}". 
-    // It updates a user by ID.
+the annotated method is responsible for <u>handling POST requests sent to the /users endpoint.</u>
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-    public ResponseEntity<User> updateUser(@PathVariable long userId, @RequestBody User updatedUser) {
-        // Logic to update a user by ID
-        // Typically involves updating the user in the database
-        User user = userService.updateUser(userId, updatedUser);
-        if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 
-    // Delete (DELETE)
-    // `@RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)` maps the `deleteUser` method to handle DELETE requests to "/users/{userId}". 
-    // It deletes a user by ID.
+映射HTTP请求的路径和HTTP请求方法到相应的处理方法。
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteUser(@PathVariable long userId) {
-        // Logic to delete a user by ID
-        // Typically involves deleting the user from the database
-        boolean deleted = userService.deleteUser(userId);
-        if (deleted) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-}
-```
+@RequestMapping(“/path”)表示该控制器处理所有“/path”的URL请求。RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。
+
+该注解有六个属性：
+- `params`:指定request中必须包含某些参数值是，才让该方法处理。
+- `headers`:指定request中必须包含某些指定的header值，才能让该方法处理请求。
+- `value`:指定请求的实际地址，指定的地址可以是URI Template 模式
+- `method`:指定请求的method类型， GET、POST、PUT、DELETE等
+- `consumes`:指定处理请求的提交内容类型（Content-Type），如application/json,text/html;
+- `produces`:指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回
+
+
+**could you list CRUD by this style?**
+
+- C: @PostMapping("/users")
+- R: @GetMapping("/users/{id}")
+- U: @UpdateMapping("/users/{id}")
+- D: @DeleteMapping("/users/{id}")
+
+
+
 
 ## 8.  What is ResponseEntity? why do we need it?
+
 ```
     new ResponseEntity<>(postResponse, HttpStatus.OK);
     new ResponseEntity<>(postResponse, 
@@ -282,146 +149,165 @@ public class UserController {
     ResponseEntity.ok(postService.getPostById(id));
 ```
 
-`ResponseEntity` is <u>a class</u> in the Spring Framework (and Spring Boot) that <u>represents an HTTP response to be sent back to the client </u>in a web application. <u>It encapsulates both the HTTP status code and the response body, allowing you to customize the HTTP response that your controller method sends back to the client</u>.
+**What is ResponseEntity?**
+ResponseEntity in Spring <u>represents an HTTP response.</u>
 
-Here's why you need `ResponseEntity` and its significance:
+**why do we need it?**
+<u>It allowing you to costomize the HTTP status code, headers, and body of the response returned from a controller method</u>.
 
-1. **Customizing the HTTP Status Code**: In a web application, the HTTP status code (e.g., 200 OK, 404 Not Found, 500 Internal Server Error) indicates the outcome of an HTTP request. With `ResponseEntity`, you can explicitly set the desired HTTP status code for your response. This is useful when you want to convey the success or failure of an operation to the client.
 
-2. **Customizing the Response Body**: In addition to setting the status code, `ResponseEntity` allows you to set the response body. The response body can be of any type, such as a Java object, a string, or binary data. You can provide the response body based on the outcome of your controller method.
 
-3. **Flexibility in Response Generation**: Using `ResponseEntity`, you have fine-grained control over the HTTP response. You can handle various scenarios, such as successful responses, error responses, or responses with different status codes, and build the appropriate `ResponseEntity` accordingly.
 
-4. **Response Headers**: `ResponseEntity` also allows you to set custom HTTP headers in the response, providing additional metadata to the client.
+## 9.  What is ResultSet in jdbc? and describe the flow how to get data using JDBC
 
-Here's an example of how `ResponseEntity` can be used:
+**What is ResultSet in jdbc?**
 
-```java
-@RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
-public ResponseEntity<User> getUser(@PathVariable long userId) {
-    User user = userService.getUserById(userId);
-    if (user != null) {
-        // Return a 200 OK response with the user as the response body
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    } else {
-        // Return a 404 Not Found response with no response body
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+In JDBC (Java Database Connectivity), a `ResultSet` is <u>an interface</u> that <u>represents the result set of a database query</u>. 
+
+It provides methods for retrieving and manipulating data retrieved from a relational database. 
+
+A `ResultSet` typically consists of rows and columns(包含rows和columns), where each row represents a record in the result set, and each column represents a field or attribute of that record.
+
+
+**describe the flow how to get data using JDBC**
+1. load driver
+2. establising a connection
+3. creating a prepared statement or query
+4. execute the query
+5. looping through the result set to get the objects
+6. close the connection
+
+```
+public Employee getEmployeeById(int id) throws Exception {
+        Employee employee = new Employee();
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try() {
+            // 1, load Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // 2， connect to Database;  （url, username, password）
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydatabase", "un", "pw");
+            // 3， define sql statement
+            String sql = "SELECT *  emp WHERE ID = " + id;
+            // 4, create a statement object
+            Statement statement = connection.createStatement();
+            // 5, use statement object to execute sql statement;
+            ResultSet resultSet = statement.executeQuery(sql); // the result is return to ResultSet
+            
+            while(rs.next()) {
+                // 6, get ResultSet's data to java object(employee), Retrieve Data from ResultSet
+                int id = employee.setId(rs.getInt("id"));
+                String name = employee.setName(rs.getString("name"));
+            }
+            return employee;
+        } catch (SQLException e) {
+            ...
+        }finally{
+            // 7, close conections and other resource.
+            rs.close();
+            stmt.close();
+            conn.close();
+        }
+        return null;
     }
 }
 ```
-In this example:
 
-- If the `getUser` method finds a user with the specified `userId`, it returns a `ResponseEntity` with a status code of 200 (OK) and the user object as the response body.
-- If no user is found, it returns a `ResponseEntity` with a status code of 404 (Not Found) and no response body.
+Spring JdbcTemplate and RowMapper simplify database operations:
+![JdbcTemplate](images/hw9/JdbcTemplate.png)
 
-## 9.  What is ResultSet in jdbc? and describe the flow how to get data using JDBC
-In JDBC (Java Database Connectivity), a `ResultSet` is <u>an interface</u> that <u>represents the result set of a database query</u>. 
+```
+/**
+ * GET/SELECT
+ */
+public List<Player> getAllPlayers() {
+    String sql = "SELECT * FROM PLAYER";
+    return jdbcTemplate.query(
+                    sql, 
+                    new BeanPropertyRowMapper<Player>(Player.class), 
+                );
+}
 
-<u>It provides methods for retrieving and manipulating data retrieved from a relational database</u>. 
+/**
+ * POST/Insert
+ */
+public Player getPlayerById(int id) {
+    String sql = "SELECT * FROM PLAYER WHERE ID = ?";
+    return jdbcTemplate.queryForObject(
+                        sql, 
+                        new BeanPropertyRowMapper<Player>(Player.class), 
+                        new Object[] {id}
+                    );
+}
 
-<u>A `ResultSet` typically consists of rows and columns(包含rows和columns)</u>, where each row represents a record in the result set, and each column represents a field or attribute of that record.
+/**
+ * POST/Insert
+ */
+public int insertPlayer(Player player){
+    String sql = "INSERT INTO PLAYER (ID, Name, Nationality,Birth_date, Titles) " + "VALUES (?, ?, ?, ?, ?)";
+    return jdbcTemplate.update( sql, new Object[] { 
+                                player.getId(), 
+                                player.getName(), 
+                                player.getNationality(), 
+                                new Timestamp(player.getBirthDate().getTime()), player.getTitles()  }
+                            );
+}
 
-Here's an overview of the flow of how to get data using JDBC:
+/**
+ * UPDATE
+ */
+public int updatePlayer(Player player){
+    String sql = "UPDATE PLAYER " + "SET Name = ?, Nationality = ?, Birth_date = ? , Titles = ? " + "WHERE ID = ?";
+    return jdbcTemplate.update( sql, new Object[] { 
+                                   player.getName(), 
+                                   player.getNationality(), 
+                                   new Timestamp(player.getBirthDate().getTime()), 
+                                   player.getTitles(), 
+                                   player.getId() }
+                              );
+}
 
-1. **Load JDBC Driver**:
-   - Before using JDBC, you need to load the JDBC driver specific to the database you're working with. The driver is typically loaded using the `Class.forName` method or by registering the driver with the `DriverManager` class.
+/**
+ * DELETE
+ */
+public int deletePlayerById(int id) {
+    String sql="DELETE FROM PLAYER WHERE ID = ?";
+    return jdbcTemplate.update(sql, new Object[] {id});
+}
 
-   ```java
-   Class.forName("com.mysql.cj.jdbc.Driver"); // Loading MySQL JDBC driver
-   ```
-
-2. **Establish a Database Connection**:
-   - Use the `DriverManager` to establish a connection to the database by providing the database URL, username, and password.
-
-   ```java
-   Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "username", "password");
-   ```
-
-3. **Create a SQL Statement**:
-   - Create an instance of `Statement` or `PreparedStatement` to execute SQL queries on the database.
-
-   ```java
-   Statement statement = connection.createStatement();
-   ```
-
-4. **Execute SQL Query**:
-   - Execute the SQL query using the `executeQuery` method of the `Statement` or `PreparedStatement` object.
-
-   ```java
-   ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
-   ```
-
-5. **Iterate Through the ResultSet**:
-   - Use methods of the `ResultSet` to retrieve data from the result set.
-   - Use methods like `next()` to move to the next row and `getXXX()` (e.g., `getInt()`, `getString()`) to retrieve column values.
-
-   ```java
-   while (resultSet.next()) {
-       int id = resultSet.getInt("id");
-       String name = resultSet.getString("name");
-       // Process and use the retrieved data
-   }
-   ```
-
-6. **Close Resources**:
-   - It's important to close the resources when you're done with them to release database connections and prevent resource leaks.
-
-   ```java
-   resultSet.close();
-   statement.close();
-   connection.close();
-   ```
-
-7. **Exception Handling**:
-   - Handle exceptions that may occur during database operations, such as SQLExceptions. Ensure proper error handling and resource cleanup in case of exceptions.
-
-```java
-try {
-    // JDBC code here
-} catch (SQLException e) {
-    // Handle exceptions
-} finally {
-    // Close resources in a finally block
+/**
+ * DDL
+ */
+public void createTournamentTable() {
+    String sql = "CREATE TABLE TOURNAMENT (ID INTEGER, NAME VARCHAR(50), LOCATION VARCHAR(50), PRIMARY KEY (ID))";
+    jdbcTemplate.execute(sql);
+    System.out.println("Table created");
 }
 ```
 
-8. **Cleanup**:
-   - Close the database resources (connections, statements, result sets) in a `finally` block to ensure they are properly closed, even if exceptions are thrown.
 
-The above steps outline the basic flow of using JDBC to connect to a database, execute a query, retrieve data from a `ResultSet`, and properly manage resources. Depending on your requirements, you may use `PreparedStatement` for parameterized queries, handle transactions, and perform other database operations as needed.
+
 
 ## 10. What is the ORM framework?
-ORM <u>stands for Object-Relational Mapping</u>. It is a programming technique and a framework that <u>enables developers to interact with relational databases using object-oriented programming languages like Java, Python, C#, and others</u>. ORM frameworks bridge the gap between the object-oriented world of application code and the relational world of databases by providing a way to map database tables and rows to objects and their relationships in code.
+ORM <u>stands for Object-Relational Mapping</u>. 
 
-Here are some key aspects of ORM frameworks:
+It is a programming technique and a framework that <u>enables developers to interact with relational databases using object-oriented programming languages like Java, Python, C#, and others</u>. 
 
-1. **Object-Relational Mapping**: ORM frameworks provide a way to define how database tables correspond to classes in your application. Each row in a table is mapped to an object, and each column in a table is mapped to an attribute or property of that object.
+It simplifies the interaction between the object-oriented and relational paradigms, enabling developers to work with objects rather than dealing directly with database tables and SQL queries.
 
-2. **Abstraction of SQL**: ORM frameworks abstract away the low-level SQL code required for database interactions. Developers can work with high-level object-oriented APIs instead of writing raw SQL queries.
+Popular ORM frameworks in Java: `Hibernate`, `Java Persistence API (JPA)`, EclipseLink.
 
-3. **CRUD Operations**: ORM frameworks typically support CRUD operations (Create, Read, Update, Delete) on objects, making it easier to perform database operations without writing SQL statements explicitly.
 
-4. **Relationships**: ORM frameworks support defining and managing relationships between objects/classes, including one-to-one, one-to-many, and many-to-many relationships. This simplifies working with complex data models.
 
-5. **Database Agnosticism**: Many ORM frameworks are database-agnostic, meaning they can work with different database systems (e.g., MySQL, PostgreSQL, Oracle) with minimal code changes.
-
-6. **Caching**: Some ORM frameworks provide caching mechanisms to improve performance by reducing the need for repeated database queries.
-
-7. **Validation**: ORM frameworks often include validation mechanisms to ensure that data stored in the database adheres to certain constraints defined in your application code.
-
-8. **Transaction Management**: ORM frameworks help manage database transactions, ensuring that changes to the database are either committed or rolled back in a consistent manner.
-
-Popular ORM frameworks in various programming languages include:
-
-- **Java**: Hibernate, Java Persistence API (JPA), EclipseLink.
-- **Python**: SQLAlchemy, Django ORM (built into the Django web framework).
-- **C#**: Entity Framework.
-- **Ruby**: ActiveRecord (used in Ruby on Rails).
-
-Benefits of using an ORM framework include increased developer productivity, reduced boilerplate code, improved code maintainability, and the ability to work with objects and relationships in a natural and intuitive way. However, there are also considerations such as performance and the learning curve associated with ORM frameworks, so choosing the right ORM for your project is important.
 
 ## 11. Learn how to use ObjectMapper by this example.
-a. https://github.com/TAIsRich/chuwa-eij-tutorial/blob/main/02-java-core/src/main/java/com/chuwa/exercise/oa/api/
+
+find in file coding: hw9-foodoutlet
+
+https://github.com/TAIsRich/chuwa-eij-tutorial/blob/main/02-java-core/src/main/java/com/chuwa/exercise/oa/api/
+
 ```
     FoodOutletJackson.java
     FoodOutlet foodOutlet = objectMapper.readValue(resBody, FoodOutlet.class);
@@ -429,28 +315,270 @@ a. https://github.com/TAIsRich/chuwa-eij-tutorial/blob/main/02-java-core/src/mai
     objectMapper.readTree() // learn how to use it?
 ```
 
+
 1. 题目描述在PDF文件，先阅读下面文章，再尝试自己写。
 2. 答案包含了java 8, java 11怎么做HTTP call。String 和Json的转换也有两个版本。
 3. 如果答案也看不懂，则先照抄一遍，能理解多少是多少。
 
-read and learn the IO: https://www.liaoxuefeng.com/wiki/1252599548343744/1255945227202752
+### 1. read and learn the IO: 
+https://www.liaoxuefeng.com/wiki/1252599548343744/1255945227202752
 
-read and learn the HTTP: https://www.liaoxuefeng.com/wiki/1252599548343744/1319099982413858
+**IO:**
 
-read and learn xml and Json: https://www.liaoxuefeng.com/wiki/1252599548343744/1255945389334784
+    IO是指Input/Output，即输入和输出。以内存为中心：
 
-read and has basic understanding of Gson. know what is serialization。 https://zetcode.com/java/gson/
+    Input指从外部读入数据到内存，例如，把文件从磁盘读取到内存，从网络读取数据到内存等等。
 
-### 题目：
+    Output指把数据从内存输出到外部，例如，把数据从内存写入到文件，把数据从内存输出到网络等等。
+
+**InputStream / OutputStream 输入字节流/输出字节流:**
+
+    字节流传输的最小数据单位是`byte`
+
+**Reader / Writer (输出)字符流/ (输入)字符流**
+
+    字符流传输的最小数据单位是`char`
+
+**同步和异步:**
+
+    同步IO是指，读写IO时代码必须等待数据返回后才继续执行后续代码，它的优点是代码编写简单，缺点是CPU执行效率低。
+
+    异步IO是指，读写IO时仅发出请求，然后立刻执行后续代码，它的优点是CPU执行效率高，缺点是代码编写复杂。
+
+
+### 2. read and learn the HTTP: 
+https://www.liaoxuefeng.com/wiki/1252599548343744/1319099982413858
+
+**HTTP:**
+
+HTTP是HyperText Transfer Protocol的缩写，翻译为超文本传输协议，它是基于TCP协议之上的一种请求-响应协议。
+
+HTTP请求的格式：HTTP Header和HTTP Body两部分构成
+
+```
+// header
+POST /login HTTP/1.1
+Content-Type: application/json
+Content-Length: 38
+
+// body
+{
+    "username":"bob",
+    "password":"123456"
+}
+```
+
+HTTP响应的格式： 也是由Header和Body两部分组成
+```
+HTTP/1.1 200 OK // 响应的第一行总是HTTP版本 响应代码 响应说明
+Content-Type: text/html
+Content-Length: 133251
+
+<!DOCTYPE html>
+<html><body>
+<h1>Hello</h1>
+...
+```
+
+- http1.0版本：对于最早期的HTTP/1.0协议，每次发送一个HTTP请求，客户端都需要先创建一个新的TCP连接，然后，收到服务器响应后，关闭这个TCP连接。
+- http1.1版本：HTTP/1.1协议允许在一个TCP连接中反复发送-响应。因为HTTP协议是一个请求-响应协议，客户端在发送了一个HTTP请求后，必须等待服务器响应后，才能发送下一个请求，这样一来，如果某个响应太慢，它就会堵住后面的请求。
+- http2.0版本：HTTP/2.0允许客户端在没有收到响应的时候，发送多个HTTP请求，服务器返回响应的时候，不一定按顺序返回，只要双方能识别出哪个响应对应哪个请求，就可以做到并行发送和接收。
+
+
+**HttpClient (客户端的http编程):**
+
+客户端的http编程：发送一个HTTP请求，接收服务器响应后，获得响应内容。只不过浏览器进一步把响应内容解析后渲染并展示给了用户，而我们使用Java进行HTTP客户端编程仅限于获得响应内容。
+
+早期的JDK版本是通过HttpURLConnection访问HTTP，代码编写比较繁琐，并且需要手动处理InputStream，所以用起来很麻烦。
+
+从Java 11开始，引入了新的HttpClient，使用链式调用的API，能大大简化HTTP的处理。
+
+使用GET请求获取文本内容代码如下：
+```
+import java.net.URI;
+import java.net.http.*;
+import java.net.http.HttpClient.Version;
+import java.time.Duration;
+import java.util.*;
+
+public class Main {
+    // 全局HttpClient(首先需要创建一个全局HttpClient实例，因为HttpClient内部使用线程池优化多个HTTP连接，可以复用：)
+    static HttpClient httpClient = HttpClient.newBuilder().build();
+
+    public static void main(String[] args) throws Exception {
+        String url = "https://www.sina.com.cn/";
+        HttpRequest request = HttpRequest.newBuilder(new URI(url))
+            .header("User-Agent", "Java HttpClient").header("Accept", "*/*")    // 设置Header:
+            .timeout(Duration.ofSeconds(5))       // 设置超时:
+            .version(Version.HTTP_2).build();       // 设置版本:
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        // HTTP允许重复的Header，因此一个Header可对应多个Value:
+        Map<String, List<String>> headers = response.headers().map();
+        for (String header : headers.keySet()) {
+            System.out.println(header + ": " + headers.get(header).get(0));
+        }
+        System.out.println(response.body().substring(0, 1024) + "...");
+    }
+}
+```
+
+使用post请求，要准备好发送的Body数据并正确设置Content-Type：
+```
+String url = "http://www.example.com/login";
+String body = "username=bob&password=123456";
+HttpRequest request = HttpRequest.newBuilder(new URI(url))
+    .header("Accept", "*/*")        // 设置Header:
+    .header("Content-Type", "application/x-www-form-urlencoded")   
+    .timeout(Duration.ofSeconds(5))     // 设置超时:  
+    .version(Version.HTTP_2)       // 设置版本:  
+    .POST(BodyPublishers.ofString(body, StandardCharsets.UTF_8)).build();       // 使用POST并设置Body:
+
+HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+String s = response.body();
+```
+
+
+### 3. read and learn xml and Json: 
+https://www.liaoxuefeng.com/wiki/1252599548343744/1255945389334784 （如何使用Java读写XML和JSON。）
+
+**XML (在实际应用中很少用到，通常了解一下就可以了):**
+
+XML是可扩展标记语言（eXtensible Markup Language）的缩写，它是一种数据表示格式，可以描述非常复杂的数据结构，常用于传输和存储数据。
+
+XML的结构：
+
+- 首行必定是<?xml version="1.0"?>，可以加上可选的编码。
+- 紧接着，如果以类似<!DOCTYPE note SYSTEM "book.dtd">声明的是文档定义类型（DTD：Document Type Definition），DTD是可选的。
+- 接下来是XML的文档内容，一个XML文档有且仅有一个根元素，根元素可以包含任意个子元素，元素可以包含属性，例如，<isbn lang="CN">1234567</isbn>包含一个属性lang="CN"，且元素必须正确嵌套。如果是空元素，可以用<tag/>表示。
+- 使用DOM，SAX和Jackson解析XML
+
+```
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE note SYSTEM "book.dtd">
+<book id="1">
+    <name>Java核心技术</name>
+    <author>Cay S. Horstmann</author>
+    <isbn lang="CN">1234567</isbn>
+    <tags>
+        <tag>Java</tag>
+        <tag>Network</tag>
+    </tags>
+    <pubDate/>
+</book>
+```
+
+**JSON 取代 XML:**
+
+JSON是JavaScript Object Notation的缩写，它去除了所有JavaScript执行代码，只保留JavaScript的对象格式。
+
+```
+{
+    "id": 1,
+    "name": "Java核心技术",
+    "author": {
+        "firstName": "Abc",
+        "lastName": "Xyz"
+    },
+    "isbn": "1234567",
+    "tags": ["Java", "Network"]
+}
+```
+
+<u>使用Java如何对JSON进行读写 ： 利用Jackson解析JSON(直接在JSON和JavaBean之间转换)</u>
+
+**反序列化(把JSON解析为JavaBean):**
+
+![反序列化](images/hw9/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.png)
+
+![自定义反序列化](images/hw9/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.png)
+
+![反序列化enum](images/hw9/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96enum.png)
+
+**序列化(把JavaBean变为JSON):**
+```
+ObjectMapper mapper = new ObjectMapper();   // 核心代码是创建一个ObjectMapper对象
+String json = mapper.writeValueAsString(book);
+```
+
+
+### 4. read and has basic understanding of Gson. know what is serialization。 
+work with JSON in Java using Gson library: https://zetcode.com/java/gson/
+
+**3 types of API**
+
+We use three different Gson APIs to work with JSON. 
+Gson has three types of API:
+- Data binding API
+    - Data binding API converts JSON to and from POJO using property accessors. Gson processes JSON data using data type adapters. It is similar to XML JAXB parser.
+- Tree model API
+    - Tree model API creates an in-memory tree representation of the JSON document. It builds a tree of JsonElements. It is similar to XML DOM parser.
+- Streaming API
+    - Streaming API is a low-level API that reads and writes JSON content as discrete tokens with JsonReader and JsonWriter. These classes read data as JsonTokens. This API has the lowest overhead and is fast in read/write operations. It is similar to Stax parser for XML.
+
+
+**create Gson:**
+
+Gson is the main class for using Gson library. 
+
+There are two basic ways to create Gson:
+- new Gson()
+    - toJson() : serializes the specified object into its equivalent JSON representation. 序列化
+    - fromJson() : deserializes the specified JSON into an object of the specified class.  反序列化
+- new GsonBuilder().create()
+    - GsonBuilder builds Gson with various configuration settings.
+    - Gson gson = new GsonBuilder()
+        .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+        .create();
+    -  GsonBuilder follows the builder pattern, and it is typically used by first invoking various configuration methods to set desired options, and finally calling create.
+
+
+**Gson output modes:**
+
+- compact
+- pretty
+    - Gson gson = new GsonBuilder().setPrettyPrinting().create();   // The example pretty prints the JSON output.
+
+
+**Serializing null values:**
+
+Gson by default does not serialize fields with null values to JSON. If a field in a Java object is null, Gson excludes it. We can force Gson to serialize null values via the GsonBuilder by using serializeNulls method.
+
+- builder.serializeNulls();
+
+
+**Java Gson write list:**
+
+writes a list of JSON objects into a file.
+
+**Java Gson read into array**
+
+**Java Gson read JSON from URL**
+
+**Java Gson excluding fields with @Expose**
+
+**Java Gson data binding API**
+- Gson data binding API write
+- Gson data binding API read
+
+**Java Gson tree model API**
+- Gson tree model write
+- Gson tree model read
+
+**Java Gson streaming API**
+- Gson JsonWriter
+- Gson JsonReader
+
+
+
+
+### 题目1：
 REST API: Relevant Food Outlets
 
-A REST API contains information about food outlets across multiple cities. Given the city name, and maximum cost for
-2 persons. The goal is to use the API to get the list of food outlets that belongs to this city and have an estimated
-cost less than or equal to given cost. The API returns paginated data. (用API来获得所在城市的the list of outlets，并且给出一个estimated cost要求少于或者等于限定值, API返回分页数据)
+A REST API contains information about food outlets across multiple cities. Given the city name, and maximum cost for 2 persons. The goal is to use the API to get the list of food outlets that belongs to this city and have an estimated cost less than or equal to given cost. The API returns paginated data. (用API来获得所在城市的the list of outlets，并且给出一个estimated cost要求少于或者等于限定值, API返回分页数据)
 
 To access the information, perform an HTTP GET request to:
-`https://jsonmock.hackerrank.com/api/food_outlets?city=<city>&page=<pageNumber>` where `<city>` is the city to get the food outlets for 
-and `<pageNumber>` is an integer that denotes the page of the result to return.
+`https://jsonmock.hackerrank.com/api/food_outlets?city=<city>&page=<pageNumber>` where `<city>` is the city to get the food outlets for and `<pageNumber>` is an integer that denotes the page of the result to return.
 
 For example, a GET request to
 `https://jsonmock.hackerrank.com/api/food_outlets?city=Seattle&page=2` returns data associated with <u>city Seattle</u>, and on the <u>second page</u> of the results.
@@ -460,11 +588,11 @@ Similary, a GET request to
 
 The response to such a request is a JSON with the following 5 fields:
 
-1. `page`: The current page of the results
-2. `per_page`: The maximum number of records returned per page.
-3. `total`: The total number of records in the database
-4. `total_pages` The total number of pages with results;
-5. `data`: Either an empty array or an array of outlet objects. Each object has the following schema:
+- `page`: The current page of the results
+- `per_page`: The maximum number of records returned per page.
+- `total`: The total number of records in the database
+- `total_pages` The total number of pages with results;
+- `data`: Either an empty array or an array of outlet objects. Each object has the following schema:
     - `city`: city we queried for where the outlet is located[STRING]
     - `name`: name of the outlet[STRING]
     - `estimated_cost`: estimated cost for 2 persons[INTEGER]
@@ -472,8 +600,6 @@ The response to such a request is a JSON with the following 5 fields:
         - `average_rating`: average rating of the outlet[FLOAT]
         - `votes`: total votes for the outlet[INTEGER]
     - `id`: unique identifier of the outlet[INTEGER]
-
-Below is an example of an outlet object:
 
 Given a string city, numerical maximum cost for 2 persons maxCost, return the list of food outlet names that are located in this city and have an estimated cost less than or equal to given maxCost.
 
@@ -492,74 +618,43 @@ The given city will always have data returned from the API.
 Note:
 Required libraries can be imported in order to solve the question.
 
-### 1. read and learn the IO: 
-https://www.liaoxuefeng.com/wiki/1252599548343744/1255945227202752
+![题目capital](images/hw9/capital.png)
+![jackson](images/hw9/FoodOutletJackson.png)
+![Gson](images/hw9/FoodOutletsGson.png)
+![java8](images/hw9/FoodOutletsJava8.png)
+![java11](images/hw9/FoodOutletsJava11.png)
 
-IO是指Input/Output，即输入和输出。以内存为中心：
 
-Input指从外部读入数据到内存，例如，把文件从磁盘读取到内存，从网络读取数据到内存等等。
+### 题目3：
+Meaning of AVL Tree:
 
-Output指把数据从内存输出到外部，例如，把数据从内存写入到文件，把数据从内存输出到网络等等。
+A: a BST with the properity that each node has equal difference between left and right sub tree
 
-1. InputStream / OutputStream 输入字节流/输出字节流
+B: A tree having a finite member of nodes
 
-    字节流传输的最小数据单位是`byte`
+C: A tree having a single node
 
-2. Reader / Writer (输出)字符流/ (输入)字符流
+D: None of the node
 
-    字符流传输的最小数据单位是`char`
+The correct answer is A: 
 
-3. 同步和异步
+An AVL tree is a type of self-balancing binary search tree (BST) where the heights of the two child subtrees of any node differ by at most one. This balancing is maintained after every insertion or deletion operation, ensuring that the tree remains balanced, and therefore, efficient for search, insertion, and deletion operations.
 
-    同步IO是指，<u>读写IO时代码必须等待数据返回后才继续执行后续代码</u>，它的优点是代码编写简单，缺点是CPU执行效率低。
 
-    异步IO是指，<u>读写IO时仅发出请求，然后立刻执行后续代码</u>，它的优点是CPU执行效率高，缺点是代码编写复杂。
 
-### 2. read and learn the HTTP: 
-https://www.liaoxuefeng.com/wiki/1252599548343744/1319099982413858
-
-HTTP是HyperText Transfer Protocol的缩写，翻译为超文本传输协议，它是基于TCP协议之上的一种请求-响应协议。
-
-HTTP请求的格式：HTTP Header和HTTP Body两部分构成 (GET和POST请求看链接的例子)
-
-HTTP响应的格式： 也是由Header和Body两部分组成 (看链接的例子)
-
-### 3. read and learn xml and Json: 
-https://www.liaoxuefeng.com/wiki/1252599548343744/1255945389334784 （如何使用Java读写XML和JSON。）
-
-***XML***：
-XML是可扩展标记语言（eXtensible Markup Language）的缩写，它是一种数据表示格式，可以描述非常复杂的数据结构，常用于传输和存储数据。
-
-XML的结构：
-
-- 首行必定是<?xml version="1.0"?>，可以加上可选的编码。
-- 紧接着，如果以类似<!DOCTYPE note SYSTEM "book.dtd">声明的是文档定义类型（DTD：Document Type Definition），DTD是可选的。
-- 接下来是XML的文档内容，一个XML文档有且仅有一个根元素，根元素可以包含任意个子元素，元素可以包含属性，例如，<isbn lang="CN">1234567</isbn>包含一个属性lang="CN"，且元素必须正确嵌套。如果是空元素，可以用<tag/>表示。
-- 使用DOM，SAX和Jackson解析XML
-
-***JSON 取代 XML***
-JSON是JavaScript Object Notation的缩写，它去除了所有JavaScript执行代码，只保留JavaScript的对象格式。
-
-<u>使用Java如何对JSON进行读写 ： 利用Jackson解析JSON(直接在JSON和JavaBean之间转换)</u>
-
-<u>序列化：把JavaBean变为JSON</u>
-
-<u>反序列化： 把JSON解析为JavaBean</u>
-
-### 4. read and has basic understanding of Gson. know what is serialization。 
-https://zetcode.com/java/gson/： work with JSON in Java using Gson library
-
-### 5. answer: 
-see coding files: FoodOutlet
 
 ## 12. What is the serialization and desrialization?
-a. https://hazelcast.com/glossary/serialization/
 
-***Serialization*** is <u>the process of converting a data object</u>—a combination of code and data represented within a region of data storage—<u>into a series of bytes</u> that saves the state of the object in an easily transmittable form. 
+https://hazelcast.com/glossary/serialization/
 
-In this serialized form, the data can be delivered to another data store (such as an in-memory computing platform), application, or some other destination.
+***Serialization*** is <u>the process of converting an object</u>—a combination of code and data represented within a region of data storage—<u>into a stream of bytes</u> that saves the state of the object in an easily transmittable form. 
 
-The <u>reverse process—constructing a data structure or object from a series of bytes</u>—is ***deserialization***. The deserialization process recreates the object, thus making the data easier to read and modify as a native structure in a programming language.
+The <u>reverse process—constructing a data structure or object from a series of bytes</u>—is ***deserialization***. 
+
+![Serialization](images/hw9/Serialization.png)
+
+
+
 
 ## 13. use stream api to get the average of the array [20, 3, 78, 9, 6, 53, 73, 99, 24, 32].
 ```java
@@ -568,15 +663,12 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         int[] numbers = {20, 3, 78, 9, 6, 53, 73, 99, 24, 32};
-        
-        // Using the Stream API to calculate the average
-        // use the `Arrays.stream(numbers)` method to create a stream of integers from the `numbers` array.
-        // use the `.average()` method on the stream to calculate the average. 
-        // The `average()` method returns an `OptionalDouble`, 
-        // so we use `.orElse(Double.NaN)` to handle the case where the stream is empty (e.g., if the array is empty)
-        //  and return `Double.NaN` in that case.
+    
+        // use `.orElse(Double.NaN)` to handle the case where the stream is empty (e.g., if the array is empty)
+        // `Double.NaN` represents a "Not-a-Number" value
 
-        double average = Arrays.stream(numbers)
+        double average = Arrays
+            .stream(numbers)
             .average()
             .orElse(Double.NaN);
         
@@ -588,13 +680,34 @@ output:
 Average: 41.4
 ```
 
+
+
+
 ## 14. 抄写，https://github.com/TAIsRich/springboot-redbook/tree/03_post_pageable，你也可以像我一样分branch添加新代码。
-see file coding : springboot-redbook
+find in file coding : hw9-springboot-redbook
+
+![post_pageable](images/hw9/post_pageable.png)
+![参数分页结果](images/hw9/%E5%8F%82%E6%95%B0%E5%88%86%E9%A1%B5%E7%BB%93%E6%9E%9C.png)
+![默认分页结果](images/hw9/%E9%BB%98%E8%AE%A4%E5%88%86%E9%A1%B5%E7%BB%93%E6%9E%9C.png)
+
+
+
 
 ## 15. (Optional) 抄写 https://github.com/TAIsRich/springboot-redbook/tree/04_comment你也可以像我一样分branch添加新代码。
-see file coding : springboot-redbook
+find in file coding : hw9-springboot-redbook
 
-## 16. (Optional)Try to write the CRUD api for a new application Cassandra-Blog
-    a. spring 提供了相关dependency,(https://start.spring.io/)
-        i.  Spring Data for Apache Cassandra
-    b. Cassandra十分流行，且面试问的多。
+![dir of hw9-springboot](images/hw9/dir%20of%20hw9-springboot.png)
+![commentController](images/hw9/commentcontroller.png)
+![test create comment](images/hw9/test%20comment%20create.png)
+
+
+
+
+## 16. (Optional) Try to write the CRUD api for a new application Cassandra-Blog
+- https://www.bilibili.com/video/BV1aQ4y1Z7Nj
+- spring 提供了相关dependency,(https://start.spring.io/)
+    -  Spring Data for Apache Cassandra
+- Cassandra十分流行，且面试问的多。
+
+
+
