@@ -38,10 +38,21 @@
     - 它表示在 JSON 序列化和反序列化过程中，该字段将使用指定的名称：name
     - 如果是@jsonProperty("full name"),那么在 JSON 中将其表示为不同的名称： full_name
 
+- `Getter`, `Setter`, `NoArgsConstructor`,`AllArgsContructor`
+    - 来自于 Lombok 库，自动生成类中所有字段的 Getter 和 Setter 方法, 自动生成构造函数。
+
     ```java
     import javax.persistence.*;
     import java.time.LocalDateTime;
+    import lombok.AllArgsConstructor;
+    import lombok.Getter;
+    import lombok.NoArgsConstructor;
+    import lombok.Setter;
 
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Entity
     @Table(name = "users")
     public class User {
@@ -63,11 +74,6 @@
 
         @UpdateTimestamp
         private LocalDateTime updateDateTime;
-
-        // Getters and setters
-        // Constructors, etc.
-
-        // Other entity properties, methods, etc.
     }
     ```
 
@@ -81,17 +87,165 @@
     - @ManyToOne(fetch = FetchType.LAZY)：指定加载关联实体的方式。
     - 在加载实体时不会立即加载关联的实体数据，而是在访问关联属性时才会触发加载，这种方式也被称为延迟加载。
 
-- `@ManyToMany`:
-    - specify a many-to-many relationship between entities.
-    - 描述实体之间的关系，其中一个实体对象可以与另一个实体对象建立多对多的关系。
-
 - `@JoinColumn`:
     - specify the column that is used for joining in a relationship.
     - 充当了外键的角色，指示了实体之间的关联关系。
     - 一对一：本表中指向另一个表的外键。一对多/多对一：另一个表指向本表的外键。
 
+    ```java
+    @Entity
+    public class Author {
+        // ...
+        // Specifies the field in the target entity (Book in this case) that owns the relationship
+        @OneToMany(mappedBy = "author",cascade = CascadeType.ALL, orphanRemoval = true)    
+        private List<Book> books;
+        // ...
+    }
+
+    @Entity
+    public class Book {
+        // ...
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "author_id")
+        private Author author;
+        // ...
+    }
+    ```
+
+- `@ManyToMany`:
+    - specify a many-to-many relationship between entities.
+    - 描述实体之间的关系，其中一个实体对象可以与另一个实体对象建立多对多的关系。
+
 - `@JoinTable`:
     - define the join table for a many-to-many relationship
+
+    ```java
+    @Entity
+    public class Student {
+        // ...
+        @ManyToMany
+        @JoinTable(
+            name = "student_course",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+        )
+        private List<Course> courses;
+        // ...
+    }
+
+    @Entity
+    public class Course {
+        // ...
+        @ManyToMany(mappedBy = "courses")
+        private List<Student> students;
+        // ...
+    }
+    ```
+
+
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+
+### Annotations Used by JPQL:
+
+- `@NamedQuery` : 
+    - define a named query at the entity level for JPA entities.
+
+- `@NamedQueries`:
+    - define multiple named queries for an entity class.
+
+- `@Query` : 
+    - define a custom queries for a repository using JPQL (Java Persistence Query Language) or native SQL.
+    - 定义一个基于JPQL（Java Persistence Query Language）的查询方法。
+
+    ```java
+    // Entity层
+    @Entity
+    @Table(
+        name = "posts",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"title"})
+        }
+    )
+    // 在实体类 Post 上定义一个名为 "Post.getAll" 的查询。
+    // 从数据库中选择所有的 Post 对象并返回。在这个查询中，p 是 Post 类的别名，
+    @NamedQuery(name="Post.getAll", query="select p from Post p")
+    public class Post {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+
+        //省略其他field
+    }
+
+    // Repository层
+    @Repository
+    public interface PostJPQLRepository{
+
+        // 根据条件从数据库中选择 Post 对象
+        // ?1 对应方法参数中的第一个参数 Long id。
+        // ?2 对应方法参数中的第二个参数 String title。
+        @Query("select p from Post p where p.id = ?1 or p.title = ?2")
+        // 通过 id 或者 title 获取对应的 Post 对象。
+        Post getPostByIDOrTitleWithJPQLIndexParameters(Long id, String title);
+
+        @Query("select p from Post p where p.id = :key or p.title = :title")
+        Post getPostByIDOrTitleWithJPQLNamedParameters(@Param("key") Long id,
+                                                   @Param("title") String title);
+    }
+    ```
+
+
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+
+### Annotations Used by Transaction:
+
+- `@Transactional`: 
+    - manage the transcation, represents a unit of work. if one step fails, the whole transaction fails
+    - 原子操作
+
+    ```
+    @Override
+    @Transactional
+    public OrderResponse placeOrder(OrderRequest orderRequest) {
+        Order order = orderRequest.getOrder();
+        order.setStatus("INPROGRESS");
+        order.setOrderTackingNumber(UUID.randomUUID().toString());
+        orderRepository.save(order);
+
+        Payment payment = orderRequest.getPayment();
+        if(!payment.getType().equals("DEBIT")){
+            throw new PaymentException("Payment card type do not support");
+        }
+
+        payment.setOrderId(order.getId());
+        paymentRepository.save(payment);
+
+        OrderResponse orderResponse = new OrderResponse();
+        orderResponse.setOrderTackingNumber(order.getOrderTackingNumber());
+        orderResponse.setStatus(order.getStatus());
+        orderResponse.setMessage("SUCCESS");
+        return orderResponse;
+    }
+    ```
+
+- `@EnableTransactionManagement`:
+    - 开启transaction
+
+    ```
+    @SpringBootApplication
+    @EnableTransactionManagement
+    public class Hw10TransactionalApplication {
+
+        public static void main(String[] args) {
+            SpringApplication.run(Hw10TransactionalApplication.class, args);
+        }
+    }
+    ```
 
 
 
