@@ -108,6 +108,8 @@
 
 **@Inject**
 
+**@Value**
+
 ## Example
 
     @Entity
