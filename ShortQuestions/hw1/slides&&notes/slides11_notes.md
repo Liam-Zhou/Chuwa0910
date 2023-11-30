@@ -7,3 +7,4 @@ https://howtodoinjava.com/maven/maven-parent-child-pom-example/
 3. '<dependencies>' tag下可以调用'<properties>'已定义的值（page6）。
 4. Your first mojo: https://maven.apache.org/guides/plugin/guide-java-plugin-development.html.
 5. NPM is the Node.js version of Maven.
+6. How to use a jar file: https://docs.oracle.com/javase/tutorial/deployment/jar/basicsindex.html.
