@@ -303,7 +303,7 @@
 
 <!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
 
-# Annotations Used by MongoDB:**
+# Annotations Used by MongoDB:
 
 - `@Document`: Marks a class as a document for Spring Data MongoDB.
 - `@Field`: Customizes the mapping of a field in a Spring Data MongoDB document.
@@ -542,12 +542,252 @@
 
 
 <!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
-# Annotations Used by Exception
+
+# Annotations Used by Exception:
 - `@ResponseStatus`:
     - 用于指示当抛出此异常时返回的 HTTP 状态码
+
+-  `@ExceptionHandler`
+    - Method Level
+    - used to handle the specific exceptions and sending the custom responses to the client
+
+-  `@ControllerAdvice`
+    - Class Level
+    - make this class be a bean
+    - define global exception handling and to consolidate centralized exception handling logic for multiple controllers in a Spring MVC application.
+
+    ```java
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public class ResourceNotFoundException extends RuntimeException {
+        private String resourceName;
+        private String fieldName;
+        private long fieldValue;
+
+        public ResourceNotFoundException(String resourceName, String fieldName, long fieldValue) {
+            // Post not found with id : '1'
+            super(String.format("%s not found with %s : '%s'", resourceName, fieldName, fieldValue));
+            this.resourceName = resourceName;
+            this.fieldName = fieldName;
+            this.fieldValue = fieldValue;
+        }
+
+        省略getter and setter
+    }
+
+    @ControllerAdvice
+    public class GlobalExceptionHandler {
+
+        /**
+        * handler specific exceptions
+        * @param exception
+        * @param webRequest
+        * @return
+        */
+
+        @ExceptionHandler(ResourceNotFoundException.class)
+        public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest webRequest) {
+            ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
+                    webRequest.getDescription(false));
+
+            return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+        }
+
+        @ExceptionHandler(Exception.class)
+        public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception, WebRequest webRequest) {
+            ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
+                    webRequest.getDescription(false));
+
+            return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     ```
-    @ResponseStatus(value = HttpStatus.NOT_FOUND) .  //抛出404异常
-        public class ResourceNotFoundException extends RuntimeException{...}
+
+
+
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+
+# Annotations Used by Validation:
+
+-  `@Valid` 
+    - add validation rule to payload, then add @Valid to controller to apply the rule.
+
+    ```java
+    public class PostDto {
+    private Long id;
+    /**
+     * 1. title should not be null or empty
+     * 2. title should have at least 2 characters
+     * Question, our database have set it as nullable=false,
+     * why do we need to set validation here? what is the benefits?
+     * 在保证不为null的情况下，也要保证不为empty（null != empty）
+     */
+    @NotEmpty
+    @Size(min = 2, message = "Post title should have at least 2 characters")
+    private String title;
+
+    @NotEmpty
+    @Size(min = 10, message = "Post description should have at least 10 characters")
+    private String description;
+
+    @NotEmpty
+    private String content;
+
+    private Set<CommentDto> comments;
+
+    省略getter and setter
+
+    }
+
+    // controller
+    @RestController
+    @RequestMapping("/api/v1/posts")
+    public class PostController {
+
+        @Autowired
+        private PostService postService;
+
+        @PostMapping()
+        public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto) {
+            PostDto postResponse = postService.createPost(postDto);
+            return new ResponseEntity<>(postResponse, HttpStatus.CREATED);
+        }
+    }
+
+    // exception: global exception handler -> accept and handle
+    ```
+
+
+
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+
+# Annotations Used by Bean Define:
+
+- `@Component`
+- `@Service`
+- `@Repository`
+- `@Controller`
+- `@ContollerAdvice`
+
+- `@Bean`: declare a method that produces a bean to be managed by the Spring container.
+
+   ```java
+   @Configuration
+   public class AppConfig {
+       @Bean
+       public MyBean myBean() {
+           return new MyBean();
+       }
+   }
+   ```
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+
+# Annotations Used by Configiuration:
+
+-  `@ComponentScan`:
+    - specify the base packages to scan components
+    
+    ```java
+    @Configuration
+    @ComponentScan(basePackages = "com.example.package")
+    public class BeanConfig {
+        @Bean
+        .....
+    }
+    ```
+
+- `@SpringBootApplication`:
+    - a combination of `@Configuration`, `@EnableAutoConfiguration` and `@ComponentScan`
+    - `@Configuration`: marks a class as a source of bean definitions to define Spring beans using @Bean annotations within the class.
+    - `@EnableAutoConfiguration`: allows the application to add beans using classpath definitions.
+    - `@ComponentScan`: directs Spring to search for components in the path specified. 在哪里寻找@Component注解标记的组件类，以便自动注册它们到应用程序的上下文中
+
+    ```java
+    @SpringBootApplication
+    public class SpringbasicApplication {
+
+        public static void main(String[] args) {
+            SpringApplication.run(SpringbasicApplication.class, args);
+        }
+
+    }
+    ```
+
+
+
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+
+# Annotations Used by Dependency Injection:
+
+- `@Autowired`:
+   - Usage: Used for automatic injection of dependencies.
+   - By Type > By Name
+
+- `@Qualifier`
+    - work with `@Autowired` to provide the name of bean to inject when there are multiple beans with same type.
+
+- `Primary`
+    - to indicate this bean is the primary bean for autowiring when there are multiple beans with same type and not define @Qualifier
+
+    1. 如果只有一个impl,则默认用这个impl
+    2. 如果有多个impl, 则查看是否有@Qualifier
+    3. 如果有多个impl, 且无@Qualifier, 则查看是否有@Primary (因为这个是type level的)
+    4. 如果有多个impl, 无@Qualifier, 且无@Primary, 按变量名(By Name)确定用哪一个
+    5. 若无，则报错(NoUniqueBeanDefinitionException)
+
+- `@Resource`:
+    - inject beans by name by using the value of name.(By Name > By Type)
+
+- `@Inject`: 
+    - similar to `@Autowired` and can be used for bean injection by type.
+
+    ```java
+    @Component
+    public class DependencyInjectionByTypeByName {
+        /**
+        * Match by type
+        * 变量名您可以随意取
+        */
+        @Autowired
+        private HibernateChuwa hibernate;
+
+        /**
+        * Match by Name
+        * 变量名必须是某个子类的名称，且首字母小写,
+        * 如果是来自于@Bean,则用的是方法名小写。
+        */
+        @Autowired
+        private JpaChuwa hibernateChuwa;
+
+        @Autowired
+        private JpaChuwa eclipseLinkChuwa;
+
+        @Autowired
+        private JpaChuwa myDataNucleus;
+
+        /**
+        * wrong
+        * NoUniqueBeanDefinitionException: No qualifying bean of type 'com.chuwa.springbasic.components.JpaChuwa'
+        * available: expected single matching bean but found 3: eclipsedLinkChuwa,hibernateChuwa,myDataNucleus
+        */
+    //    @Autowired
+    //    private JpaChuwa jpaChuwa;
+
+
+        /**
+        * Match by Qualifier
+        * 变量名您随意起
+        */
+        @Autowired
+        @Qualifier("hibernateChuwa")
+        private JpaChuwa jpaChuwaQualifier;
     ```
 
 
@@ -555,7 +795,90 @@
 
 <!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
 
-**General Purpose Annotations:**
+# Annotations Used by Bean Scope:
+
+- `singleton`: 
+    - the bean instance will created be only once and same instance will be returned by the IOC container
+    - by using @Scope("singleton")
+    - Configuration classes, utility classes, stateless services.
+
+- `prototype`: 
+    - the bean instance will be created each time when requested.
+    - by using @Scope("prototype")
+    - Objects that need to be uniquely instantiated each time, such as user sessions, shopping cart items.
+
+- `request`: 
+    - the bean instance will be created per HTTP request
+    - by using @RequestScope
+    - Web controllers, objects that need to be available during a single HTTP request.
+    - Objects that need to be created anew for each HTTP request, like request-specific data processing, form handling objects.
+
+- `session`: 
+    - the bean instance will be created per HTTP session
+    - by using @SessionScope
+    - User-specific information stored across multiple requests, session-related data.
+
+- `global-session(Portlet context)`:  
+    - the bean instance will be created per HTTP global session. It can be used in portlet context only.
+    - by using @Scope("globalSession")
+    - Portlet-specific objects that need to be maintained across requests within a global session.
+
+    ```java
+    import org.springframework.context.annotation.Scope;
+    import org.springframework.stereotype.Component;
+
+    // Singleton Scope
+    @Component
+    @Scope("singleton")
+    public class SingletonBean {
+        // Implementation...
+    }
+
+    // Prototype Scope
+    @Component
+    @Scope("prototype")
+    public class PrototypeBean {
+        // Implementation...
+    }
+
+    // Request Scope (for web applications)
+    import org.springframework.web.context.annotation.RequestScope;
+    import org.springframework.stereotype.Component;
+
+    @Component
+    @RequestScope
+    public class RequestScopedBean {
+        // Implementation...
+    }
+
+    // Session Scope (for web applications)
+    import org.springframework.web.context.annotation.SessionScope;
+    import org.springframework.stereotype.Component;
+
+    @Component
+    @SessionScope
+    public class SessionScopedBean {
+        // Implementation...
+    }
+
+
+    // global-seesion Scope
+    import org.springframework.context.annotation.Scope;
+    import org.springframework.stereotype.Component;
+
+    @Component
+    @Scope("globalSession")
+    public class MyGlobalSessionBean {
+        // Implementation...
+    }
+    ```
+
+
+
+
+<!-- 分割线------------------------------------------------------------------------------------------------------------------------------- -->
+
+# general Purpose Annotations:
 
 - `@Autowired` 自动注入
    - Usage: Used for automatic injection of dependencies.
