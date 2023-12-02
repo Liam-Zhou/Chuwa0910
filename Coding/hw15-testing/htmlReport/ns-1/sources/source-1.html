@@ -1,0 +1,224 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CommentServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.chuwa.redbook.service.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: CommentServiceImpl (com.chuwa.redbook.service.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CommentServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.2%
+  </span>
+  <span class="absValue">
+    (31/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.chuwa.redbook.service.impl;
+&nbsp;
+&nbsp;import com.chuwa.redbook.dao.CommentRepository;
+&nbsp;import com.chuwa.redbook.dao.PostRepository;
+&nbsp;import com.chuwa.redbook.entity.Comment;
+&nbsp;import com.chuwa.redbook.entity.Post;
+&nbsp;import com.chuwa.redbook.exception.BlogAPIException;
+&nbsp;import com.chuwa.redbook.exception.ResourceNotFoundException;
+&nbsp;import com.chuwa.redbook.payload.CommentDto;
+&nbsp;import com.chuwa.redbook.service.CommentService;
+&nbsp;import org.modelmapper.ModelMapper;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author b1go
+&nbsp; * @date 6/23/22 11:14 PM
+&nbsp; */
+&nbsp;@Service
+<b class="fc">&nbsp;public class CommentServiceImpl implements CommentService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private CommentRepository commentRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private PostRepository postRepository;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * use this modelMapper to replace the mapToDto, mapToEntity methods.
+&nbsp;     */
+&nbsp;    @Autowired
+&nbsp;    private ModelMapper modelMapper;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CommentDto createComment(long postId, CommentDto commentDto) {
+<b class="fc">&nbsp;        Comment comment = modelMapper.map(commentDto, Comment.class);</b>
+&nbsp;        // retrieve post entity by id
+<b class="fc">&nbsp;        Post post = postRepository.findById(postId)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Post&quot;, &quot;id&quot;, postId));</b>
+&nbsp;        // set post to comment entity
+<b class="fc">&nbsp;        comment.setPost(post);</b>
+&nbsp;
+&nbsp;        // comment entity to DB
+<b class="fc">&nbsp;        Comment savedComment = commentRepository.save(comment);</b>
+&nbsp;
+<b class="fc">&nbsp;        return modelMapper.map(savedComment, CommentDto.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;CommentDto&gt; getCommentsByPostId(long postId) {
+&nbsp;        // retrieve comments by postId
+<b class="fc">&nbsp;        List&lt;Comment&gt; comments = commentRepository.findByPostId(postId);</b>
+&nbsp;
+&nbsp;        // convert list of comment entities to list of comment dto&#39;s
+<b class="fc">&nbsp;        return comments.stream().map(comment -&gt; modelMapper.map(comment, CommentDto.class)).collect(Collectors.toList());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CommentDto getCommentById(Long postId, Long commentId) {
+&nbsp;        // retrieve post entity by id
+<b class="fc">&nbsp;        Post post = postRepository.findById(postId)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Post&quot;, &quot;id&quot;, postId));</b>
+&nbsp;
+&nbsp;        // retrieve comment by id
+<b class="fc">&nbsp;        Comment comment = commentRepository.findById(commentId)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Comment&quot;, &quot;id&quot;, commentId));</b>
+&nbsp;
+&nbsp;        // 业务逻辑
+<b class="fc">&nbsp;        if (!comment.getPost().getId().equals(post.getId())) {</b>
+<b class="nc">&nbsp;            throw new BlogAPIException(HttpStatus.BAD_REQUEST, &quot;Comment does not belong to post&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return modelMapper.map(comment, CommentDto.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CommentDto updateComment(Long postId, Long commentId, CommentDto commentDtoRequest) {
+&nbsp;        // retrieve post entity by id
+<b class="fc">&nbsp;        Post post = postRepository.findById(postId)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Post&quot;, &quot;id&quot;, postId));</b>
+&nbsp;
+&nbsp;        // retrieve comment by id
+<b class="fc">&nbsp;        Comment comment = commentRepository.findById(commentId)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Comment&quot;, &quot;id&quot;, commentId));</b>
+&nbsp;
+&nbsp;        // 业务逻辑
+<b class="fc">&nbsp;        if (!comment.getPost().getId().equals(post.getId())) {</b>
+<b class="nc">&nbsp;            throw new BlogAPIException(HttpStatus.BAD_REQUEST, &quot;Comment does not belong to post&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        comment.setName(commentDtoRequest.getName());</b>
+<b class="fc">&nbsp;        comment.setEmail(commentDtoRequest.getEmail());</b>
+<b class="fc">&nbsp;        comment.setBody(commentDtoRequest.getBody());</b>
+&nbsp;
+<b class="fc">&nbsp;        Comment updatedComment = commentRepository.save(comment);</b>
+&nbsp;
+<b class="fc">&nbsp;        return modelMapper.map(updatedComment, CommentDto.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void deleteComment(Long postId, Long commentId) {
+&nbsp;        // retrieve post entity by id
+<b class="fc">&nbsp;        Post post = postRepository.findById(postId)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Post&quot;, &quot;id&quot;, postId));</b>
+&nbsp;
+&nbsp;        // retrieve comment by id
+<b class="fc">&nbsp;        Comment comment = commentRepository.findById(commentId)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Comment&quot;, &quot;id&quot;, commentId));</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!comment.getPost().getId().equals(post.getId())) {</b>
+<b class="nc">&nbsp;            throw new BlogAPIException(HttpStatus.BAD_REQUEST, &quot;Comment does not belong to post&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        commentRepository.delete(comment);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-01 12:23</div>
+</div>
+</body>
+</html>
