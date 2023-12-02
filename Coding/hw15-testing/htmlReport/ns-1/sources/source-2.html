@@ -1,0 +1,221 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PostServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.chuwa.redbook.service.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: PostServiceImpl (com.chuwa.redbook.service.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PostServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.chuwa.redbook.service.impl;
+&nbsp;
+&nbsp;import com.chuwa.redbook.dao.PostRepository;
+&nbsp;import com.chuwa.redbook.entity.Post;
+&nbsp;import com.chuwa.redbook.exception.ResourceNotFoundException;
+&nbsp;import com.chuwa.redbook.payload.PostDto;
+&nbsp;import com.chuwa.redbook.payload.PostResponse;
+&nbsp;import com.chuwa.redbook.service.PostService;
+&nbsp;import org.modelmapper.ModelMapper;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.data.domain.Page;
+&nbsp;import org.springframework.data.domain.PageRequest;
+&nbsp;import org.springframework.data.domain.Sort;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author b1go
+&nbsp; * @date 8/22/22 6:56 PM
+&nbsp; */
+&nbsp;@Service
+<b class="nc">&nbsp;public class PostServiceImpl implements PostService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private PostRepository postRepository;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * use this modelMapper to replace the mapToDto, mapToEntity methods.
+&nbsp;     */
+&nbsp;    @Autowired
+&nbsp;    private ModelMapper modelMapper;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PostDto createPost(PostDto postDto) {
+&nbsp;
+&nbsp;        // covert DTO to Entity
+<b class="nc">&nbsp;        Post post = modelMapper.map(postDto, Post.class);</b>
+&nbsp;
+&nbsp;        // 调用Dao的save 方法，将entity的数据存储到数据库MySQL
+&nbsp;        // save()会返回存储在数据库中的数据
+<b class="nc">&nbsp;        Post savedPost = postRepository.save(post);</b>
+&nbsp;
+&nbsp;        // 将save() 返回的数据转换成controller/前端 需要的数据，然后return给controller
+&nbsp;//        PostDto postResponse = mapToDTO(savedPost);
+&nbsp;
+<b class="nc">&nbsp;        return modelMapper.map(savedPost, PostDto.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 此处练习了lambda， stream API
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;PostDto&gt; getAllPost() {
+<b class="nc">&nbsp;        List&lt;Post&gt; posts = postRepository.findAll();</b>
+<b class="nc">&nbsp;        List&lt;PostDto&gt; postDtos = posts.stream().map(post -&gt; modelMapper.map(post, PostDto.class)).collect(Collectors.toList());</b>
+<b class="nc">&nbsp;        return postDtos;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 此处顺便练习Optional
+&nbsp;     * @param id
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public PostDto getPostById(long id) {
+<b class="nc">&nbsp;        Post post = postRepository.findById(id).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Post&quot;, &quot;id&quot;, id));</b>
+&nbsp;
+<b class="nc">&nbsp;        return modelMapper.map(post, PostDto.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PostDto updatePost(PostDto postDto, long id) {
+&nbsp;        //  Question, why do we need to find it out firstly?
+<b class="nc">&nbsp;        Post post = postRepository.findById(id).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Post&quot;, &quot;id&quot;, id));</b>
+<b class="nc">&nbsp;        post.setTitle(postDto.getTitle());</b>
+<b class="nc">&nbsp;        post.setDescription(postDto.getDescription());</b>
+<b class="nc">&nbsp;        post.setContent(postDto.getContent());</b>
+&nbsp;
+<b class="nc">&nbsp;        Post updatePost = postRepository.save(post);</b>
+<b class="nc">&nbsp;        return modelMapper.map(updatePost, PostDto.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void deletePostById(long id) {
+&nbsp;        //  Question, why do we need to find it out firstly?
+<b class="nc">&nbsp;        Post post = postRepository.findById(id).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Post&quot;, &quot;id&quot;, id));</b>
+<b class="nc">&nbsp;        postRepository.delete(post);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PostResponse getAllPost(int pageNo, int pageSize, String sortBy, String sortDir) {
+&nbsp;
+<b class="nc">&nbsp;        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()</b>
+<b class="nc">&nbsp;                : Sort.by(sortBy).descending();</b>
+&nbsp;
+&nbsp;        // create pageable instance
+&nbsp;
+<b class="nc">&nbsp;        PageRequest pageRequest = PageRequest.of(pageNo, pageSize, sort);</b>
+<b class="nc">&nbsp;        Page&lt;Post&gt; pagePosts = postRepository.findAll(pageRequest);</b>
+&nbsp;
+&nbsp;        // get content for page abject
+<b class="nc">&nbsp;        List&lt;Post&gt; posts = pagePosts.getContent();</b>
+<b class="nc">&nbsp;        List&lt;PostDto&gt; postDtos = posts.stream().map(post -&gt; modelMapper.map(post, PostDto.class)).collect(Collectors.toList());</b>
+&nbsp;
+<b class="nc">&nbsp;        PostResponse postResponse = new PostResponse();</b>
+<b class="nc">&nbsp;        postResponse.setContent(postDtos);</b>
+<b class="nc">&nbsp;        postResponse.setPageNo(pagePosts.getNumber());</b>
+<b class="nc">&nbsp;        postResponse.setPageSize(pagePosts.getSize());</b>
+<b class="nc">&nbsp;        postResponse.setTotalElements(pagePosts.getTotalElements());</b>
+<b class="nc">&nbsp;        postResponse.setTotalPages(pagePosts.getTotalPages());</b>
+<b class="nc">&nbsp;        postResponse.setLast(pagePosts.isLast());</b>
+<b class="nc">&nbsp;        return postResponse;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-01 12:23</div>
+</div>
+</body>
+</html>
