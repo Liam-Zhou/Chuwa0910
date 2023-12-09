@@ -1,4 +1,4 @@
-# Homework 5 (hw24 - multi-threading)
+# Homework 5 (hw23 - multi-threading)
 
 ## 1. Explain volatile variables in java? (we also use it in Singleton)
 

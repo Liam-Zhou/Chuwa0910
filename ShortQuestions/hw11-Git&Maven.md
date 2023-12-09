@@ -1,4 +1,4 @@
-# Homework 1 (Sept 11) of Yichuan Hu
+# Homework 1 (Hw11 Maven&PR)
 
 ## 2. git commands I learned
 

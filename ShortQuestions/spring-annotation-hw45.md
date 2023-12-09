@@ -2,6 +2,7 @@
 
 ```
 @PreAuthorize("hasRole('ROLE_ADMIN')")
+public void adminOnlyMethod() {}
 ```
 
 - `@ExceptionHandler`: used for defining methods that handle exceptions that occur during the processing of HTTP requests in a Spring MVC application
