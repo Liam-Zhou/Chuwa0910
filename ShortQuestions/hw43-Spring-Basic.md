@@ -68,13 +68,13 @@ Both are containers responsible for managing Spring beans.
 ## 14. What is the Scope of a Bean? and list the examples for each scope.
 
 - Basic
-  - Singleton
-  - prototype
+  - **Singleton**: only one instance will be created per spring container(IoC). 
+  - **Prototype**: A new instance will be created every time the bean is requested from the spring container
 - Web
-  - Request
-  - Session
-  - Application
-  - Websocket
+  - **Request**: definition to an HTTP request. Only valid in the context of a web-aware Spring ApplicationContext.
+  - **Session**:  definition to an HTTP session. Only valid in the context of a web-aware Spring ApplicationContext.
+  - **Application**
+  - **Websocket**
 
 ## 15. Configure a bean using xml. If bean has parameters/dependencies, how can we configure the bean? (you can google the tutorial how to configure beans in xml, and feel free to ask me any quesitons if you don't understand. it is a little bit old, I am not sure if I need to exaplain it in class)
 

@@ -192,7 +192,7 @@ The code should be extensible, like Inferface declared a function that some clas
 
 Choose A.
 
-## 17. Watch the design pattern video, and type the code, submit it to MavenProject folder
+## 17. Watch the design pattern video, and type the code, submit it to DesignPattern folder
 
 - singleton: https://www.bilibili.com/video/BV1Np4y1z7BU?p=22
 - Factory: https://www.bilibili.com/video/BV1Np4y1z7BU?p=35&vd_source=310561eab1216a27f7accf859bf7f6d9

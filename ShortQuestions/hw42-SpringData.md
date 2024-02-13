@@ -51,7 +51,7 @@ Yes. We can implement the method by ourselves. We can customize the mappings usi
 
 Done.
 
-## 11. (Optional) Check out a new branch(https://github.com/TAIsRich/springboot-red book/tree/hw02_01_jdbcTemplate) from branch 02_post_RUD, replace the dao layer using JdbcTemplate.
+## 11. (Optional) Check out a new branch(https://github.com/TAIsRich/springboot-redbook/tree/hw02_01_jdbcTemplate) from branch 02_post_RUD, replace the dao layer using JdbcTemplate.
 
 ## 12. (Optional) use JDBC to read the data from database.
 
@@ -85,7 +85,11 @@ JPQL is similar to SQL (Structured Query Language) but is designed to work with 
 
 ## 19. What is SessionFactory and Session?
 
-- `SessionFactory`: a crucial component in Hibernate and serves as a factory for creating Session objects. It is typically created only once during the application's startup process and is responsible for bootstrapping Hibernate, configuring various settings, and establishing a connection to the database.
+- `SessionFactory`: a crucial component in Hibernate and serves as a factory for creating Session objects. It is typically created only once during the application's startup process.  
+  Responsibilities:
+  - bootstrapping Hibernate
+  - configuring various settings
+  - establishing a connection to the database
 - `Session`: a short-lived object representing a single unit of work or a database transaction. It is created by `SessionFactory`.
 
 ## 20. What is Transaction? how to manage your transaction?
@@ -94,7 +98,7 @@ JPQL is similar to SQL (Structured Query Language) but is designed to work with 
 
 Based on your application's requirements, We can define different operations in a transaction. In Spring framework, we can use `@Transactional` annotation.
 
-## 21. What is hibernate Caching?
+## 21. What is Hibernate Caching?
 
 Hibernate Caching, stores and manages data in a memory cache to improve the performance and reduce the number of database queries.
 
