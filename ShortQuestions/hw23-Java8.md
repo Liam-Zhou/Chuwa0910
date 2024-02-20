@@ -1,16 +1,16 @@
 ## 1. What is generic in Java? and type the generic code by yourself.
 
-https://github.com/TAIsRich/chuwa-eij-tutorial/tree/main/02-java-core/src/main/java/com/chuwa/tutorial/t01_basic/generic   (Same code seen as Coding/Java8/generic)
+https://github.com/TAIsRich/chuwa-eij-tutorial/tree/main/02-java-core/src/main/java/com/chuwa/tutorial/t01_basic/generic   (Seen as Coding/Java8/generic)
 
 Generaic in Java: it is a way that allows you to write code that operates on different data types in a type-safe and reusable manner.
 
 ## 2. Read those codes and type it one by one by yourself. the push the code to your branch.
 
-https://github.com/TAIsRich/chuwa-eij-tutorial/tree/main/02-java-core/src/main/java/com/chuwa/tutorial/t06_java8
+https://github.com/TAIsRich/chuwa-eij-tutorial/tree/main/02-java-core/src/main/java/com/chuwa/tutorial/t06_java8 (Seen as Coding/Java8/)
 
 ## 3. practice stream API at least 3 times
 
-a. https://blog.devgenius.io/15-practical-exercises-help-you-master-java-stream-api-3f9c86b1cf82
+a. https://blog.devgenius.io/15-practical-exercises-help-you-master-java-stream-api-3f9c86b1cf82  (Seen as Coding/Java8/)
 
 ## 4. Practice Optional methods at least 2 times
 
@@ -63,11 +63,11 @@ Better dealing with null value. Avoid NPE.
 
 ## 10. What is the @FunctionalInterface?
 
-It's a annotation for Functional Interface which has one single abstract method. The annotation is for the sanity check.
+It's a annotation for Functional Interface which has only one single abstract method and several default methods. The annotation is for the sanity check.
 
 ## 11. what is lamda?
 
-The Lambda expression is used to provide the implementation of an interface which has functional interface.
+The Lambda expression is used to provide the implementation of a functional interface.
 
 ## 12. What is Method Reference?
 
@@ -100,7 +100,7 @@ No. It has a single abstract method.
 
 ## 17. What is the lambda expression in Java and How does a lambda expression relate to a functional interface?
 
-The Lambda expression is used to provide the implementation of an interface which has functional interface. It saves a lot of code. In case of lambda expression, we don't need to define the method again for providing the implementation. Here, we just write the implementation code.
+The Lambda expression is used to provide the implementation of functional interface. It saves a lot of code. In case of lambda expression, we don't need to define the method again for providing the implementation. Here, we just write the implementation code.
 
 ## 18. In Java 8, what is Method Reference?
 
@@ -125,9 +125,9 @@ In Java Streams, Intermediate operations are operations that are applied to a st
   - count
   - max(Comparator c)
   - min(Comparator c)
-  - forEach
+  - **forEach**
 - reduce
-- collect(Collectors c)
+- **collect(Collectors c)**
 
 ## 22. What is the difference between findFirst() and findAny()?
 

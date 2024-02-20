@@ -1,4 +1,4 @@
-### 1. Lambda & Functional Interface
+### Lambda & Functional Interface
 
 Lambda表达式本质上是一个匿名内部类（anonymous class），但它们与函数式接口（functional interface）密切相关，并在使用函数式接口时提供了更简洁（concise）的语法。
 
@@ -40,7 +40,7 @@ thread.start();
 
 
 
-### 2. Memory Management of Java 8
+### Memory Management of Java 8
 
 Java 8 introduced several memory management improvements and features, including enhancements to the garbage collector and the introduction of the "Metaspace" memory area. Here are some of the key memory management features in Java 8:
 
@@ -267,7 +267,7 @@ Two ways of Implementation:
 
 **TreeMap:** 是一个基于红黑树的NavigableMap实现。
 
-- 它存储键值对（key-value pairs），并且按照键的自然顺序（或者根据构造时提供的Comparator）进行排序。
+- 它存储键值对（key-value pairs），并且按照**键的自然顺序（或者根据构造时提供的Comparator）进行排序。**
 - get和put操作的时间复杂度为 O(log n)。
 - non-synchronized
 - 保证了元素的顺序，因此它可以提供诸如firstKey、lastKey、floorKey以及ceilingKey等有序集合相关的操作。
@@ -496,3 +496,20 @@ Two ways of Implementation:
 - `IntFunction<R>`、`LongFunction<R>`、`DoubleFunction<R>`：接受`int`、`long`或`double`参数，返回R类型的结果。
 
 这些函数式接口为Java中的函数式编程提供了强大的基础，使得开发者可以写出更简洁、更灵活的代码，尤其是在使用Stream API、并行计算和事件监听器等场景中。
+
+
+
+### Generic
+
+```KafkaConsumer<String, String>```
+
+`<String, String>` 中的尖括号表示泛型（Generics）。在 Java 中，泛型提供了一种在编译时检查和强化类型安全性的机制，使得代码更加灵活和可重用。
+
+在 `KafkaConsumer<String, String>` 中，`<String, String>` 指定了两个泛型类型参数。第一个参数表示 Kafka 消息的键（Key）的类型，第二个参数表示 Kafka 消息的值（Value）的类型。在这个例子中，键和值都是字符串类型，因此指定了两个 `String` 类型的参数。	
+
+通过使用泛型，`KafkaConsumer` 可以在编译时检查消费者的键和值类型，从而提供更强的类型安全性。
+
+
+
+
+

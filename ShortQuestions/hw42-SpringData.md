@@ -94,9 +94,12 @@ JPQL is similar to SQL (Structured Query Language) but is designed to work with 
 
 ## 20. What is Transaction? how to manage your transaction?
 
-`Transaction`: a series of one or more operations on a database that should be executed as a single, indivisible unit. Transactions ensure the integrity and consistency of data in a database.
+`Transaction`: several operations on database should be executed as an unit.
+Transactions ensure the integrity and consistency of data in database
 
-Based on your application's requirements, We can define different operations in a transaction. In Spring framework, we can use `@Transactional` annotation.
+Implementation:
+`@Transactional` in application,
+`@EnableTransactionManagement` in method.
 
 ## 21. What is Hibernate Caching?
 

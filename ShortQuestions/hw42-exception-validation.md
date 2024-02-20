@@ -11,10 +11,23 @@
 
 - Using `@ExceptionHandler` in Controllers
   - Method Level
-  - used to handle the specific exceptions and sending the custom responses to the client
+  - handle the specific exceptions and sending the custom responses to the client
 - Global Exception Handling with `@ControllerAdvice`
   - Class Level
-  - make this class be a bean
+  - make this class to be a bean
+
+```java
+@ControllerAdvice
+public class GlobalExceptionHandler {
+		@ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,                                                 WebRequest webRequest) {
+    		...
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+}
+```
+
+
 
 ## 4. How do you do the validations in Spring? And list some validation annotaitons you know.
 
