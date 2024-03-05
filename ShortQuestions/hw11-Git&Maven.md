@@ -64,7 +64,7 @@ git merge branch_test
 git add .
 git status
 git stash save "New Stash"
-# If need to apply the stashed changes: git stash apply
+git stash apply		# If need to apply the stashed changes
 ```
 
 - IDEA Way:
